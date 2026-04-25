@@ -4874,9 +4874,9 @@ MonoBehaviour:
   blinkInterval: 0.1
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
-  groundCheck: {fileID: 1135670707}
+  footCheck: {fileID: 1135670707}
   checkRadius: 0.2
-  groundLayer:
+  footLayer:
     serializedVersion: 2
     m_Bits: 72
 --- !u!114 &986031323
@@ -4978,7 +4978,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1135670707}
   m_Layer: 0
-  m_Name: GroundCheck
+  m_Name: FootCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5013,7 +5013,7 @@ GameObject:
   - component: {fileID: 1783356869}
   - component: {fileID: 1783356868}
   - component: {fileID: 1783356867}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: enemy_zako1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5092,7 +5092,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1783356869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5108,6 +5108,7 @@ MonoBehaviour:
   speed: 3
   gravity: 3
   nonVisibleAct: 0
+  anim: {fileID: 0}
 --- !u!95 &1783356870
 Animator:
   serializedVersion: 7
@@ -5118,7 +5119,7 @@ Animator:
   m_GameObject: {fileID: 1783356866}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e53244165c4521746b8711ef8e123a7e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1718671b34ba8204ebb76199583f695f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
