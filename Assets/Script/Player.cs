@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
@@ -54,9 +55,9 @@ public class Player : MonoBehaviour
     // 接地
     // ======================
     [Header("接地")]
-    public Transform groundCheck;
+    public Transform footCheck;
     public float checkRadius = 0.2f;
-    public LayerMask groundLayer;
+    public LayerMask footLayer;
 
     private bool isGrounded;
     private Vector3 lastGroundPosition;
@@ -208,10 +209,11 @@ public class Player : MonoBehaviour
     void CheckGround()
     {
         Collider2D hit = Physics2D.OverlapCircle(
-            groundCheck.position,
+            footCheck.position,
             checkRadius,
-            groundLayer
+            footLayer
         );
+
 
         isGrounded = hit != null;
 
