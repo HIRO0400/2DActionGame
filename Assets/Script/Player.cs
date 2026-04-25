@@ -285,4 +285,9 @@ public class Player : MonoBehaviour
         sr.color = Color.white;
         isInvincible = false;
     }
+    public void Bounce(float force)
+    {
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, force);
+    }
 }

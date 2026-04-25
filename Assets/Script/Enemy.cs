@@ -64,6 +64,12 @@ public class Enemy : MonoBehaviour
             {
                 // 上から踏まれた → 敵死亡
                 Die();
+
+                Player player = collision.gameObject.GetComponent<Player>();
+                if (player != null)
+                {
+                    player.Bounce(10f);
+                }
             }
             else
             {
@@ -91,4 +97,5 @@ public class Enemy : MonoBehaviour
 
         Destroy(gameObject, 1.0f);
     }
+
 }
