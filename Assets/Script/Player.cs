@@ -227,24 +227,41 @@ public class Player : MonoBehaviour
     // クローン
     // ======================
     void CreateClone()
+{
+    int index = currentClones % maxClones;
+
+    if (clones[index] != null)
     {
-        int index = currentClones % maxClones;
+        Destroy(clones[index]);
+    }
 
-        if (clones[index] != null)
-        {
-            Destroy(clones[index]);
-        }
+    GameObject clone = Instantiate(playerPrefab, transform.position, Quaternion.identity);
+    float direction = sr.flipX ? -1f : 1f;
 
-        clones[index] = Instantiate(playerPrefab, transform.position, Quaternion.identity);
-        currentClones++;
+// 進行方向に1.0fずらす
+    clone.transform.position = new Vector2(
+    transform.position.x + direction * 1.0f,
+    transform.position.y
+);
+    clones[index] = clone;
+    currentClones++;
 
-        Respawn();
+    Respawn();
     }
 
     void Respawn()
     {
-        transform.position = lastGroundPosition + Vector3.up * 0.5f;
+        transform.position = new Vector2(lastGroundPosition.x, transform.position.y);
         rb.linearVelocity = Vector2.zero;
+    }
+    IEnumerator RestoreCollision(){
+    yield return new WaitForSeconds(0.1f);
+
+    Physics2D.IgnoreLayerCollision(
+        LayerMask.NameToLayer("Player"),
+        LayerMask.NameToLayer("Clone"),
+        false
+    );
     }
 
     // ======================
