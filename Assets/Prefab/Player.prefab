@@ -218,16 +218,16 @@ MonoBehaviour:
   jumpForce: 4
   jumpHoldForce: 6
   maxJumpTime: 0.3
-  playerPrefab: {fileID: 9127260586487135647, guid: fbcedaef8811bb949988e6f98c1ad311, type: 3}
+  playerPrefab: {fileID: 2364090702565517131, guid: e64c3223b8c865e4d859ff757409ccef, type: 3}
   maxClones: 3
   blinkInterval: 0.05
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
-  groundCheck: {fileID: 1167665022171358101}
+  footCheck: {fileID: 0}
   checkRadius: 0.2
-  groundLayer:
+  footLayer:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 0
 --- !u!114 &6636260472764856146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,7 +252,19 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0e5d85ef-1032-471e-82a5-0e512f18f10c
+    m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3c43b2e4-8b8e-4134-9790-0ee8b2b7337d
+    m_ActionName: 'Player/Jump[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a0bc030f-a01d-49ca-bc0e-964607634e74
+    m_ActionName: 'Player/Clone[/Mouse/leftButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
