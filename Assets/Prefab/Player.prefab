@@ -177,11 +177,11 @@ MonoBehaviour:
   blinkInterval: 0.05
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
-  footCheck: {fileID: 0}
-  checkRadius: 0.2
+  footCheck: {fileID: 1167665022171358101}
+  groundCheckSize: {x: 0.8, y: 0.15}
   footLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 72
 --- !u!114 &6636260472764856146
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     private bool jumpHeld;
     private bool isJumping;
     private float jumpTimeCounter;
+    private float coyoteTime = 0.1f;
+    private float coyoteCounter;
 
     // ======================
     // クローン
@@ -37,6 +39,8 @@ public class Player : MonoBehaviour
     private GameObject[] clones;
     private int currentClones;
     private InputAction cloneAction;
+    private bool isRespawning;
+    private bool canClone = true;
 
     // ======================
     // 無敵
@@ -56,8 +60,10 @@ public class Player : MonoBehaviour
     // ======================
     [Header("接地")]
     public Transform footCheck;
-    public float checkRadius = 0.2f;
+    public Vector2 groundCheckSize = new Vector2(0.8f, 0.15f);
     public LayerMask footLayer;
+    private bool isTouchingWall;
+    private Collider2D currentGround;
 
     private bool isGrounded;
     private Vector3 lastGroundPosition;
@@ -72,11 +78,8 @@ public class Player : MonoBehaviour
     private InputAction moveAction;
     private InputAction jumpAction;
 
-    // ======================
     // 初期化
-    // ======================
-    void Awake()
-    {
+    void Awake(){
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponentInChildren<SpriteRenderer>();
         playerInput = GetComponent<PlayerInput>();
@@ -86,173 +89,198 @@ public class Player : MonoBehaviour
         cloneAction = playerInput.actions["Clone"];
     }
 
-    void Start()
-    {
+    void Start(){
         clones = new GameObject[maxClones];
         lastGroundPosition = transform.position;
     }
 
-    // ======================
-    // メインループ
-    // ======================
-    void Update()
-    {
-        ReadInput();
-        CheckGround();
-        HandleJump();
-        HandleFlip();
-
-        if (cloneAction.WasPressedThisFrame())
-        {
-            CreateClone();
-        }
+    void Update(){
+    CheckGround();
+    // ★ クローンは常に禁止（ここで制御）
+    if (!isRespawning && cloneAction.WasPressedThisFrame() && canClone){
+        CreateClone();
+        canClone = false;
     }
-
-    void FixedUpdate()
-    {
-        Move();
-        ApplyGravity();
+    if (cloneAction.WasReleasedThisFrame()){
+        canClone = true;
     }
+    ReadInput();
+    HandleJump();
+    HandleFlip();
+    jumpPressed = false;
+}
 
-    // ======================
+    void FixedUpdate(){
+    Move();
+    ApplyGravity();
+    ResolveWallCollision();
+}
+
     // 入力
-    // ======================
-    void ReadInput()
-    {
+    void ReadInput(){
+        if (isRespawning){
+        moveInput = Vector2.zero;
+        return;
+    }
         Vector2 input = moveAction.ReadValue<Vector2>();
         moveInput.x = Mathf.Abs(input.x) > 0.1f ? input.x : 0;
 
-        if (jumpAction.WasPressedThisFrame())
-        {
+        if (jumpAction.WasPressedThisFrame()){
             jumpPressed = true;
             jumpHeld = true;
         }
 
-        if (jumpAction.WasReleasedThisFrame())
-        {
+        if (jumpAction.WasReleasedThisFrame()){
             jumpHeld = false;
         }
     }
 
-    // ======================
     // 移動
-    // ======================
     void Move()
-    {
-        float multiplier = isGrounded ? 1f : airControl;
+{
+    Vector2 v = rb.linearVelocity;
 
+    float multiplier = isGrounded ? 1f : airControl;
+
+    float inputX = moveInput.x * moveSpeed * multiplier;
+
+    v.x = inputX;
+
+    rb.linearVelocity = v;
+}
+void ResolveWallCollision()
+{
+    if (!isTouchingWall) return;
+
+    RaycastHit2D hit = Physics2D.Raycast(
+        transform.position,
+        Vector2.right * Mathf.Sign(rb.linearVelocity.x),
+        0.3f,
+        footLayer
+    );
+
+    if (hit.collider != null)
+    {
         Vector2 v = rb.linearVelocity;
-        v.x = moveInput.x * moveSpeed * multiplier;
+        v.x = 0;
         rb.linearVelocity = v;
     }
-
-    void HandleFlip()
-    {
+}
+    void HandleFlip(){
         if (moveInput.x > 0) sr.flipX = false;
         else if (moveInput.x < 0) sr.flipX = true;
     }
 
-    // ======================
     // ジャンプ
-    // ======================
-    void HandleJump()
-    {
-        if (jumpPressed && isGrounded)
-        {
-            isJumping = true;
-            jumpTimeCounter = maxJumpTime;
+    void HandleJump(){
+    if (jumpPressed && coyoteCounter > 0f){
+        isJumping = true;
+        jumpTimeCounter = maxJumpTime;
 
-            Vector2 v = rb.linearVelocity;
-            v.y = jumpForce;
-            rb.linearVelocity = v;
+        Vector2 v = rb.linearVelocity;
+        v.y = jumpForce;
+        rb.linearVelocity = v;
 
-            jumpPressed = false;
-        }
-
-        if (jumpHeld && isJumping)
-        {
-            if (jumpTimeCounter > 0)
-            {
-                Vector2 v = rb.linearVelocity;
-                v.y = jumpHoldForce;
-                rb.linearVelocity = v;
-
-                jumpTimeCounter -= Time.deltaTime;
-            }
-            else
-            {
-                isJumping = false;
-            }
-        }
-
-        if (!jumpHeld) isJumping = false;
+        jumpPressed = false;
+        coyoteCounter = 0f;
     }
 
-    // ======================
+    if (jumpHeld && isJumping){
+        if (jumpTimeCounter > 0){
+            Vector2 v = rb.linearVelocity;
+            v.y = jumpHoldForce;
+            rb.linearVelocity = v;
+
+            jumpTimeCounter -= Time.deltaTime;
+        }
+        else{
+            isJumping = false;
+        }
+    }
+
+    if (!jumpHeld) isJumping = false;
+}
+
     // 重力
-    // ======================
     void ApplyGravity()
     {
-        if (rb.linearVelocity.y < 0)
-        {
+        if (rb.linearVelocity.y < 0){
             rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (rb.linearVelocity.y > 0 && !jumpHeld)
-        {
+        else if (rb.linearVelocity.y > 0 && !jumpHeld){
             rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
     }
 
-    // ======================
     // 接地
-    // ======================
-    void CheckGround()
+    void CheckGround(){
+        if (isGrounded) coyoteCounter = coyoteTime;
+        else coyoteCounter -= Time.deltaTime;
+
+        Collider2D hit = Physics2D.OverlapBox(
+        footCheck.position,
+        groundCheckSize,
+        0f,
+        footLayer
+    );
+
+    bool wasGrounded = isGrounded;
+    isGrounded = hit != null;
+
+    currentGround = hit;
+
+    if (!wasGrounded && isGrounded && hit != null)
     {
-        Collider2D hit = Physics2D.OverlapCircle(
-            footCheck.position,
-            checkRadius,
-            footLayer
+        lastGroundPosition = new Vector2(
+            transform.position.x,
+            hit.bounds.max.y
         );
+    }
+}
+void OnDrawGizmosSelected()
+{
+    Gizmos.color = Color.red;
+    Gizmos.DrawWireCube(footCheck.position, groundCheckSize);
+}
+bool IsStandingOnClone()
+{
+    if (currentGround == null) return false;
 
-
-        isGrounded = hit != null;
-
-        if (isGrounded && hit.gameObject.layer == LayerMask.NameToLayer("Ground"))
+    return currentGround.gameObject.layer == LayerMask.NameToLayer("Clone");
+}
+void OnCollisionStay2D(Collision2D collision)
+{
+    foreach (ContactPoint2D contact in collision.contacts)
+    {
+        if (Mathf.Abs(contact.normal.x) > 0.5f)
         {
-            lastGroundPosition = transform.position;
+            isTouchingWall = true;
+            return;
         }
     }
 
-    // ======================
-    // クローン
-    // ======================
-    void CreateClone()
-{
-    int index = currentClones % maxClones;
+    isTouchingWall = false;
+}
 
-    if (clones[index] != null)
-    {
+    // クローン
+    void CreateClone(){
+        if (isRespawning || !canClone) return;
+        if (IsStandingOnClone()) return;
+    int index = currentClones % maxClones;
+    if (clones[index] != null){
         Destroy(clones[index]);
     }
 
     GameObject clone = Instantiate(playerPrefab, transform.position, Quaternion.identity);
-    float direction = sr.flipX ? -1f : 1f;
 
-// 進行方向に1.0fずらす
-    clone.transform.position = new Vector2(
-    transform.position.x + direction * 1.0f,
-    transform.position.y
-);
     clones[index] = clone;
     currentClones++;
 
     Respawn();
-    }
+}
 
-    void Respawn()
-    {
-        transform.position = new Vector2(lastGroundPosition.x, transform.position.y);
-        rb.linearVelocity = Vector2.zero;
+    void Respawn(){
+        StartCoroutine(RespawnRoutine());
     }
     IEnumerator RestoreCollision(){
     yield return new WaitForSeconds(0.1f);
@@ -263,34 +291,61 @@ public class Player : MonoBehaviour
         false
     );
     }
+    IEnumerator RespawnRoutine()
+{
+    isRespawning = true;
+    isInvincible = true;
 
-    // ======================
-    // トゲ判定
-    // ======================
-    private void OnTriggerEnter2D(Collider2D collision)
+    moveInput = Vector2.zero;
+    jumpHeld = false;
+    jumpPressed = false;
+
+    // ★ 完全に入力停止
+    playerInput.enabled = false;
+
+    float respawnHeight = 2.0f;
+
+    transform.position = new Vector2(
+        lastGroundPosition.x,
+        lastGroundPosition.y + respawnHeight
+    );
+
+    rb.linearVelocity = Vector2.zero;
+
+    while (!isGrounded)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Spike"))
-        {
-            Die();
-        }
+        yield return null;
     }
 
-    public void Die()
-    {
+    yield return new WaitForSeconds(0.1f);
+
+    // ★ 入力復帰
+    playerInput.enabled = true;
+
+    isInvincible = false;
+    isRespawning = false;
+}
+
+    // トゲ判定
+    private void OnTriggerEnter2D(Collider2D collision){
+        if (isRespawning) return;
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Spike")){
+        Die();
+    }
+    }
+
+    public void Die(){
         if (isInvincible) return;
 
         CreateClone();
         StartCoroutine(InvincibleRoutine());
     }
 
-    IEnumerator InvincibleRoutine()
-    {
+    IEnumerator InvincibleRoutine(){
         isInvincible = true;
-
         float t = 0f;
-
-        while (t < 1f)
-        {
+        while (t < 1f){
             Color c = sr.color;
             c.a = (c.a == 1f) ? 0.2f : 1f;
             sr.color = c;
@@ -298,12 +353,10 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(blinkInterval);
             t += blinkInterval;
         }
-
         sr.color = Color.white;
         isInvincible = false;
     }
-    public void Bounce(float force)
-    {
+    public void Bounce(float force){
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, force);
     }
