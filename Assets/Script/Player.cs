@@ -80,6 +80,12 @@ public class Player : MonoBehaviour
 
     private InputAction moveAction;
     private InputAction jumpAction;
+    // ======================
+    // オーディオ
+    // ======================
+    public AudioSource audioSource;
+    public AudioClip jumpSound;
+    public AudioClip cloneSound;
 
     // ======================
     // 初期化
@@ -218,6 +224,7 @@ public class Player : MonoBehaviour
     {
         if (jumpPressed && coyoteCounter > 0f){
             isJumping = true;
+            audioSource.PlayOneShot(jumpSound);
             jumpTimeCounter = maxJumpTime;
 
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -307,6 +314,7 @@ public class Player : MonoBehaviour
     {
         if (isRespawning || !canCloneInput) return;
         if (IsStandingOnClone()) return;
+        audioSource.PlayOneShot(cloneSound);
 
         int index = currentClones % maxClones;
 
@@ -324,6 +332,7 @@ public class Player : MonoBehaviour
 
     void CreateCloneForce(){
     int index = currentClones % maxClones;
+    audioSource.PlayOneShot(cloneSound);
 
     if (clones[index] != null)
     {
