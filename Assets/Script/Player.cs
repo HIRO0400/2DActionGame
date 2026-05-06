@@ -18,8 +18,8 @@ public class Player : MonoBehaviour
     // ジャンプ
     // ======================
     [Header("ジャンプ")]
-    public float jumpForce = 4f;
-    public float jumpHoldForce = 6f;
+    public float jumpForce = 6f;
+    public float jumpHoldForce = 10f;
     public float maxJumpTime = 0.3f;
 
     private bool jumpPressed;
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     // ======================
     [Header("クローン")]
     public GameObject playerPrefab;
-    public int maxClones = 3;
+    public int maxClones = 1;
 
     private GameObject[] clones;
     private int currentClones;
@@ -216,33 +216,17 @@ public class Player : MonoBehaviour
     // ======================
     void HandleJump()
     {
-        if (jumpPressed && coyoteCounter > 0f)
-        {
+        if (jumpPressed && coyoteCounter > 0f){
             isJumping = true;
             jumpTimeCounter = maxJumpTime;
 
-            Vector2 v = rb.linearVelocity;
-            v.y = jumpForce;
-            rb.linearVelocity = v;
-
-            jumpPressed = false;
-            coyoteCounter = 0f;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
 
-        if (jumpHeld && isJumping)
-        {
-            if (jumpTimeCounter > 0)
-            {
-                Vector2 v = rb.linearVelocity;
-                v.y = jumpHoldForce;
-                rb.linearVelocity = v;
+        if (jumpHeld && isJumping && jumpTimeCounter > 0){
+            jumpTimeCounter -= Time.deltaTime;
 
-                jumpTimeCounter -= Time.deltaTime;
-            }
-            else
-            {
-                isJumping = false;
-            }
+            rb.linearVelocity += Vector2.up * 10f * Time.deltaTime;
         }
 
         if (!jumpHeld) isJumping = false;
@@ -338,6 +322,23 @@ public class Player : MonoBehaviour
         StartGroundLock();
     }
 
+    void CreateCloneForce(){
+    int index = currentClones % maxClones;
+
+    if (clones[index] != null)
+    {
+        Destroy(clones[index]);
+    }
+
+    GameObject clone = Instantiate(playerPrefab, transform.position, Quaternion.identity);
+
+    clones[index] = clone;
+    currentClones++;
+
+    StartRespawn();
+    StartGroundLock();
+}
+
     void StartRespawn()
     {
         if (isRespawning) return;
@@ -387,7 +388,7 @@ public class Player : MonoBehaviour
     }
 
     // ======================
-    // ダメージ・無敵
+    // 接触判定
     // ======================
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -401,7 +402,7 @@ public class Player : MonoBehaviour
     {
         if (isInvincible) return;
 
-        CreateClone();
+        CreateCloneForce();
         StartCoroutine(InvincibleRoutine());
     }
 
@@ -428,5 +429,20 @@ public class Player : MonoBehaviour
     {
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, force);
+    }
+    public void AddCloneCapacity(int amount){
+    int oldMax = maxClones;
+    maxClones += amount;
+
+    // 配列を拡張
+    GameObject[] newClones = new GameObject[maxClones];
+
+    // 既存データをコピー
+    for (int i = 0; i < oldMax; i++)
+    {
+        newClones[i] = clones[i];
+    }
+
+    clones = newClones;
     }
 }
