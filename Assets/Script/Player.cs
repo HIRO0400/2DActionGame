@@ -9,8 +9,8 @@ public class Player : MonoBehaviour
     // 移動
     // ======================
     [Header("移動")]
-    public float moveSpeed = 5f;
-    public float airControl = 0.6f;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float airControl = 0.6f;
 
     private Vector2 moveInput;
 
@@ -18,9 +18,9 @@ public class Player : MonoBehaviour
     // ジャンプ
     // ======================
     [Header("ジャンプ")]
-    public float jumpForce = 6f;
-    public float jumpHoldForce = 10f;
-    public float maxJumpTime = 0.3f;
+    [SerializeField] private float jumpForce = 6f;
+    //[SerializeField] private float jumpHoldForce = 10f;
+    [SerializeField] private float maxJumpTime = 0.3f;
 
     private bool jumpPressed;
     private bool jumpHeld;
@@ -33,8 +33,8 @@ public class Player : MonoBehaviour
     // クローン
     // ======================
     [Header("クローン")]
-    public GameObject playerPrefab;
-    public int maxClones = 1;
+    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private int maxClones = 1;
 
     private GameObject[] clones;
     private int currentClones;
@@ -49,22 +49,22 @@ public class Player : MonoBehaviour
     // 無敵
     // ======================
     private bool isInvincible;
-    public float blinkInterval = 0.05f;
+    [SerializeField] private float blinkInterval = 0.05f;
 
     // ======================
     // 落下
     // ======================
     [Header("落下")]
-    public float fallMultiplier = 2.5f;
-    public float lowJumpMultiplier = 2f;
+    [SerializeField] private float fallMultiplier = 2.5f;
+    [SerializeField] private float lowJumpMultiplier = 2f;
 
     // ======================
     // 接地
     // ======================
     [Header("接地")]
-    public Transform footCheck;
-    public Vector2 groundCheckSize = new Vector2(0.8f, 0.15f);
-    public LayerMask footLayer;
+    [SerializeField] private Transform footCheck;
+    [SerializeField] private Vector2 groundCheckSize = new Vector2(0.8f, 0.15f);
+    [SerializeField] private LayerMask footLayer;
 
     private bool isTouchingWall;
     private Collider2D currentGround;
@@ -83,9 +83,8 @@ public class Player : MonoBehaviour
     // ======================
     // オーディオ
     // ======================
-    public AudioSource audioSource;
-    public AudioClip jumpSound;
-    public AudioClip cloneSound;
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip cloneSound;
 
     // ======================
     // 初期化
@@ -96,6 +95,18 @@ public class Player : MonoBehaviour
         sr = GetComponentInChildren<SpriteRenderer>();
         playerInput = GetComponent<PlayerInput>();
 
+        if (rb == null || sr == null ||  playerInput.actions == null)
+        {
+            enabled = false;
+            return;
+        }
+
+        if (footCheck == null ||  playerPrefab == null)
+        {
+            enabled = false;
+            return;
+        }
+
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["Jump"];
         cloneAction = playerInput.actions["Clone"];
@@ -103,6 +114,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        maxClones = Mathf.Max(1, maxClones);
         clones = new GameObject[maxClones];
         lastGroundPosition = transform.position;
         canCloneInput = false;
@@ -224,7 +236,7 @@ public class Player : MonoBehaviour
     {
         if (jumpPressed && coyoteCounter > 0f){
             isJumping = true;
-            audioSource.PlayOneShot(jumpSound);
+            AudioManager.Instance.PlaySE(jumpSound);
             jumpTimeCounter = maxJumpTime;
 
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -244,13 +256,15 @@ public class Player : MonoBehaviour
     // ======================
     void ApplyGravity()
     {
+        float deltaTime = Time.fixedDeltaTime;
+
         if (rb.linearVelocity.y < 0)
         {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * deltaTime;
         }
         else if (rb.linearVelocity.y > 0 && !jumpHeld)
         {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * deltaTime;
         }
     }
 
@@ -259,6 +273,8 @@ public class Player : MonoBehaviour
     // ======================
     void CheckGround()
     {
+        if (footCheck == null) return;
+
         if (isGrounded) coyoteCounter = coyoteTime;
         else coyoteCounter -= Time.deltaTime;
 
@@ -295,6 +311,8 @@ public class Player : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D collision)
     {
+        isTouchingWall = false;
+
         foreach (ContactPoint2D contact in collision.contacts)
         {
             if (Mathf.Abs(contact.normal.x) > 0.5f)
@@ -303,7 +321,10 @@ public class Player : MonoBehaviour
                 return;
             }
         }
+    }
 
+    void OnCollisionExit2D(Collision2D collision)
+    {
         isTouchingWall = false;
     }
 
@@ -314,7 +335,9 @@ public class Player : MonoBehaviour
     {
         if (isRespawning || !canCloneInput) return;
         if (IsStandingOnClone()) return;
-        audioSource.PlayOneShot(cloneSound);
+        if (maxClones <= 0 || clones == null || playerPrefab == null) return;
+
+        AudioManager.Instance.PlaySE(cloneSound);
 
         int index = currentClones % maxClones;
 
@@ -331,8 +354,9 @@ public class Player : MonoBehaviour
     }
 
     void CreateCloneForce(){
+    if (maxClones <= 0 || clones == null || playerPrefab == null) return;
     int index = currentClones % maxClones;
-    audioSource.PlayOneShot(cloneSound);
+    AudioManager.Instance.PlaySE(cloneSound);
 
     if (clones[index] != null)
     {
@@ -436,10 +460,13 @@ public class Player : MonoBehaviour
 
     public void Bounce(float force)
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb == null) return;
+
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, force);
     }
     public void AddCloneCapacity(int amount){
+    if (amount <= 0) return;
+
     int oldMax = maxClones;
     maxClones += amount;
 

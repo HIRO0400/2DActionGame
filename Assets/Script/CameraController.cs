@@ -4,34 +4,42 @@ using Unity.Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
-    public CinemachineCamera vcam;
-    public Transform cameraTarget;
-    public Rigidbody2D playerRb;
+    [SerializeField] private CinemachineCamera vcam;
+    [SerializeField] private Transform cameraTarget;
+    [SerializeField] private Rigidbody2D playerRb;
 
     [Header("Input System")]
-    public InputActionReference moveAction; // ← 追加（Horizontal入力）
+    [SerializeField] private InputActionReference moveAction;
 
-    public float lookAheadAmount = 2f;
-    public float smoothSpeed = 5f;
+    [SerializeField] private float lookAheadAmount = 2f;
+    [SerializeField] private float smoothSpeed = 5f;
 
     private float currentOffsetX;
     private float currentOffsetY;
 
-    public float fallOffsetY = -1f;
-    public float fallThreshold = -2f;
+    [SerializeField] private float fallOffsetY = -1f;
+    [SerializeField] private float fallThreshold = -2f;
 
     void OnEnable()
     {
-        moveAction.action.Enable();
+        if (moveAction != null && moveAction.action != null)
+        {
+            moveAction.action.Enable();
+        }
     }
 
     void OnDisable()
     {
-        moveAction.action.Disable();
+        if (moveAction != null && moveAction.action != null)
+        {
+            moveAction.action.Disable();
+        }
     }
 
     void Update()
     {
+        if (moveAction == null || playerRb == null || cameraTarget == null) return;
+
         HandleLookAhead();
         HandleFall();
         ApplyOffset();
@@ -39,6 +47,8 @@ public class CameraController : MonoBehaviour
 
     void HandleLookAhead()
     {
+        if (moveAction == null || moveAction.action == null) return;
+
         Vector2 input = moveAction.action.ReadValue<Vector2>();
 
         float horizontal = input.x;
@@ -53,6 +63,8 @@ public class CameraController : MonoBehaviour
 
     void HandleFall()
     {
+        if (playerRb == null) return;
+
         float targetY = 0f;
 
         if (playerRb.linearVelocity.y < fallThreshold)
@@ -63,6 +75,8 @@ public class CameraController : MonoBehaviour
 
     void ApplyOffset()
     {
+        if (cameraTarget == null) return;
+
         cameraTarget.localPosition = new Vector3(
             currentOffsetX,
             currentOffsetY,

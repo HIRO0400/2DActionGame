@@ -3,6 +3,7 @@ using UnityEngine;
 public class Goal : MonoBehaviour
 {
     private bool isGoal = false;
+    [SerializeField] private StageManager stageManager;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,14 +14,21 @@ public class Goal : MonoBehaviour
             isGoal = true;
 
             // プレイヤー操作停止（任意）
-            Player player = collision.GetComponent<Player>();
-            if (player != null)
+            if (collision.TryGetComponent<Player>(out var player))
             {
                 player.enabled = false;
             }
 
             // StageManagerに通知
-            FindObjectOfType<StageManager>().OnStageClear();
+            if (stageManager == null)
+            {
+                stageManager = FindFirstObjectByType<StageManager>();
+            }
+
+            if (stageManager != null)
+            {
+                stageManager.OnStageClear();
+            }
         }
     }
 }

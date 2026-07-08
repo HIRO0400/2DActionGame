@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Killer : MonoBehaviour
 {
-    public float speed = 8f;
-    public float explosionScale = 2f;
+    [SerializeField] private float speed = 8f;
+    [SerializeField] private float explosionScale = 2f;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -58,6 +58,7 @@ public class Killer : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (isExploded) return;
+        if (collision.contactCount == 0) return;
 
         // ★ プレイヤー
         if (collision.gameObject.CompareTag("Player"))
@@ -71,8 +72,7 @@ public class Killer : MonoBehaviour
                 // 上から踏まれた → 墜落
                 Fall();
 
-                Player player = collision.gameObject.GetComponent<Player>();
-                if (player != null)
+                if (collision.gameObject.TryGetComponent<Player>(out var player))
                 {
                     player.Bounce(12f);
                 }
@@ -134,8 +134,7 @@ public class Killer : MonoBehaviour
 
         if (collision.CompareTag("Player"))
         {
-            Player player = collision.GetComponent<Player>();
-            if (player != null)
+            if (collision.TryGetComponent<Player>(out var player))
             {
                 player.Die();
             }

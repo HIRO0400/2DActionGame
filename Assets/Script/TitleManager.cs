@@ -3,10 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
+    private const string StageSelectSceneName = "StageSelectScene";
+
     // スタートボタン
     public void OnClickStart()
     {
-        SceneManager.LoadScene("StageSelectScene"); // 次のシーン名
+        SceneManager.LoadScene(StageSelectSceneName); // 次のシーン名
     }
 
     // 終了ボタン

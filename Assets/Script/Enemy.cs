@@ -5,15 +5,16 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     #region インスペクター
-    [Header("移動速度")] public float speed;
-    [Header("重力")] public float gravity;
-    [Header("画面外でも行動する")] public bool nonVisibleAct;
+    [Header("移動速度")] [SerializeField] private float speed;
+    [Header("重力")] [SerializeField] private float gravity;
+    [Header("画面外でも行動する")] [SerializeField] private bool nonVisibleAct;
     #endregion
 
     #region プライベート
     private Rigidbody2D rb = null;
     private SpriteRenderer sr = null;
-    public Animator anim = null;
+    private Animator anim = null;
+    private Collider2D col = null;
     private bool rightTleftF = false;
     private bool isDead = false;
     #endregion
@@ -23,6 +24,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>(); // 追加
+        col = GetComponent<Collider2D>();
     }
 
     void FixedUpdate()
@@ -55,6 +57,7 @@ public class Enemy : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (isDead) return;
+        if (collision.contactCount == 0) return;
 
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -65,8 +68,7 @@ public class Enemy : MonoBehaviour
                 // 上から踏まれた → 敵死亡
                 Die();
 
-                Player player = collision.gameObject.GetComponent<Player>();
-                if (player != null)
+                if (collision.gameObject.TryGetComponent<Player>(out var player))
                 {
                     player.Bounce(10f);
                 }
@@ -74,9 +76,7 @@ public class Enemy : MonoBehaviour
             else
             {
                 // 横 or 下 → プレイヤー死亡
-                Player player = collision.gameObject.GetComponent<Player>();
-
-                if (player != null)
+                if (collision.gameObject.TryGetComponent<Player>(out var player))
                 {
                     player.Die();
                 }
@@ -93,7 +93,10 @@ public class Enemy : MonoBehaviour
 
         anim.SetTrigger("Death"); // ←ここ
 
-        GetComponent<Collider2D>().enabled = false;
+        if (col != null)
+        {
+            col.enabled = false;
+        }
 
         Destroy(gameObject, 1.0f);
     }

@@ -4,8 +4,10 @@ using UnityEngine.UI;
 
 public class StageSelectManager : MonoBehaviour
 {
-    public Button[] stageButtons; // Inspectorで登録
-    public string[] stageSceneNames;
+    [SerializeField] private Button[] stageButtons; // Inspectorで登録
+    [SerializeField] private string[] stageSceneNames;
+
+    private const string TitleSceneName = "TitleScene";
 
     void Start()
     {
@@ -14,10 +16,15 @@ public class StageSelectManager : MonoBehaviour
 
     void UpdateStageButtons()
     {
+        if (stageButtons == null || stageSceneNames == null) return;
+
+        int count = Mathf.Min(stageButtons.Length, stageSceneNames.Length);
         int unlockedStage = PlayerPrefs.GetInt("UnlockedStage", 1);
 
-        for (int i = 0; i < stageButtons.Length; i++)
+        for (int i = 0; i < count; i++)
         {
+            if (stageButtons[i] == null) continue;
+
             int stageIndex = i + 1;
 
             if (stageIndex <= unlockedStage)
@@ -37,11 +44,13 @@ public class StageSelectManager : MonoBehaviour
 
     void LoadStage(int index)
     {
+        if (stageSceneNames == null || index < 0 || index >= stageSceneNames.Length) return;
+
         SceneManager.LoadScene(stageSceneNames[index]);
     }
 
     public void BackToTitle()
     {
-        SceneManager.LoadScene("TitleScene");
+        SceneManager.LoadScene(TitleSceneName);
     }
 }

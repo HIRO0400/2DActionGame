@@ -4,8 +4,10 @@ using UnityEngine.SceneManagement;
 public class StageManager : MonoBehaviour
 {
     [Header("ステージ情報")]
-    public int stageNumber = 1; // このステージ番号
-    public string nextStageName; // 次のシーン名
+    [SerializeField] private int stageNumber = 1; // このステージ番号
+    [SerializeField] private string nextStageName; // 次のシーン名
+
+    private const string StageSelectSceneName = "StageSelectScene";
 
     private bool isCleared = false;
 
@@ -45,7 +47,7 @@ public class StageManager : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("StageSelectScene");
+            SceneManager.LoadScene(StageSelectSceneName);
         }
     }
 
@@ -54,7 +56,7 @@ public class StageManager : MonoBehaviour
     // ======================
     public void BackToSelect()
     {
-        SceneManager.LoadScene("StageSelectScene");
+        SceneManager.LoadScene(StageSelectSceneName);
     }
 
     // ======================

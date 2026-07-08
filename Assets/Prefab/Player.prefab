@@ -279,7 +279,6 @@ MonoBehaviour:
   moveSpeed: 6
   airControl: 0.6
   jumpForce: 6
-  jumpHoldForce: 10
   maxJumpTime: 0.3
   playerPrefab: {fileID: 2364090702565517131, guid: e64c3223b8c865e4d859ff757409ccef, type: 3}
   maxClones: 1
@@ -291,7 +290,7 @@ MonoBehaviour:
   footLayer:
     serializedVersion: 2
     m_Bits: 72
-  audioSource: {fileID: 673016108778216490}
+  audioSource: {fileID: 0}
   jumpSound: {fileID: 8300000, guid: 12185b2aedb57824892ea412e81ff68d, type: 3}
   cloneSound: {fileID: 8300000, guid: 800f37d861afee94baf0ae3deada3072, type: 3}
 --- !u!114 &6636260472764856146
@@ -428,10 +427,10 @@ AudioSource:
   m_GameObject: {fileID: 5907979830062562168}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3292476773546282349, guid: 6391665754167db46b753d9f6cd17e5f, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

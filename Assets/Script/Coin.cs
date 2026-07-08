@@ -2,17 +2,24 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    public int addAmount = 1;
-    public AudioSource audioSource;
-    public AudioClip coinSound;
-    private void OnTriggerEnter2D(Collider2D collision){
-        Player player = collision.GetComponent<Player>();
-        audioSource.PlayOneShot(coinSound);
-
-        if (player != null)
+    [SerializeField] private int addAmount = 1;
+    [SerializeField] private AudioClip coinSound;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.TryGetComponent<Player>(out var player))
         {
-            player.AddCloneCapacity(addAmount);
-            Destroy(gameObject);
+            return;
         }
+
+
+        if (coinSound != null)
+        {
+            AudioManager.Instance.PlaySE(coinSound);
+        }
+
+
+        player.AddCloneCapacity(addAmount);
+
+        Destroy(gameObject);
     }
 }
