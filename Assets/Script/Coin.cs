@@ -7,10 +7,10 @@ public class Coin : MonoBehaviour
     public AudioClip coinSound;
     private void OnTriggerEnter2D(Collider2D collision){
         Player player = collision.GetComponent<Player>();
+        audioSource.PlayOneShot(coinSound);
 
         if (player != null)
         {
-            audioSource.PlayOneShot(coinSound);
             player.AddCloneCapacity(addAmount);
             Destroy(gameObject);
         }
