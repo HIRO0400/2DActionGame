@@ -1,0 +1,4 @@
+BackGround0 Far width=46.08, x=-34.91642
+BackGround1 Far width=46.08, x=11.16358
+BackGround2 Far width=46.08, x=57.24358
+PASS: 3360 continuous callback frames; stationary camera, left/right travel, teleports, listener order; no repeated reverse wrapping.

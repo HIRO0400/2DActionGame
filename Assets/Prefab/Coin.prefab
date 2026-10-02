@@ -145,7 +145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coin
   addAmount: 1
-  audioSource: {fileID: 1386510117792186629}
   coinSound: {fileID: 8300000, guid: de350c92e60dc2144a5d9119cde29cbc, type: 3}
 --- !u!95 &5439079743386884130
 Animator:

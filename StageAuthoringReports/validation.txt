@@ -1,0 +1,1 @@
+PASS: references, static composite terrain, spike trigger, root AudioManager, static goal, regeneration preserves manual decoration and creates exactly one generated root.

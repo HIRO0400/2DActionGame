@@ -1,0 +1,24 @@
+PASS: Start lands on generated ground
+PASS: Walk to x=7, position=(6.85, 0.46, 0.00)
+PASS: Jump to x=12, landing=(11.91, 0.46, 0.00)
+PASS: Walk to x=18.5, position=(18.35, 0.46, 0.00)
+PASS: Clone creates a usable elevated foothold
+PASS: Jump to x=22, landing=(21.96, 4.46, 0.00)
+PASS: First four-unit wall reached using clone and held jump
+PASS: Walk to x=28.5, position=(28.35, 1.68, 0.00)
+PASS: First coin increases clone capacity
+PASS: Walk to x=30, position=(29.85, 0.46, 0.00)
+PASS: Jump to x=32.5, landing=(32.40, 2.46, 0.00)
+PASS: Jump to x=36, landing=(35.93, 3.46, 0.00)
+PASS: Optional high coin can be collected
+PASS: Walk to x=42, position=(41.85, 0.46, 0.00)
+PASS: Actual spike contact causes one death and returns to safe ground
+PASS: Jump to x=47, landing=(46.90, 0.46, 0.00)
+PASS: Three-unit pit crossed using ordinary held jump
+PASS: Walk to x=58.5, position=(58.35, 0.46, 0.00)
+PASS: Jump to x=62, landing=(61.93, 4.46, 0.00)
+PASS: Final wall reached using existing clone ability
+PASS: Walk to x=69, position=(68.85, 0.69, 0.00)
+PASS: Walk to x=70.5, position=(69.61, 0.46, 0.00)
+PASS: Goal transitions from Stage1 to existing Stage2
+PASS: Background camera/parallax/loop and full viewport sky coverage stable during 57501 Play Mode camera updates, including clone return and spike respawn
