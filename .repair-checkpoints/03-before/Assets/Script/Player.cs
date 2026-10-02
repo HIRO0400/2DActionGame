@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Vector2 groundCheckSize = new Vector2(0.8f, 0.15f);
     [SerializeField] private LayerMask footLayer;
 
-    private readonly ContactPoint2D[] wallContacts = new ContactPoint2D[32];
+    private bool isTouchingWall;
     private Collider2D currentGround;
     private bool isGrounded;
     private Vector3 lastGroundPosition;
@@ -227,16 +227,20 @@ public class Player : MonoBehaviour
 
     void ResolveWallCollision()
     {
-        int count = rb.GetContacts(wallContacts);
-        for (int i = 0; i < count; i++)
+        if (!isTouchingWall) return;
+
+        RaycastHit2D hit = Physics2D.Raycast(
+            transform.position,
+            Vector2.right * Mathf.Sign(rb.linearVelocity.x),
+            0.3f,
+            footLayer
+        );
+
+        if (hit.collider != null)
         {
-            ContactPoint2D contact = wallContacts[i];
-            if (Mathf.Abs(contact.normal.x) > 0.5f &&
-                contact.normal.x * rb.linearVelocity.x < 0f)
-            {
-                rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
-                return;
-            }
+            Vector2 v = rb.linearVelocity;
+            v.x = 0;
+            rb.linearVelocity = v;
         }
     }
 
@@ -246,7 +250,6 @@ public class Player : MonoBehaviour
     void HandleJump()
     {
         if (jumpPressed && coyoteCounter > 0f){
-            coyoteCounter = 0f;
             isJumping = true;
             if (AudioManager.Instance != null) AudioManager.Instance.PlaySE(jumpSound);
             jumpTimeCounter = maxJumpTime;
@@ -287,29 +290,22 @@ public class Player : MonoBehaviour
     {
         if (footCheck == null) return;
 
-        currentGround = null;
-        // A downward surface test rejects nearby walls and trigger volumes.
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(
-            footCheck.position + Vector3.up * 0.15f,
-            new Vector2(groundCheckSize.x, 0.05f), 0f,
-            Vector2.down, 0.25f, footLayer);
-        float nearest = float.PositiveInfinity;
-        foreach (RaycastHit2D candidate in hits)
-        {
-            if (candidate.collider == null || candidate.collider.isTrigger ||
-                candidate.normal.y < 0.5f || candidate.distance <= 0f) continue;
-            if (candidate.distance < nearest)
-            {
-                nearest = candidate.distance;
-                currentGround = candidate.collider;
-            }
-        }
-        isGrounded = currentGround != null && rb.linearVelocity.y <= 0.1f;
         if (isGrounded) coyoteCounter = coyoteTime;
-        else coyoteCounter = Mathf.Max(0f, coyoteCounter - Time.deltaTime);
+        else coyoteCounter -= Time.deltaTime;
 
-        if (isGrounded && currentGround != null && !isRespawning && !isGroundLocked &&
-            rb.linearVelocity.y <= 0.1f)
+        Collider2D hit = Physics2D.OverlapBox(
+            footCheck.position,
+            groundCheckSize,
+            0f,
+            footLayer
+        );
+
+        bool wasGrounded = isGrounded;
+        isGrounded = hit != null;
+
+        currentGround = hit;
+
+        if (isGrounded && hit != null && !isRespawning && !isGroundLocked && rb.linearVelocity.y <= 0.1f)
         {
             if (currentGround.gameObject.layer == LayerMask.NameToLayer("Ground"))
                 lastGroundPosition = footCheck.position;
@@ -318,7 +314,6 @@ public class Player : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        if (footCheck == null) return;
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(footCheck.position, groundCheckSize);
     }
@@ -332,6 +327,26 @@ public class Player : MonoBehaviour
     // ======================
     // クローン
     // ======================
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        isTouchingWall = false;
+
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            if (Mathf.Abs(contact.normal.x) > 0.5f)
+            {
+                isTouchingWall = true;
+                return;
+            }
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        isTouchingWall = false;
+    }
+
+
     void CreateClone()
     {
         if (isRespawning || !canCloneInput) return;
@@ -395,19 +410,8 @@ public class Player : MonoBehaviour
 
         float respownHeight = 3.0f;
 
-        Vector2 respawnPosition = new Vector2(
-            lastGroundPosition.x,
-            lastGroundPosition.y + respownHeight
-        );
-        // Do not interpolate across a teleport from the death position.
-        RigidbodyInterpolation2D interpolation = rb.interpolation;
-        rb.interpolation = RigidbodyInterpolation2D.None;
-        rb.position = respawnPosition;
-        transform.position = respawnPosition;
-        Physics2D.SyncTransforms();
-
+        transform.position = new Vector2(lastGroundPosition.x, lastGroundPosition.y + respownHeight);
         yield return new WaitForFixedUpdate();
-        rb.interpolation = interpolation;
         yield return new WaitForSeconds(0.1f);
 
         isRespawning = false;
@@ -476,8 +480,6 @@ public class Player : MonoBehaviour
     {
         if (rb == null) return;
 
-        coyoteCounter = 0f;
-        isJumping = false;
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, force);
     }

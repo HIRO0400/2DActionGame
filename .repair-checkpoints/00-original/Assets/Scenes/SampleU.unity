@@ -4869,7 +4869,7 @@ MonoBehaviour:
   jumpForce: 4
   jumpHoldForce: 6
   maxJumpTime: 0.3
-  playerPrefab: {fileID: 2364090702565517131, guid: e64c3223b8c865e4d859ff757409ccef, type: 3}
+  playerPrefab: {fileID: 9127260586487135647, guid: fbcedaef8811bb949988e6f98c1ad311, type: 3}
   maxClones: 3
   blinkInterval: 0.1
   fallMultiplier: 2.5

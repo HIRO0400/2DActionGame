@@ -61,9 +61,7 @@ public class Enemy : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            float y = 1f;
-            foreach (ContactPoint2D contact in collision.contacts)
-                y = Mathf.Min(y, contact.normal.y);
+            float y = collision.contacts[0].normal.y;
 
             if (y <= -0.5f)
             {

@@ -395,19 +395,8 @@ public class Player : MonoBehaviour
 
         float respownHeight = 3.0f;
 
-        Vector2 respawnPosition = new Vector2(
-            lastGroundPosition.x,
-            lastGroundPosition.y + respownHeight
-        );
-        // Do not interpolate across a teleport from the death position.
-        RigidbodyInterpolation2D interpolation = rb.interpolation;
-        rb.interpolation = RigidbodyInterpolation2D.None;
-        rb.position = respawnPosition;
-        transform.position = respawnPosition;
-        Physics2D.SyncTransforms();
-
+        transform.position = new Vector2(lastGroundPosition.x, lastGroundPosition.y + respownHeight);
         yield return new WaitForFixedUpdate();
-        rb.interpolation = interpolation;
         yield return new WaitForSeconds(0.1f);
 
         isRespawning = false;
@@ -476,8 +465,6 @@ public class Player : MonoBehaviour
     {
         if (rb == null) return;
 
-        coyoteCounter = 0f;
-        isJumping = false;
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, force);
     }
