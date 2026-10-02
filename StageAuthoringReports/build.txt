@@ -1,0 +1,5 @@
+Stage1 created; original archived at Assets/Scenes/Archive/Stage1_BeforeAuthoring.unity
+Ground uses CompositeCollider2D and Static Rigidbody2D.
+Spike uses the Spike layer and trigger collider.
+AudioManager is a scene root; Goal is static and has an explicit manager reference.
+Player uses existing movement, clone, respawn and input settings.

@@ -12,11 +12,13 @@ public class ParallaxBackground : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 startCameraPosition;
     private Vector3 loopOffset;
+    private BackgroundLooper looper;
 
 
     private void Awake()
     {
         startPosition = transform.position;
+        looper = GetComponentInParent<BackgroundLooper>();
         if (cameraTransform != null) startCameraPosition = cameraTransform.position;
     }
 
@@ -40,8 +42,14 @@ public class ParallaxBackground : MonoBehaviour
             return;
         }
 
-        Vector3 cameraOffset =
-            (cameraTransform.position - startCameraPosition) * parallaxFactor;
+        // A configured looper updates all its panels together before wrapping them.
+        if (looper != null && looper.isActiveAndEnabled && looper.ManagesBackground(transform, cameraTransform)) return;
+        ApplyCameraPosition(cameraTransform.position);
+    }
+
+    public void ApplyCameraPosition(Vector3 cameraPosition)
+    {
+        Vector3 cameraOffset = (cameraPosition - startCameraPosition) * parallaxFactor;
 
         transform.position =
             startPosition + loopOffset + new Vector3(

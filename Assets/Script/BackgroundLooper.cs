@@ -29,26 +29,36 @@ public class BackgroundLooper : MonoBehaviour
             backgroundWidth <= 0f || brain == null || brain.OutputCamera == null ||
             brain.OutputCamera.transform != cameraTransform) return;
 
+        // Capture one final camera position; apply parallax to every panel first.
+        Vector3 cameraPosition = cameraTransform.position;
+        foreach (Transform bg in backgrounds)
+            if (bg != null && bg.TryGetComponent<ParallaxBackground>(out var panel))
+                panel.ApplyCameraPosition(cameraPosition);
+
+        float span = backgroundWidth * backgrounds.Length;
+        float halfSpan = span * 0.5f;
         foreach (Transform bg in backgrounds)
         {
             if (bg == null) continue;
             float distance =
-                cameraTransform.position.x - bg.position.x;
+                cameraPosition.x - bg.position.x;
 
 
-            float span = backgroundWidth * backgrounds.Length;
-            Vector3 offset = Vector3.zero;
-            if (distance > backgroundWidth)
-            {
-                offset = Vector3.right * span * Mathf.Ceil((distance - backgroundWidth) / span);
-            }
-            else if (distance < -backgroundWidth)
-                offset = Vector3.left * span * Mathf.Ceil((-distance - backgroundWidth) / span);
+            // Normalize into [-halfSpan, halfSpan). A moved panel cannot immediately
+            // cross the opposite threshold, even when the camera teleports.
+            Vector3 offset = Vector3.right * span * Mathf.Floor((distance + halfSpan) / span);
 
             if (offset == Vector3.zero) continue;
             if (bg.TryGetComponent<ParallaxBackground>(out var parallax))
                 parallax.ShiftLoop(offset);
             else bg.position += offset;
         }
+    }
+
+    public bool ManagesBackground(Transform panel, Transform camera)
+    {
+        if (cameraTransform != camera || backgrounds == null || backgrounds.Length < 2 || backgroundWidth <= 0f) return false;
+        foreach (var background in backgrounds) if (background == panel) return true;
+        return false;
     }
 }

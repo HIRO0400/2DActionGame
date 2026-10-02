@@ -1,0 +1,33 @@
+Camera (2.50, 1.00): exposed clear-color pixels=0
+BackGround0 sky bounds=Center: (-37.17, 0.28, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+BackGround1 sky bounds=Center: (8.91, 0.28, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+BackGround2 sky bounds=Center: (54.99, 0.28, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+Camera (25.00, 6.00): exposed clear-color pixels=0
+BackGround0 sky bounds=Center: (-25.92, 2.78, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+BackGround1 sky bounds=Center: (20.16, 2.78, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+BackGround2 sky bounds=Center: (66.24, 2.78, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+Camera (45.00, 1.00): exposed clear-color pixels=0
+BackGround0 sky bounds=Center: (-15.92, 0.28, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+BackGround1 sky bounds=Center: (30.16, 0.28, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+BackGround2 sky bounds=Center: (76.24, 0.28, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+Camera (70.00, 8.00): exposed clear-color pixels=0
+BackGround0 sky bounds=Center: (134.82, 3.78, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+BackGround1 sky bounds=Center: (42.66, 3.78, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+BackGround2 sky bounds=Center: (88.74, 3.78, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+Camera (100.00, 3.00): exposed clear-color pixels=0
+BackGround0 sky bounds=Center: (149.82, 1.28, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+BackGround1 sky bounds=Center: (57.66, 1.28, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+BackGround2 sky bounds=Center: (103.74, 1.28, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+Camera (150.00, 1.00): exposed clear-color pixels=0
+BackGround0 sky bounds=Center: (174.82, 0.28, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+BackGround1 sky bounds=Center: (82.66, 0.28, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+BackGround2 sky bounds=Center: (128.74, 0.28, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+Camera (-80.00, 1.00): exposed clear-color pixels=0
+BackGround0 sky bounds=Center: (-78.42, 0.28, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+BackGround1 sky bounds=Center: (-32.34, 0.28, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+BackGround2 sky bounds=Center: (-124.50, 0.28, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+Camera (45.00, -16.00): exposed clear-color pixels=0
+BackGround0 sky bounds=Center: (-15.92, -8.22, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+BackGround1 sky bounds=Center: (30.16, -8.22, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+BackGround2 sky bounds=Center: (76.24, -8.22, 10.00), Extents: (23.04, 20.74, 0.10), draw mode=Simple
+PASS: no clear-color holes across rendered views; exposed pixels=0
