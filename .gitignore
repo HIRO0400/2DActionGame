@@ -1,14 +1,22 @@
 # ========== Unity ==========
-[Ll]ibrary/
-[Tt]emp/
-[Oo]bj/
-[Bb]uild/
-[Bb]uilds/
-[Ll]ogs/
-UserSettings/
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
 
-# ========== Packages ==========
-Packages/packages-lock.json
+# Local repair snapshots, validation projects, and test player builds
+/.repair-checkpoints/
+
+# Generated Unity validation logs; keep reports, plans, and preview images
+/StageAuthoringReports/**/*.log
+
+# Keep Assets (including .meta), Packages/manifest.json,
+# Packages/packages-lock.json, and ProjectSettings under version control.
 
 # ========== IDE ==========
 .vs/
@@ -19,7 +27,13 @@ Packages/packages-lock.json
 *.csproj
 *.unityproj
 *.sln
+*.slnx
+*.suo
 *.user
+*.userprefs
+*.booproj
+*.opendb
+*.VC.db
 *.tmp
 
 # ========== OS ==========
