@@ -1,0 +1,41 @@
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Actual pointer click pauses time and audio
+PASS: Player stationary during pause
+PASS: Button exists: Resume
+PASS: Pointer raycast reaches Resume
+PASS: Actual pointer click resumes
+PASS: Resume click does not create an unintended clone
+PASS: Escape opens pause through new Input System
+PASS: Escape resumes
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Button exists: Restart
+PASS: Pointer raycast reaches Restart
+PASS: Pointer restart resets scene and time
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Button exists: Select
+PASS: Pointer raycast reaches Select
+PASS: Pointer opens selection
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Button exists: Title
+PASS: Pointer raycast reaches Title
+PASS: Pointer opens title
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Actual pointer controls independent volume sliders
+PASS: Button exists: Mute
+PASS: Pointer raycast reaches Mute
+PASS: Pointer toggles mute
+PASS: Button exists: Mute
+PASS: Pointer raycast reaches Mute
+PASS: Zero volume is silent without invalid logarithm
+PASS: Button exists: CloseSettings
+PASS: Pointer raycast reaches CloseSettings
+PASS: Close saves volume and restores time
+PASS: Japanese font bundled with runtime resources
+PASS: Bundled font contains all Japanese HUD and menu glyphs
+PASS: TextMeshPro builds Japanese glyphs from bundled font
+PASS: Menu text uses bundled font

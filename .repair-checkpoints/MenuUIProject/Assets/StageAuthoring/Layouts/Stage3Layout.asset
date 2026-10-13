@@ -1,0 +1,173 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eace31c800c5b644987bc775211ae85f, type: 3}
+  m_Name: Stage3Layout
+  m_EditorClassIdentifier: Assembly-CSharp::StageLayout
+  sceneName: Stage3
+  title: "\u7A7A\u4E2D\u306B\u3001\u3072\u3068\u3064\u306E\u8DB3\u5834"
+  concept: "5\u30DE\u30B9\u306E\u58C1\u3092\u7A7A\u4E2D\u306B\u6B8B\u3059\u30AF\u30ED\u30FC\u30F31\u3064\u3067\u653B\u7565\u3002\u5B89\u5168\u306A\u5E8A\u3067\u8A2D\u7F6E\u3092\u8A66\u3057\u3001\u6BB5\u5DEE\u3068\u5C0F\u3055\u306A\u7A74\u3078\u5FDC\u7528\u3059\u308B\u3002"
+  difficulty: 3
+  playerStart: {x: 2.5, y: 0.5}
+  goalPosition: {x: 167.5, y: 0.5}
+  playerPrefab: {fileID: 5907979830062562168, guid: 9a41d938a409df84ba7f06ea0e055cfa, type: 3}
+  goalPrefab: {fileID: 1768159151923144790, guid: 0837209cd31cf994e88cef8a99c5c983, type: 3}
+  stageManagerPrefab: {fileID: 4043276702052842445, guid: 9df37ef50a7b2c74781189a7334ecd27, type: 3}
+  audioManagerPrefab: {fileID: 1201783954725208842, guid: 1878d35ac9867584eace811c979aae87, type: 3}
+  bgmPrefab: {fileID: 2319908281580917720, guid: b05ae39bab5dfc945a623565e0406c5b, type: 3}
+  backgroundPrefab: {fileID: 2038757429365776046, guid: a54f610fd4496c648a7c6043787e713f, type: 3}
+  groundTile: {fileID: 11400000, guid: 2963f154e75bf674792662feb98bb8ba, type: 2}
+  spikeTile: {fileID: 11400000, guid: 7b0da1aca2cfd854da49f6d4b7875e0d, type: 2}
+  groundMaterial: {fileID: 6200000, guid: 8cd217d82924974449b2f052e9495a83, type: 2}
+  terrain:
+  - purpose: "A\u5730\u9762"
+    cells:
+      x: -8
+      y: -2
+      width: 28
+      height: 2
+  - purpose: "B\u5730\u9762"
+    cells:
+      x: 23
+      y: -2
+      width: 52
+      height: 2
+  - purpose: "C\u5730\u9762"
+    cells:
+      x: 78
+      y: -2
+      width: 43
+      height: 2
+  - purpose: "D\u5730\u9762"
+    cells:
+      x: 124
+      y: -2
+      width: 51
+      height: 2
+  - purpose: "\u5FC5\u9808\u306E\u30AF\u30ED\u30FC\u30F3\u6BB5\u5DEE"
+    cells:
+      x: 30
+      y: 0
+      width: 6
+      height: 5
+  - purpose: "\u5B89\u5168\u306A\u4E0B\u308A\u4E0A\u6BB5"
+    cells:
+      x: 36
+      y: 0
+      width: 3
+      height: 2
+  - purpose: "\u5B89\u5168\u306A\u4E0B\u308A\u4E0B\u6BB5"
+    cells:
+      x: 39
+      y: 0
+      width: 3
+      height: 2
+  - purpose: "\u5FC5\u9808\u306E\u30AF\u30ED\u30FC\u30F3\u6BB5\u5DEE"
+    cells:
+      x: 86
+      y: 0
+      width: 6
+      height: 5
+  - purpose: "\u5B89\u5168\u306A\u4E0B\u308A\u4E0A\u6BB5"
+    cells:
+      x: 92
+      y: 0
+      width: 3
+      height: 2
+  - purpose: "\u5B89\u5168\u306A\u4E0B\u308A\u4E0B\u6BB5"
+    cells:
+      x: 95
+      y: 0
+      width: 3
+      height: 2
+  - purpose: "\u5FC5\u9808\u306E\u30AF\u30ED\u30FC\u30F3\u6BB5\u5DEE"
+    cells:
+      x: 138
+      y: 0
+      width: 6
+      height: 5
+  - purpose: "\u5B89\u5168\u306A\u4E0B\u308A\u4E0A\u6BB5"
+    cells:
+      x: 144
+      y: 0
+      width: 3
+      height: 2
+  - purpose: "\u5B89\u5168\u306A\u4E0B\u308A\u4E0B\u6BB5"
+    cells:
+      x: 147
+      y: 0
+      width: 3
+      height: 2
+  hazards:
+  - purpose: "\u7A741"
+    cells:
+      x: 20
+      y: -3
+      width: 3
+      height: 1
+  - purpose: "\u30C8\u30B21"
+    cells:
+      x: 63
+      y: 0
+      width: 1
+      height: 1
+  - purpose: "\u7A742"
+    cells:
+      x: 75
+      y: -3
+      width: 3
+      height: 1
+  - purpose: "\u30C8\u30B22"
+    cells:
+      x: 113
+      y: 0
+      width: 2
+      height: 1
+  - purpose: "\u7A743"
+    cells:
+      x: 121
+      y: -3
+      width: 3
+      height: 1
+  - purpose: "\u6700\u5F8C\u306E\u30C8\u30B2"
+    cells:
+      x: 156
+      y: 0
+      width: 2
+      height: 1
+  placements:
+  - label: Coin_AfterLearning
+    prefab: {fileID: 715680254216700685, guid: 3703606d66b3771449c64dccd11daac6, type: 3}
+    position: {x: 51, y: 0.9}
+  - label: Coin_Optional
+    prefab: {fileID: 715680254216700685, guid: 3703606d66b3771449c64dccd11daac6, type: 3}
+    position: {x: 109, y: 0.9}
+  areas:
+  - title: "A \u7A7A\u4E2D\u306B\u8DB3\u5834\u3092\u6B8B\u3059\u7DF4\u7FD2"
+    instruction: "\u5730\u9762\u304B\u3089\u30B8\u30E3\u30F3\u30D7\u3057\u3066\u5DE6\u30AF\u30EA\u30C3\u30AF\u3092\u96E2\u3059\u3068\u3001\u305D\u306E\u9AD8\u3055\u306B\u8DB3\u5834\u304C\u6B8B\u308A\u307E\u3059\u3002\u307E\u305A\u5B89\u5168\u306A\u5E8A\u3067\u8A66\u3057\u307E\u3057\u3087\u3046\u3002"
+    fromX: -8
+    toX: 26
+  - title: "B \u8DB3\u58341\u3064\u3067\u9AD8\u3044\u58C1\u3078"
+    instruction: "\u58C1\u306E\u5C11\u3057\u624B\u524D\u3067\u3001\u7A7A\u4E2D\u306B\u8DB3\u5834\u30921\u3064\u6B8B\u3057\u307E\u3059\u3002\u5730\u9762\u3078\u623B\u308A\u3001\u305D\u306E\u8DB3\u5834\u306B\u4E57\u3063\u3066\u9577\u62BC\u3057\u30B8\u30E3\u30F3\u30D7\uFF01"
+    fromX: 26
+    toX: 62
+  - title: "C \u7A74\u306E\u5F8C\u3067\u3001\u3082\u3046\u4E00\u5EA6"
+    instruction: "\u7A74\u3092\u8D8A\u3048\u3066\u5B89\u5168\u306A\u5E8A\u306B\u7740\u5730\u3057\u3066\u304B\u3089\u8DB3\u5834\u3092\u8A2D\u7F6E\u3002\u5FC5\u8981\u306A\u306E\u306F\u4F7F\u3048\u308B\u8DB3\u58341\u3064\u3067\u3059\u3002"
+    fromX: 62
+    toX: 110
+  - title: "D \u899A\u3048\u305F\u9AD8\u3055\u3092\u518D\u73FE"
+    instruction: "\u6700\u5F8C\u306E\u9AD8\u3044\u58C1\u3082\u540C\u3058\u65B9\u6CD5\u3067\u653B\u7565\u3002\u30C8\u30B2\u306E\u624B\u524D\u306B\u306F\u5B89\u5168\u306A\u5E8A\u304C\u3042\u308A\u307E\u3059\u3002"
+    fromX: 110
+    toX: 150
+  - title: "E \u7740\u5730\u3057\u3066\u30B4\u30FC\u30EB\u3078"
+    instruction: "\u58C1\u3092\u8D8A\u3048\u305F\u3089\u3001\u6700\u5F8C\u306E\u898B\u3048\u308B\u30C8\u30B2\u3092\u9577\u62BC\u3057\u30B8\u30E3\u30F3\u30D7\u3067\u8D8A\u3048\u307E\u3057\u3087\u3046\u3002"
+    fromX: 150
+    toX: 176

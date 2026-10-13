@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     [Header("クローン")]
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private int maxClones = 1;
+    public int CloneCapacity => maxClones;
 
     private GameObject[] clones;
     private int currentClones;
@@ -127,6 +128,14 @@ public class Player : MonoBehaviour
     // ======================
     void Update()
     {
+        if (GameMenus.IsPaused)
+        {
+            moveInput = Vector2.zero;
+            jumpPressed = canCloneInput = false;
+            jumpHeld = jumpAction != null && jumpAction.IsPressed();
+            return;
+        }
+        if (GameMenus.BlocksGameplay) canCloneInput = false;
         if (!inputInitialized)
         {
             inputInitialized = true;
@@ -160,7 +169,7 @@ public class Player : MonoBehaviour
             canCloneInput = false;
         }
 
-        if (cloneAction.WasReleasedThisFrame())
+        if (cloneAction.WasReleasedThisFrame() && !GameMenus.BlocksGameplay)
         {
             canCloneInput = true;
         }
@@ -174,6 +183,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (GameMenus.IsPaused) return;
         Move();
         ApplyGravity();
         ResolveWallCollision();

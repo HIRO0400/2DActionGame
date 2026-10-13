@@ -1,0 +1,15 @@
+PASS: Pause freezes time, sound, and gameplay input
+PASS: Player remains stationary while paused
+PASS: Resume restores time, sound, and input
+PASS: Restart from pause works
+PASS: Back to selection restores time
+PASS: Back to title works
+PASS: Zero volume is finite and silent
+PASS: Mute affects both mixer groups
+PASS: Independent volumes persist and reload
+PASS: Japanese font bundled in runtime resources
+PASS: Bundled font contains Japanese HUD and menu glyphs
+PASS: TextMeshPro dynamic Japanese glyph generation works
+PASS: Title text uses bundled font
+PASS: Title text uses bundled font
+PASS: Title text uses bundled font

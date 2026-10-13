@@ -1,0 +1,25 @@
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Actual pointer click pauses time and audio
+PASS: Player stationary during pause
+PASS: Button exists: Resume
+PASS: Pointer raycast reaches Resume
+PASS: Actual pointer click resumes
+PASS: Resume click does not create an unintended clone
+PASS: Escape opens pause through new Input System
+PASS: Escape resumes
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Button exists: Restart
+PASS: Pointer raycast reaches Restart
+PASS: Pointer restart resets scene and time
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Button exists: Select
+PASS: Pointer raycast reaches Select
+PASS: Pointer opens selection
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Button exists: Title
+PASS: Pointer raycast reaches Title
+PASS: Pointer opens title

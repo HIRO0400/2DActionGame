@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 4781116548868131549}
   - component: {fileID: 8145669217783845237}
   - component: {fileID: 673016108778216490}
+  - component: {fileID: 1775552424274941145}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -283,6 +284,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 2364090702565517131, guid: e64c3223b8c865e4d859ff757409ccef, type: 3}
   maxClones: 1
   blinkInterval: 0.05
+  fallDeathDistance: 20
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
   footCheck: {fileID: 1167665022171358101}
@@ -290,7 +292,6 @@ MonoBehaviour:
   footLayer:
     serializedVersion: 2
     m_Bits: 72
-  audioSource: {fileID: 0}
   jumpSound: {fileID: 8300000, guid: 12185b2aedb57824892ea412e81ff68d, type: 3}
   cloneSound: {fileID: 8300000, guid: 800f37d861afee94baf0ae3deada3072, type: 3}
 --- !u!114 &6636260472764856146
@@ -515,6 +516,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1775552424274941145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5907979830062562168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8a5b8f32f8a8444b4f746be4e5c56b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHUD
+  cloneIcon: {fileID: 5118336606452451184, guid: fa47db1ffea8a264a8f13a01f4493418, type: 3}
 --- !u!1 &5920512121941551366
 GameObject:
   m_ObjectHideFlags: 0

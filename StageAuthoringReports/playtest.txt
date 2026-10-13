@@ -20,5 +20,6 @@ PASS: Jump to x=62, landing=(61.93, 4.46, 0.00)
 PASS: Final wall reached using existing clone ability
 PASS: Walk to x=69, position=(68.85, 0.69, 0.00)
 PASS: Walk to x=70.5, position=(69.61, 0.46, 0.00)
+PASS: Goal displays clear screen
 PASS: Goal transitions from Stage1 to existing Stage2
-PASS: Background camera/parallax/loop and full viewport sky coverage stable during 57501 Play Mode camera updates, including clone return and spike respawn
+PASS: Background camera/parallax/loop and full viewport sky coverage stable during 72725 Play Mode camera updates, including clone return and spike respawn

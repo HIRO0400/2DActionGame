@@ -1,0 +1,30 @@
+PASS: Pause freezes time, sound, and gameplay input
+PASS: Player remains stationary while paused
+PASS: Resume restores time, sound, and input
+PASS: Restart from pause works
+PASS: Back to selection restores time
+PASS: Back to title works
+PASS: Zero volume is finite and silent
+PASS: Mute affects both mixer groups
+PASS: Independent volumes persist and reload
+PASS: Japanese font bundled in runtime resources
+PASS: Bundled font contains Japanese HUD and menu glyphs
+PASS: TextMeshPro dynamic Japanese glyph generation works
+PASS: Title text uses bundled font
+PASS: Title text uses bundled font
+PASS: Title text uses bundled font
+PASS: Invalid negative progress repaired
+PASS: Progress capped at existing last stage
+PASS: Old progress migrates without losing unlocks
+PASS: Progress reset preserves audio settings
+PASS: Clear progress explicitly saved
+PASS: Saved progress reloads
+PASS: Actual goal displays clear screen and waits for choice
+PASS: Clear freezes player and saves next unlock
+PASS: Clear screen next-stage action works
+PASS: Selection respects saved stage locks
+PASS: Selection marks cleared stages
+PASS: Unbuilt Stage6 hidden
+PASS: Selection button loads available stage
+PASS: Final-stage completion screen and record work
+PASS: Final completion returns to selection

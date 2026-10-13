@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class StageSelectManager : MonoBehaviour
 {
@@ -19,13 +20,29 @@ public class StageSelectManager : MonoBehaviour
         if (stageButtons == null || stageSceneNames == null) return;
 
         int count = Mathf.Min(stageButtons.Length, stageSceneNames.Length);
-        int unlockedStage = PlayerPrefs.GetInt("UnlockedStage", 1);
+        int unlockedStage = ProgressStore.UnlockedStage;
+        if (GameObject.Find("SelectionSubtitle") == null) MenuScreenLayout.Selection(stageButtons, stageSceneNames);
 
         for (int i = 0; i < count; i++)
         {
             if (stageButtons[i] == null) continue;
 
             int stageIndex = i + 1;
+            bool available = StageManager.CanLoadScene(stageSceneNames[i]);
+            stageButtons[i].gameObject.SetActive(available);
+            stageButtons[i].onClick.RemoveAllListeners();
+            var label = stageButtons[i].GetComponentInChildren<TMP_Text>(true);
+            if (label != null)
+            {
+                label.font = UIFont.TMPFont;
+                label.text = "Stage " + stageIndex + "\n" + (ProgressStore.IsCleared(stageIndex) ? "クリア済み" : stageIndex <= unlockedStage ? "挑戦可能" : "未解放");
+                label.enableAutoSizing = true;
+                label.fontSizeMin = 14; label.fontSizeMax = 24;
+                label.alignment = TextAlignmentOptions.Center;
+                label.rectTransform.anchorMin = Vector2.zero; label.rectTransform.anchorMax = Vector2.one;
+                label.rectTransform.offsetMin = label.rectTransform.offsetMax = Vector2.zero;
+                label.margin = new Vector4(8, 8, 8, 8);
+            }
 
             if (stageIndex <= unlockedStage &&
                 !string.IsNullOrEmpty(stageSceneNames[i]) &&
@@ -48,7 +65,7 @@ public class StageSelectManager : MonoBehaviour
     {
         if (stageSceneNames == null || index < 0 || index >= stageSceneNames.Length) return;
 
-        if (StageManager.CanLoadScene(stageSceneNames[index]))
+        if (index + 1 <= ProgressStore.UnlockedStage && StageManager.CanLoadScene(stageSceneNames[index]))
             SceneManager.LoadScene(stageSceneNames[index]);
     }
 

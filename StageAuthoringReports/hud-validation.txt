@@ -1,0 +1,6 @@
+PASS: Initial capacity ×1; HUD present in all five scenes
+PASS: HUD independent of camera motion
+PASS: HUD does not intercept mouse input
+PASS: Existing clone sprite assigned
+PASS: Actual coin trigger increases capacity and displayed number
+PASS: HUD preview image generated

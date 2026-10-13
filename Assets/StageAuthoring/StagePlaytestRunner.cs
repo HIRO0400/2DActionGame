@@ -104,6 +104,7 @@ public class StagePlaytestRunner : MonoBehaviour
         InputSystem.settings.updateMode = originalUpdateMode;
         if (hadPreference) PlayerPrefs.SetInt("UnlockedStage", originalPreference);
         else PlayerPrefs.DeleteKey("UnlockedStage");
+        JsonUtility.FromJson<ProgressTestSnapshot>(SessionState.GetString("Stage1.OriginalProgress", "")).Restore();
         File.WriteAllLines("StageAuthoringReports/playtest.txt", results);
         EditorApplication.Exit(failed ? 1 : 0);
     }
@@ -138,7 +139,7 @@ public class StagePlaytestRunner : MonoBehaviour
         var input = player.GetComponent<PlayerInput>();
         input.actions.devices = new InputDevice[] { keyboard, mouse };
         input.actions.Enable();
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSecondsRealtime(0.6f);
         Check(Field<bool>("isGrounded"), "Start lands on generated ground");
         yield return Drive(7f);
         yield return JumpTo(12f);
@@ -148,14 +149,14 @@ public class StagePlaytestRunner : MonoBehaviour
         yield return JumpTo(22f);
         Check(player.transform.position.y > 4.2f, "First four-unit wall reached using clone and held jump");
         yield return Drive(28.5f);
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSecondsRealtime(0.6f);
         Check(Field<int>("maxClones") >= 2, "First coin increases clone capacity");
         yield return Drive(30f);
         yield return JumpTo(32.5f);
         yield return JumpTo(36f);
         Check(Field<int>("maxClones") >= 3, "Optional high coin can be collected");
         yield return Drive(42f);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSecondsRealtime(0.5f);
         var body = player.GetComponent<Rigidbody2D>();
         var safe = Field<Vector3>("lastGroundPosition");
         int beforeDeath = Field<int>("currentClones");
@@ -163,7 +164,7 @@ public class StagePlaytestRunner : MonoBehaviour
         player.transform.position = body.position;
         body.linearVelocity = Vector2.zero;
         Physics2D.SyncTransforms();
-        yield return new WaitForSeconds(1.8f);
+        yield return new WaitForSecondsRealtime(1.8f);
         Check(Field<int>("currentClones") == beforeDeath + 1 && Mathf.Abs(player.transform.position.x - safe.x) < 0.3f && Field<bool>("isGrounded"), "Actual spike contact causes one death and returns to safe ground");
         yield return JumpTo(47f);
         Check(player.transform.position.x > 46f && player.transform.position.y > 0.2f, "Three-unit pit crossed using ordinary held jump");
@@ -174,7 +175,9 @@ public class StagePlaytestRunner : MonoBehaviour
         yield return Drive(69f);
         yield return Drive(70.5f);
         Input();
-        yield return new WaitForSeconds(1.8f);
+        Check(GameMenus.Instance.IsClearVisible, "Goal displays clear screen");
+        GameMenus.Instance.ContinueAfterClear();
+        yield return new WaitForSecondsRealtime(1.8f);
         Check(SceneManager.GetActiveScene().name == "Stage2", "Goal transitions from Stage1 to existing Stage2");
         Check(backgroundFrames > 200, "Background camera/parallax/loop and full viewport sky coverage stable during " + backgroundFrames + " Play Mode camera updates, including clone return and spike respawn");
         Finish();
@@ -191,12 +194,12 @@ public class StagePlaytestRunner : MonoBehaviour
         if (player != null && Mathf.Abs(player.transform.position.x - x) >= 0.3f && player.enabled)
             results.Add("INPUT DIAGNOSTIC: keyboard=" + keyboard.enabled + ", D=" + keyboard.dKey.isPressed + ", action=" + player.GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>() + ", playerInput=" + Field<Vector2>("moveInput") + ", playerEnabled=" + player.enabled);
         Check(player != null && (!player.enabled || Mathf.Abs(player.transform.position.x - x) < 0.3f), "Walk to x=" + x + ", position=" + (player == null ? "null" : player.transform.position.ToString()));
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSecondsRealtime(0.15f);
     }
     IEnumerator JumpTo(float x)
     {
         Input();
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSecondsRealtime(0.25f);
         float start = Time.time;
         while (Time.time - start < 1.8f)
         {
@@ -210,9 +213,9 @@ public class StagePlaytestRunner : MonoBehaviour
     IEnumerator Clone()
     {
         Input(0, false, true);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSecondsRealtime(0.1f);
         Input();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSecondsRealtime(1f);
     }
 }
 #endif

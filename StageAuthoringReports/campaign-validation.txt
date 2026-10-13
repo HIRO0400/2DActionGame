@@ -1,0 +1,5 @@
+PASS: Stage2 references, transitions, static composite terrain, spike triggers, world sky, required gates, regeneration preserves manual decorations.
+PASS: Stage3 references, transitions, static composite terrain, spike triggers, world sky, required gates, regeneration preserves manual decorations.
+PASS: Stage4 references, transitions, static composite terrain, spike triggers, world sky, required gates, regeneration preserves manual decorations.
+PASS: Stage5 references, transitions, static composite terrain, spike triggers, world sky, required gates, regeneration preserves manual decorations.
+PASS: Stage3/4 mandatory heights 5/6 exceed normal jump; Stage5 height 8 exceeds normal jump plus one reachable clone (about 7.36). No enemy at mandatory gates.

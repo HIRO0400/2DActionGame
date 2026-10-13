@@ -1,0 +1,12 @@
+PASS: Stage2 camera (12.00, 2.00) rendered with zero exposed clear-color pixels.
+PASS: Stage2 camera (60.00, 2.00) rendered with zero exposed clear-color pixels.
+PASS: Stage2 camera (145.00, 2.00) rendered with zero exposed clear-color pixels.
+PASS: Stage3 camera (30.00, 3.00) rendered with zero exposed clear-color pixels.
+PASS: Stage3 camera (86.00, 3.00) rendered with zero exposed clear-color pixels.
+PASS: Stage3 camera (138.00, 3.00) rendered with zero exposed clear-color pixels.
+PASS: Stage4 camera (28.00, 4.00) rendered with zero exposed clear-color pixels.
+PASS: Stage4 camera (80.00, 4.00) rendered with zero exposed clear-color pixels.
+PASS: Stage4 camera (146.00, 4.00) rendered with zero exposed clear-color pixels.
+PASS: Stage5 camera (41.00, 5.00) rendered with zero exposed clear-color pixels.
+PASS: Stage5 camera (94.00, 5.00) rendered with zero exposed clear-color pixels.
+PASS: Stage5 camera (137.00, 5.00) rendered with zero exposed clear-color pixels.

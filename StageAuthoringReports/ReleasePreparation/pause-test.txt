@@ -1,0 +1,6 @@
+PASS: Pause freezes time, sound, and gameplay input
+PASS: Player remains stationary while paused
+PASS: Resume restores time, sound, and input
+PASS: Restart from pause works
+PASS: Back to selection restores time
+PASS: Back to title works

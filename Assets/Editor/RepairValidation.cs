@@ -38,7 +38,8 @@ public static class RepairValidation
                 Check(manager != null, name + " has a stage manager");
                 Call(manager, "Awake");
                 Check(Get<int>(manager, "stageNumber") == (name == "Stage1" ? 1 : 2), name + " stage number");
-                Check(Get<string>(manager, "nextStageName") == (name == "Stage1" ? "Stage2" : ""), name + " transition");
+                string expectedNext = "Stage" + (Get<int>(manager, "stageNumber") + 1);
+                Check(Get<string>(manager, "nextStageName") == (StageManager.CanLoadScene(expectedNext) ? expectedNext : ""), name + " transition");
             }
             foreach (string path in new[] { "Assets/Scenes/Terrain.unity", "Assets/Scenes/SampleU.unity" })
             {

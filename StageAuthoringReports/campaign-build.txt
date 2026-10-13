@@ -1,0 +1,4 @@
+Created Stage2, goal=(158.50, 0.50), regions=6
+Created Stage3, goal=(167.50, 0.50), regions=13
+Created Stage4, goal=(174.50, 0.50), regions=13
+Created Stage5, goal=(169.50, 0.50), regions=12

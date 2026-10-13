@@ -1,0 +1,14 @@
+PASS: Native build starts at title
+PASS: Native pointer opens volume settings
+PASS: Native pointer toggles mute
+PASS: Native settings close restores time
+PASS: Native coin pickup updates clone HUD
+PASS: Native pointer pauses gameplay
+PASS: Native bundled Japanese font has glyphs
+PASS: Native pointer resumes gameplay
+PASS: Native goal shows clear screen and saves record
+PASS: Native next-stage button loads build scene
+PASS: Native final clear works
+PASS: Native final clear returns to selection
+PASS: Native reset cancel preserves record
+PASS: Native reset confirm clears progress

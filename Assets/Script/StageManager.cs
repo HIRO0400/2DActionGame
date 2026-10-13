@@ -50,7 +50,7 @@ public class StageManager : MonoBehaviour
         isCleared = true;
 
         UnlockNextStage();
-        Invoke(nameof(GoToNextStage), 1.0f); // 1秒後に遷移
+        GameMenus.Instance.ShowClear(stageNumber, nextStageName);
     }
 
     // ======================
@@ -58,13 +58,7 @@ public class StageManager : MonoBehaviour
     // ======================
     void UnlockNextStage()
     {
-        int unlocked = PlayerPrefs.GetInt("UnlockedStage", 1);
-
-        if (stageNumber >= unlocked && !string.IsNullOrEmpty(nextStageName) &&
-            CanLoadScene(nextStageName))
-        {
-            PlayerPrefs.SetInt("UnlockedStage", stageNumber + 1);
-        }
+        ProgressStore.CompleteStage(stageNumber, nextStageName);
     }
 
     // ======================

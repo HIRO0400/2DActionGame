@@ -1,0 +1,583 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+Built from '6000.3/staging' branch; Version is '6000.3.13f1 (8c4f11e4fb20) revision 9195281'; Using compiler version '194234433'; Build Type 'Release'
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-rekka" at "2026-10-13T15:10:19.5893684Z"
+OS: 'Windows 11  (10.0.26200) Core' Language: 'ja' Physical Memory: 16000 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-10-13T15:10:19Z
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\6000.3.13f1\Editor\Unity.exe
+-batchmode
+-projectPath
+C:/Users/rekka/2DActionGame
+-executeMethod
+CampaignPlaytest.Run
+-logFile
+C:/Users/rekka/2DActionGame/StageAuthoringReports/ReleasePreparation/campaign.log
+Successfully changed project path to: C:/Users/rekka/2DActionGame
+C:/Users/rekka/2DActionGame
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+Player connection [28996]  Target information:
+
+Player connection [28996]  * "[IP] 192.168.1.1 [Port] 55504 [Flags] 2 [Guid] 3134571700 [EditorId] 3134571700 [Version] 1048832 [Id] WindowsEditor(7,KANOUNUVERSITY) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [28996]  * "[IP] 172.27.160.1 [Port] 55504 [Flags] 2 [Guid] 3134571700 [EditorId] 3134571700 [Version] 1048832 [Id] WindowsEditor(7,KANOUNUVERSITY) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [28996]  * "[IP] 192.168.1.12 [Port] 55504 [Flags] 2 [Guid] 3134571700 [EditorId] 3134571700 [Version] 1048832 [Id] WindowsEditor(7,KANOUNUVERSITY) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Unable to join player connection multicast group (err: 10013).
+Player connection [28996] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Package Manager] Connected to IPC stream "Upm-20672" after 0.5 seconds.
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::Client] Error: HandshakeResponse reported an error:
+	ResponseCode: 505
+	ResponseStatus: Unsupported protocol version '1.18.1'.
+[Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-rekka"
+[Licensing::IpcConnector] LicenseClient-rekka channel disconnected successfully.
+[Licensing::IpcConnector] Channel LicenseClient-rekka-6000.3.13 doesn't exist
+[Licensing::Module] Successfully launched the LicensingClient (PId: 15264)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-rekka-6000.3.13" at "2026-10-13T15:10:22.9417306Z"
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              16d7aa778ed04b8d853c05527124e92b
+  Correlation Id:          3a244a6ca27bb65234f859c5cec0d145
+  External correlation Id: 5846967990520625318
+  Machine Id:              HEYpkbjaIU2G1nhHhHlhCq2+qew=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-rekka-6000.3.13" (connect: 0.57s, validation: 0.07s, handshake: 2.58s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-rekka-6000.3.13-notifications" at "2026-10-13T15:10:25.5877917Z"
+[Licensing::Module] Connected to LicensingClient (PId: 15264, launch time: 0.01, total connection time: 3.21s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 15668484983643-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.01
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Licensing Background thread has ended after 6.05s
+[Licensing::Module] Licensing is initialized (took 5.15s).
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Refreshing native plugins compatible for Editor in 0.93 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 6000.3.13f1 (8c4f11e4fb20)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.3.13f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/rekka/2DActionGame/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) Iris(R) Xe Graphics (ID=0xa7a1)
+    Vendor:   Intel
+    VRAM:     8000 MB
+    Driver:   32.0.101.7085
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.3.13f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.3.13f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.3.13f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56672
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.3.13f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+[Licensing::Client] Successfully resolved entitlement details
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.3.13f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+[Licensing::Client] Successfully resolved entitlement details
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.3.13f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Registered in 0.017605 seconds.
+- Loaded All Assemblies, in  0.524 seconds
+Native extension for iOS target not found
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+Package Manager log level set to [2]
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.491 seconds
+Domain Reload Profiling: 1012ms
+	BeginReloadAssembly (169ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (20ms)
+	RebuildCommonClasses (47ms)
+	RebuildNativeTypeToScriptingClass (13ms)
+	initialDomainReloadingComplete (72ms)
+	LoadAllAssembliesAndSetupDomain (219ms)
+		LoadAssemblies (146ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (214ms)
+			TypeCache.Refresh (212ms)
+				TypeCache.ScanAssembly (196ms)
+			BuildScriptInfoCaches (0ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (491ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (443ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (84ms)
+			SetLoadedEditorAssemblies (4ms)
+			BeforeProcessingInitializeOnLoad (87ms)
+			ProcessInitializeOnLoadAttributes (153ms)
+			ProcessInitializeOnLoadMethodAttributes (115ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 69 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.2d.animation@13.0.4 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.2d.animation@7396d8477ca9)
+    com.unity.2d.aseprite@3.0.1 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.2d.aseprite@809e3a168ff7)
+    com.unity.2d.psdimporter@12.0.1 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.2d.psdimporter@9abe0f7cac7e)
+    com.unity.2d.spriteshape@13.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.2d.spriteshape@0738bab11647)
+    com.unity.2d.tilemap.extras@6.0.1 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867)
+    com.unity.2d.tooling@1.0.2 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.2d.tooling@249995156768)
+    com.unity.cinemachine@3.1.6 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.cinemachine@285f38545487)
+    com.unity.collab-proxy@2.12.4 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.collab-proxy@0b1559bcd34e)
+    com.unity.ide.rider@3.0.39 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.ide.rider@4504839d03f7)
+    com.unity.ide.visualstudio@2.0.26 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.ide.visualstudio@a99d56dec63f)
+    com.unity.ide.vscode@1.2.5 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.ide.vscode@82e68656b7bd)
+    com.unity.inputsystem@1.19.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.inputsystem@21a28c3a6c83)
+    com.unity.timeline@1.8.12 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.timeline@8cd8509afae5)
+    com.unity.visualscripting@1.9.11 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.visualscripting@8bed5ad90189)
+    com.unity.splines@2.8.4 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.splines@9b00833aca09)
+    com.unity.2d.common@12.0.2 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.2d.common@800085e896ad)
+    com.unity.mathematics@1.3.3 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.mathematics@19a9377c4ffa)
+    com.unity.collections@2.6.5 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.collections@12999e356c23)
+    com.unity.searcher@4.9.4 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.searcher@d45a78918735)
+    com.unity.burst@1.8.29 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.burst@6bb9aca3ef38)
+    com.unity.settings-manager@2.1.1 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.settings-manager@0b8638c5ce86)
+    com.unity.nuget.mono-cecil@1.11.6 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.nuget.mono-cecil@ecb9724e46ff)
+    com.unity.test-framework.performance@3.4.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.test-framework.performance@aa81a99c4a75)
+  Built-in packages:
+    com.unity.2d.sprite@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.2d.sprite@d14b9d497a24)
+    com.unity.2d.tilemap@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.2d.tilemap@43eb9b2da17d)
+    com.unity.multiplayer.center@1.0.1 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.multiplayer.center@f01f4ba8d00a)
+    com.unity.render-pipelines.universal@17.3.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.render-pipelines.universal@d00cd191b3cc)
+    com.unity.test-framework@1.6.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.test-framework@aebcb98460c6)
+    com.unity.ugui@2.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.ugui@8ccc29d23a79)
+    com.unity.modules.accessibility@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.accessibility)
+    com.unity.modules.adaptiveperformance@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.adaptiveperformance)
+    com.unity.modules.ai@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.ai)
+    com.unity.modules.androidjni@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.androidjni)
+    com.unity.modules.animation@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.animation)
+    com.unity.modules.assetbundle@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.assetbundle)
+    com.unity.modules.audio@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.audio)
+    com.unity.modules.cloth@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.cloth)
+    com.unity.modules.director@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.director)
+    com.unity.modules.imageconversion@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.imageconversion)
+    com.unity.modules.imgui@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.imgui)
+    com.unity.modules.jsonserialize@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.jsonserialize)
+    com.unity.modules.particlesystem@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.particlesystem)
+    com.unity.modules.physics@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.physics)
+    com.unity.modules.physics2d@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.physics2d)
+    com.unity.modules.screencapture@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.screencapture)
+    com.unity.modules.terrain@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.terrain)
+    com.unity.modules.terrainphysics@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.terrainphysics)
+    com.unity.modules.tilemap@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.tilemap)
+    com.unity.modules.ui@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.ui)
+    com.unity.modules.uielements@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.uielements)
+    com.unity.modules.umbra@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.umbra)
+    com.unity.modules.unityanalytics@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.unityanalytics)
+    com.unity.modules.unitywebrequest@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.unitywebrequest)
+    com.unity.modules.unitywebrequestassetbundle@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.unitywebrequestassetbundle)
+    com.unity.modules.unitywebrequestaudio@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.unitywebrequestaudio)
+    com.unity.modules.unitywebrequesttexture@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.unitywebrequesttexture)
+    com.unity.modules.unitywebrequestwww@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.unitywebrequestwww)
+    com.unity.modules.vectorgraphics@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.vectorgraphics)
+    com.unity.modules.vehicles@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.vehicles)
+    com.unity.modules.video@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.video)
+    com.unity.modules.vr@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.vr)
+    com.unity.modules.wind@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.wind)
+    com.unity.modules.xr@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.xr)
+    com.unity.modules.subsystems@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.subsystems)
+    com.unity.modules.hierarchycore@1.0.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.modules.hierarchycore)
+    com.unity.ext.nunit@2.0.5 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.ext.nunit@d8c07649098d)
+    com.unity.render-pipelines.core@17.3.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.render-pipelines.core@beca2a4be9a2)
+    com.unity.shadergraph@17.3.0 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.shadergraph@8453f937f03b)
+    com.unity.render-pipelines.universal-config@17.0.3 (location: C:\Users\rekka\2DActionGame\Library\PackageCache\com.unity.render-pipelines.universal-config@8dc1aab4af1d)
+[Package Manager] com.unity.ide.vscode is deprecated: Visual Studio Code package is not supported anymore. You can continue to use it, but we won't provide any update anymore.
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.06 seconds
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+[ScriptCompilation] Requested script compilation because: Assetdatabase observed changes in script compilation related files
+Starting: C:\Program Files\Unity\Hub\Editor\6000.3.13f1\Editor\Data\Tools\BuildPipeline\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: C:/Users/rekka/2DActionGame
+DisplayProgressbar: Compiling Scripts
+Starting: C:\Program Files\Unity\Hub\Editor\6000.3.13f1\Editor\Data\netcorerun\netcorerun.exe "C:\Program Files\Unity\Hub\Editor\6000.3.13f1\Editor\Data\Tools\BuildPipeline\ScriptCompilationBuildProgram.exe" "Library/Bee/1900b0aE.dag.json" "Library/Bee/1900b0aE-inputdata.json" "Library\Bee\buildprogram0.traceevents"
+WorkingDir: C:/Users/rekka/2DActionGame
+ExitCode: 4 Duration: 0s392ms
+Rebuilding DAG because FileSignature timestamp changed: Library/Bee/1900b0aE-inputdata.json
+*** Tundra requires additional run (0.32 seconds), 0 items updated, 693 evaluated
+ExitCode: 0 Duration: 1s225ms
+Starting: C:\Program Files\Unity\Hub\Editor\6000.3.13f1\Editor\Data\Tools\BuildPipeline\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --dagfilejson="Library\Bee\1900b0aE.dag.json" --profile="Library/Bee/backend2.traceevents" ScriptAssemblies
+WorkingDir: C:/Users/rekka/2DActionGame
+ExitCode: 0 Duration: 3s466ms
+Finished compiling graph: 1116 nodes, 22231 flattened edges (18255 ToBuild, 178 ToUse), maximum node priority 1282
+[ 584/1113  0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.rsp
+[ 864/1113  0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+[1105/1113  1s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll (+2 others)
+[1106/1113  0s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll (+2 others)
+[1107/1113  0s] ILPostProcess Library/Bee/artifacts/1900b0aE.dag/post-processed/Assembly-CSharp-Editor.dll (+pdb)
+Processing assembly Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll, with 135 defines and 364 references
+
+processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+
+running Unity.Jobs.CodeGen.JobsILPostProcessor
+
+running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+[1108/1113  1s] ILPostProcess Library/Bee/artifacts/1900b0aE.dag/post-processed/Assembly-CSharp.dll (+pdb)
+Processing assembly Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll, with 137 defines and 340 references
+
+processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+
+running Unity.Jobs.CodeGen.JobsILPostProcessor
+
+running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+[1109/1113  0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp.dll
+[1110/1113  0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp.pdb
+[1111/1113  0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.pdb
+[1112/1113  0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+*** Tundra build success (3.40 seconds), 10 items updated, 1113 evaluated
+AssetDatabase: script compilation time: 5.686792s
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  1.991 seconds
+'Packages/com.unity.cinemachine/Editor/Editors/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Packages/com.unity.cinemachine/Editor/Obsolete/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Refreshing native plugins compatible for Editor in 2.93 ms, found 5 plugins.
+Native extension for iOS target not found
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+Refreshing native plugins compatible for Editor in 6.92 ms, found 5 plugins.
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  5.769 seconds
+Domain Reload Profiling: 7734ms
+	BeginReloadAssembly (566ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (48ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (188ms)
+	RebuildCommonClasses (103ms)
+	RebuildNativeTypeToScriptingClass (36ms)
+	initialDomainReloadingComplete (97ms)
+	LoadAllAssembliesAndSetupDomain (1163ms)
+		LoadAssemblies (859ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (534ms)
+			TypeCache.Refresh (381ms)
+				TypeCache.ScanAssembly (355ms)
+			BuildScriptInfoCaches (125ms)
+			ResolveRequiredComponents (20ms)
+	FinalizeReload (5770ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (5476ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (44ms)
+			SetLoadedEditorAssemblies (10ms)
+			BeforeProcessingInitializeOnLoad (314ms)
+			ProcessInitializeOnLoadAttributes (4817ms)
+			ProcessInitializeOnLoadMethodAttributes (272ms)
+			AfterProcessingInitializeOnLoad (18ms)
+			EditorAssembliesLoaded (1ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (51ms)
+Refreshing native plugins compatible for Editor in 2.92 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=08b67af895be5dc43a870c81539eb77b): Total: 15.627 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=6547 ms
+		Asset DB Callback time: managed=1230 ms, native=96 ms
+		Scripting: domain reloads=1, domain reload time=1992 ms, compile time=5689 ms, other=70 ms
+		Project Asset Count: scripts=1702, non-scripts=4031
+		Asset File Changes: new=1, changed=3, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokeCustomDependenciesCallbacks: 0.002ms
+	InvokePackagesCallback: 68.790ms
+	ApplyChangesToAssetFolders: 1.315ms
+	Scan: 185.834ms
+	OnSourceAssetsModified: 1.052ms
+	CategorizeAssetsWithTransientArtifact: 86.388ms
+	ProcessAssetsWithTransientArtifactChanges: 124.406ms
+	CategorizeAssets: 147.322ms
+	ImportOutOfDateAssets: 5790.789ms (96.402ms without children)
+		CompileScripts: 5689.364ms
+		ReloadNativeAssets: 0.066ms
+		UnloadImportedAssets: 1.393ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.879ms
+		InitializingProgressBar: 0.001ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.002ms
+		OnDemandSchedulerStart: 1.681ms
+	PostProcessAllAssets: 1255.056ms
+	Hotreload: 6.306ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.003ms
+	UnloadStreamsBegin: 3.236ms
+	PersistCurrentRevisions: 0.713ms
+	UnloadStreamsEnd: 0.004ms
+	GenerateScriptTypeHashes: 9.644ms
+	Untracked: 7956.050ms
+
+Application.AssetDatabase Initial Refresh End
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Scanning for USB devices : 2.757ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-2DActionGame
+Unloading 20 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 7622 unused Assets / (3.1 MB). Loaded Objects now: 8489.
+Memory consumption went from 238.8 MB to 235.7 MB.
+Total: 15.827200 ms (FindLiveObjects: 0.797000 ms CreateObjectMapping: 0.755400 ms MarkObjects: 9.977300 ms  DeleteObjects: 4.295000 ms)
+
+Opening scene 'Assets/Scenes/Stage/Stage2.unity'
+Unloading 22 Unused Serialized files (Serialized files now loaded: 0)
+Refreshing native plugins compatible for Editor in 3.94 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Loaded scene 'Assets/Scenes/Stage/Stage2.unity'
+	Deserialize:            23.672 ms
+	Integration:            354.837 ms
+	Integration of assets:  19.027 ms
+	Thread Wait Time:       0.186 ms
+	Total Operation Time:   397.722 ms
+Unloading 2 unused Assets / (1.0 KB). Loaded Objects now: 8829.
+Memory consumption went from 227.6 MB to 227.6 MB.
+Total: 13.182100 ms (FindLiveObjects: 0.704400 ms CreateObjectMapping: 0.457000 ms MarkObjects: 11.961400 ms  DeleteObjects: 0.056500 ms)
+
+[Project] Loading completed in 27.658 seconds
+	Project init time: 				24.461 seconds
+		Template init time: 		0.000 seconds
+		Package Manager init time: 		5.634 seconds
+		Asset Database init time: 		0.594 seconds
+		Global illumination init time: 	0.003 seconds
+		Assemblies load time: 			1.037 seconds
+		Unity extensions init time: 	0.022 seconds
+		Asset Database refresh time: 	15.627 seconds
+	Scene opening time: 			2.686 seconds
+##utp:{"type":"ProjectInfo","version":2,"phase":"Immediate","time":1791904247226,"processId":20672,"projectLoad":27.6579598,"projectInit":24.4614115,"templateInit":0.0,"packageManagerInit":5.6336964,"assetDatabaseInit":0.5940609,"globalIlluminationInit":0.0030844,"assembliesLoad":1.0365923,"unityExtensionsInit":0.0223915,"assetDatabaseRefresh":15.6274282,"sceneOpening":2.6856226}
+##utp:{"type":"EditorInfo","version":2,"phase":"Immediate","time":1791904247226,"processId":20672,"editorVersion":"6000.3.13f1 (8c4f11e4fb20)","branch":"6000.3/staging","buildType":"Release","platform":"Windows"}
+SpriteAtlasPacking completed in 0.010182 sec
+Reloading assemblies for play mode.
+Reloading assemblies after forced synchronous recompile.
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  1.085 seconds
+Refreshing native plugins compatible for Editor in 3.88 ms, found 5 plugins.
+Native extension for iOS target not found
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.510 seconds
+Domain Reload Profiling: 2596ms
+	BeginReloadAssembly (568ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (53ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (341ms)
+	RebuildCommonClasses (42ms)
+	RebuildNativeTypeToScriptingClass (16ms)
+	initialDomainReloadingComplete (32ms)
+	LoadAllAssembliesAndSetupDomain (428ms)
+		LoadAssemblies (178ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (357ms)
+			TypeCache.Refresh (10ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (316ms)
+			ResolveRequiredComponents (21ms)
+	FinalizeReload (1511ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (938ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (47ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (222ms)
+			ProcessInitializeOnLoadAttributes (493ms)
+			ProcessInitializeOnLoadMethodAttributes (160ms)
+			AfterProcessingInitializeOnLoad (11ms)
+			EditorAssembliesLoaded (1ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (58ms)
+Asset Pipeline Refresh (id=ad7f1337f9121c9459c8475eac8cbe79): Total: 2.940 seconds - Initiated by StopAssetImportingV2(ForceSynchronousImport | ForceDomainReload)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=1753 ms
+		Asset DB Callback time: managed=67 ms, native=0 ms
+		Scripting: domain reloads=1, domain reload time=1115 ms, compile time=2 ms, other=0 ms
+		Project Asset Count: scripts=1702, non-scripts=4031
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokeCustomDependenciesCallbacks: 0.002ms
+	InvokePackagesCallback: 3.323ms
+	ApplyChangesToAssetFolders: 0.530ms
+	Scan: 0.001ms
+	OnSourceAssetsModified: 0.004ms
+	CategorizeAssetsWithTransientArtifact: 0.007ms
+	ProcessAssetsWithTransientArtifactChanges: 7.772ms
+	CategorizeAssets: 122.840ms
+	ImportOutOfDateAssets: 1534.427ms (1524.668ms without children)
+		CompileScripts: 2.391ms
+		CollectScriptTypesHashes: 2.767ms
+		ReloadNativeAssets: 1.712ms
+		UnloadImportedAssets: 0.132ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.669ms
+		InitializingProgressBar: 0.001ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 1.086ms
+	PostProcessAllAssets: 67.420ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.399ms
+	UnloadStreamsBegin: 0.339ms
+	PersistCurrentRevisions: 0.471ms
+	UnloadStreamsEnd: 0.003ms
+	GenerateScriptTypeHashes: 10.239ms
+	Untracked: 1202.511ms
+
+Loaded scene 'Temp/__Backupscenes/0.backup'
+	Deserialize:            4.104 ms
+	Integration:            516.932 ms
+	Integration of assets:  0.030 ms
+	Thread Wait Time:       0.025 ms
+	Total Operation Time:   521.091 ms
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+Start Indexing on Editor startup
+[Indexing] Starting Initial Indexing for Assets
+Created GICache directory at C:/Users/rekka/AppData/LocalLow/Unity/Caches/GiCache. Took: 0.035s, timestamps: [31.313 - 31.348]
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Client] Successfully resolved entitlement details
+TrimDiskCacheJob: Current cache size 106mb
+Unloading 19 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 118.163500 ms
+Loaded scene 'Assets/Scenes/Stage/Stage3.unity'
+	Deserialize:            7.462 ms
+	Integration:            594.907 ms
+	Integration of assets:  0.032 ms
+	Thread Wait Time:       4.288 ms
+	Total Operation Time:   606.689 ms
+Unloading 49 unused Assets / (34.8 KB). Loaded Objects now: 8900.
+Memory consumption went from 266.9 MB to 266.8 MB.
+Total: 17.303300 ms (FindLiveObjects: 1.084600 ms CreateObjectMapping: 0.382100 ms MarkObjects: 14.362500 ms  DeleteObjects: 1.471700 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 172.031600 ms
+Loaded scene 'Assets/Scenes/Stage/Stage4.unity'
+	Deserialize:            21.519 ms
+	Integration:            497.786 ms
+	Integration of assets:  1.292 ms
+	Thread Wait Time:       0.981 ms
+	Total Operation Time:   521.578 ms
+Unloading 10 unused Assets / (20.5 KB). Loaded Objects now: 8923.
+Memory consumption went from 253.8 MB to 253.8 MB.
+Total: 12.596200 ms (FindLiveObjects: 0.460300 ms CreateObjectMapping: 0.217700 ms MarkObjects: 11.768800 ms  DeleteObjects: 0.147500 ms)
+
+Unloading 9 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 79.698200 ms
+Loaded scene 'Assets/Scenes/Stage/Stage5.unity'
+	Deserialize:            9.579 ms
+	Integration:            535.913 ms
+	Integration of assets:  0.020 ms
+	Thread Wait Time:       0.593 ms
+	Total Operation Time:   546.106 ms
+Unloading 32 unused Assets / (16.7 KB). Loaded Objects now: 8894.
+Memory consumption went from 253.8 MB to 253.8 MB.
+Total: 21.172100 ms (FindLiveObjects: 0.460700 ms CreateObjectMapping: 0.229200 ms MarkObjects: 20.075000 ms  DeleteObjects: 0.404800 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 8.370900 ms
+Loaded scene 'Assets/Scenes/Stage/Stage5.unity'
+	Deserialize:            3.854 ms
+	Integration:            244.134 ms
+	Integration of assets:  0.002 ms
+	Thread Wait Time:       0.517 ms
+	Total Operation Time:   248.507 ms
+Unloading 2 unused Assets / (1.1 KB). Loaded Objects now: 8894.
+Memory consumption went from 254.2 MB to 254.2 MB.
+Total: 10.455500 ms (FindLiveObjects: 0.392900 ms CreateObjectMapping: 0.169900 ms MarkObjects: 9.763500 ms  DeleteObjects: 0.127700 ms)
+
+Unloading 13 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.127200 ms
+Loaded scene 'Assets/Scenes/Stage/StageSelectScene.unity'
+	Deserialize:            44.912 ms
+	Integration:            305.787 ms
+	Integration of assets:  18.285 ms
+	Thread Wait Time:       0.684 ms
+	Total Operation Time:   369.669 ms
+Unloading 158 unused Assets / (330.1 KB). Loaded Objects now: 8684.
+Memory consumption went from 263.5 MB to 263.2 MB.
+Total: 11.967500 ms (FindLiveObjects: 0.376100 ms CreateObjectMapping: 0.207700 ms MarkObjects: 10.520600 ms  DeleteObjects: 0.861500 ms)
+
+Killing ADB server in 2.2592825 seconds.
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.
+[Licensing::IpcConnector] LicenseClient-rekka-6000.3.13-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-rekka-6000.3.13 channel disconnected successfully.
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup mono
+Checking for leaked weakptr:
+  Found no leaked weakptrs.
+[Package Manager] Server process was shutdown
+##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1791904504150,"processId":20672,"allocatedMemory":28573198,"memoryLabels":[{"Default":29313},{"Permanent":15236},{"NewDelete":69267},{"Thread":4230344},{"Manager":32925},{"VertexData":8},{"Geometry":816},{"Texture":296},{"Shader":80533},{"Material":24},{"GfxDevice":55265},{"Animation":392},{"Audio":2664},{"FreeType":8},{"FontEngine":5548572},{"Physics":2090},{"Physics2D":16},{"Serialization":528},{"Input":14984},{"JobScheduler":33024},{"TextLib":216},{"Mono":32},{"MonoCode":64},{"ScriptingNativeRuntime":155060},{"BaseObject":1620336},{"Resource":1336},{"Renderer":3000},{"Transform":4685},{"File":21475},{"WebCam":616},{"Culling":32},{"Terrain":11394},{"Wind":24},{"STL":40},{"String":13613},{"DynamicArray":124242},{"HashMap":4273180},{"Utility":2660278},{"Curl":2559},{"PoolAlloc":2152},{"AI":80},{"TypeTree":16093},{"ScriptManager":512},{"RuntimeInitializeOnLoadManager":64},{"SpriteAtlas":112},{"GI":7792},{"Director":8240},{"CloudService":6480},{"WebRequest":8464},{"VR":47994},{"SceneManager":504},{"Video":208},{"LazyScriptCache":32},{"NativeArray":540},{"Camera":17},{"Secure":2113},{"SerializationCache":1576},{"APIUpdating":10320},{"Subsystems":336},{"VirtualTexturing":57888},{"StaticSafetyDebugInfo":278528},{"Analytics":384},{"Hierarchy":608},{"CoreStats":13032},{"Identifiers":12960},{"Gui":96},{"EditorUtility":109949},{"VersionControl":4},{"Undo":947},{"AssetDatabase":8931646},{"EditorGi":328},{"UnityConnect":29232},{"Upm":1896},{"AssetCompliance":64},{"DrivenProperties":72},{"LocalIPC":211},{"ProfilerEditor":9746},{"CoreBusinessMetrics":2867},{"Licensing":664},{"AssetReference":32},{"IPCStream":32}]}

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eace31c800c5b644987bc775211ae85f, type: 3}
+  m_Name: StageTemplateLayout
+  m_EditorClassIdentifier: Assembly-CSharp::StageLayout
+  sceneName: StageTemplate
+  title: "\u30B9\u30C6\u30FC\u30B8\u5236\u4F5C\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  concept: "\u5B89\u5168\u306A\u5834\u6240\u3067\u30AF\u30ED\u30FC\u30F3\u3092\u4F53\u9A13\u3057\u3001\u30B3\u30A4\u30F3\u3067\u8DB3\u5834\u6570\u3092\u5897\u3084\u3057\u3001\u6BB5\u5DEE\u3068\u5C0F\u3055\u306A\u7A74\u3092\u653B\u7565\u3059\u308B\u5C0E\u5165\u30B9\u30C6\u30FC\u30B8\u3002"
+  difficulty: 1
+  playerStart: {x: 2.5, y: 0.5}
+  goalPosition: {x: 12.5, y: 0.5}
+  playerPrefab: {fileID: 5907979830062562168, guid: 9a41d938a409df84ba7f06ea0e055cfa, type: 3}
+  goalPrefab: {fileID: 1768159151923144790, guid: 0837209cd31cf994e88cef8a99c5c983, type: 3}
+  stageManagerPrefab: {fileID: 4043276702052842445, guid: 9df37ef50a7b2c74781189a7334ecd27, type: 3}
+  audioManagerPrefab: {fileID: 1201783954725208842, guid: 1878d35ac9867584eace811c979aae87, type: 3}
+  bgmPrefab: {fileID: 2319908281580917720, guid: b05ae39bab5dfc945a623565e0406c5b, type: 3}
+  groundTile: {fileID: 11400000, guid: 2963f154e75bf674792662feb98bb8ba, type: 2}
+  spikeTile: {fileID: 11400000, guid: 7b0da1aca2cfd854da49f6d4b7875e0d, type: 2}
+  groundMaterial: {fileID: 6200000, guid: 8cd217d82924974449b2f052e9495a83, type: 2}
+  terrain:
+  - purpose: "\u5B89\u5168\u306A\u57FA\u672C\u5E8A"
+    cells:
+      x: -2
+      y: -2
+      width: 18
+      height: 2
+  hazards: []
+  placements: []
+  areas:
+  - title: "\u5236\u4F5C\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    instruction: "\u79FB\u52D5\uFF1AA/D\u30FB\u5DE6\u53F3\u77E2\u5370\u3000\u30B8\u30E3\u30F3\u30D7\uFF1ASpace\u3000\u8DB3\u5834\u3092\u6B8B\u3059\uFF1A\u5DE6\u30AF\u30EA\u30C3\u30AF"
+    fromX: -2
+    toX: 18
