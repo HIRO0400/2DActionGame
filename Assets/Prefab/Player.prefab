@@ -330,7 +330,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: a0bc030f-a01d-49ca-bc0e-964607634e74
-    m_ActionName: 'Player/Clone[/Mouse/leftButton]'
+    m_ActionName: 'Player/Clone[/Keyboard/enter]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

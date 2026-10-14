@@ -24,6 +24,11 @@ public class Player : MonoBehaviour
 
     private bool jumpPressed;
     private bool jumpHeld;
+    private const float inputBufferTime = 0.15f;
+    private bool pendingJump;
+    private float jumpInputTime;
+    private bool pendingClone;
+    private float cloneInputTime;
     private bool isJumping;
     private float jumpTimeCounter;
     private float coyoteTime = 0.1f;
@@ -132,6 +137,7 @@ public class Player : MonoBehaviour
         {
             moveInput = Vector2.zero;
             jumpPressed = canCloneInput = false;
+            pendingJump = pendingClone = false;
             jumpHeld = jumpAction != null && jumpAction.IsPressed();
             return;
         }
@@ -143,6 +149,7 @@ public class Player : MonoBehaviour
         }
 
         CheckGround();
+        ReadInput();
 
         if (!isRespawning && transform.position.y < lastGroundPosition.y - fallDeathDistance)
         {
@@ -160,25 +167,25 @@ public class Player : MonoBehaviour
         if (isGroundLocked)
         {
             CheckGroundLanding();
-            return;
+            if (isGroundLocked) return;
         }
+        if (isRespawning) return;
 
-        if (!isRespawning && canCloneInput && !isGroundLocked)
-        {
-            CreateClone();
-            canCloneInput = false;
-        }
-
-        if (cloneAction.WasReleasedThisFrame() && !GameMenus.BlocksGameplay)
-        {
-            canCloneInput = true;
-        }
-
-        ReadInput();
+        // Resolve a jump first so a click on the takeoff frame is airborne input.
         HandleJump();
         HandleFlip();
-
         jumpPressed = false;
+
+        if (pendingClone && Time.time - cloneInputTime <= inputBufferTime &&
+            !GameMenus.BlocksGameplay)
+        {
+            pendingClone = false;
+            canCloneInput = true;
+            CreateClone();
+            canCloneInput = false;
+            if (isRespawning) return;
+        }
+
     }
 
     void FixedUpdate()
@@ -194,25 +201,28 @@ public class Player : MonoBehaviour
     // ======================
     void ReadInput()
     {
-        if (isRespawning)
-        {
-            moveInput = Vector2.zero;
-            return;
-        }
-
+        jumpHeld = jumpAction.IsPressed();
         Vector2 input = moveAction.ReadValue<Vector2>();
         moveInput.x = Mathf.Abs(input.x) > 0.1f ? input.x : 0;
 
         if (jumpAction.WasPressedThisFrame())
         {
-            jumpPressed = true;
-            jumpHeld = true;
+            pendingJump = true;
+            jumpInputTime = Time.time;
         }
+        // Preserve a jump requested during recovery while the key remains held.
+        if (isGroundLocked && pendingJump && jumpHeld) jumpInputTime = Time.time;
+        if (pendingJump && Time.time - jumpInputTime > inputBufferTime) pendingJump = false;
+        jumpPressed = pendingJump;
 
-        if (jumpAction.WasReleasedThisFrame())
+        if (GameMenus.BlocksGameplay) pendingClone = false;
+        if (cloneAction.enabled && !GameMenus.BlocksGameplay && cloneAction.WasPressedThisFrame())
         {
-            jumpHeld = false;
+            pendingClone = true;
+            cloneInputTime = Time.time;
         }
+        if (pendingClone && Time.time - cloneInputTime > inputBufferTime) pendingClone = false;
+        if (isRespawning || isGroundLocked) moveInput = Vector2.zero;
     }
 
     // ======================
@@ -226,6 +236,12 @@ public class Player : MonoBehaviour
         float inputX = moveInput.x * moveSpeed * multiplier;
 
         v.x = inputX;
+        if (isGrounded && currentGround != null && currentGround.TryGetComponent<MovingStagePlatform>(out var moving) &&
+            v.y - moving.Velocity.y <= .1f)
+        {
+            v.x += moving.Velocity.x;
+            v.y = moving.Velocity.y;
+        }
         rb.linearVelocity = v;
     }
 
@@ -256,6 +272,7 @@ public class Player : MonoBehaviour
     void HandleJump()
     {
         if (jumpPressed && coyoteCounter > 0f){
+            pendingJump = false;
             coyoteCounter = 0f;
             isJumping = true;
             if (AudioManager.Instance != null) AudioManager.Instance.PlaySE(jumpSound);
@@ -308,20 +325,26 @@ public class Player : MonoBehaviour
         {
             if (candidate.collider == null || candidate.collider.isTrigger ||
                 candidate.normal.y < 0.5f || candidate.distance <= 0f) continue;
+            var platform = candidate.collider.GetComponent<StagePlatform>();
+            if (platform != null && !platform.CanStand(footCheck.position.y)) continue;
             if (candidate.distance < nearest)
             {
                 nearest = candidate.distance;
                 currentGround = candidate.collider;
             }
         }
-        isGrounded = currentGround != null && rb.linearVelocity.y <= 0.1f;
+        float surfaceY = currentGround != null && currentGround.TryGetComponent<MovingStagePlatform>(out var moving)
+            ? moving.Velocity.y : 0f;
+        isGrounded = currentGround != null && rb.linearVelocity.y - surfaceY <= 0.1f;
         if (isGrounded) coyoteCounter = coyoteTime;
         else coyoteCounter = Mathf.Max(0f, coyoteCounter - Time.deltaTime);
 
         if (isGrounded && currentGround != null && !isRespawning && !isGroundLocked &&
             rb.linearVelocity.y <= 0.1f)
         {
-            if (currentGround.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            var platform = currentGround.GetComponent<StagePlatform>();
+            if (currentGround.gameObject.layer == LayerMask.NameToLayer("Ground") &&
+                (platform == null || platform.stableRespawnSurface))
                 lastGroundPosition = footCheck.position;
         }
     }
@@ -335,7 +358,8 @@ public class Player : MonoBehaviour
 
     bool IsStandingOnClone()
     {
-        if (currentGround == null) return false;
+        // The ground probe can still touch a clone just after takeoff.
+        if (!isGrounded || rb.linearVelocity.y > 0.1f || currentGround == null) return false;
         return currentGround.gameObject.layer == LayerMask.NameToLayer("Clone");
     }
 
@@ -395,6 +419,7 @@ public class Player : MonoBehaviour
 
         moveInput = Vector2.zero;
         jumpHeld = false;
+        pendingJump = pendingClone = false;
         jumpPressed = false;
         isJumping = false;
         jumpTimeCounter = 0f;

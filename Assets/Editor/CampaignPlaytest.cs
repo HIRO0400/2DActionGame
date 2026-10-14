@@ -17,9 +17,15 @@ public static class CampaignPlaytest
         };
     }
     public static void Run()
+    { Begin(1); }
+    public static void RunStage5() { Begin(5); }
+    public static void RunStage4() { Begin(4); }
+    public static void RunStage3() { Begin(3); }
+    static void Begin(int start)
     {
+        SessionState.SetInt("Campaign.StartStage",start);
         SessionState.SetString("Campaign.OriginalProgress", JsonUtility.ToJson(new ProgressTestSnapshot()));
-        EditorSceneManager.OpenScene("Assets/Scenes/Stage/Stage2.unity");
+        EditorSceneManager.OpenScene("Assets/Scenes/Stage/Stage"+start+".unity");
         SessionState.SetBool("CampaignPlaytest",true);
         EditorApplication.EnterPlaymode();
     }

@@ -91,6 +91,7 @@ public class GameMenus : MonoBehaviour
         }
         events.enabled = module.enabled = true;
         bool inStage = FindFirstObjectByType<StageManager>() != null;
+        events.sendNavigationEvents = !inStage;
         topButton.GetComponentInChildren<Text>().text = inStage ? "ポーズ (Esc)" : "設定";
         topButton.onClick.RemoveAllListeners();
         topButton.onClick.AddListener(() => { if (inStage) Pause(); else OpenSettings(); });
@@ -110,6 +111,7 @@ public class GameMenus : MonoBehaviour
     {
         if (!paused) { previousScale = Time.timeScale; previousAudioPause = AudioListener.pause; paused = true; }
         Time.timeScale = 0;
+        events.sendNavigationEvents = true;
         AudioListener.pause = true;
         shade.SetActive(true);
     }
@@ -141,7 +143,7 @@ public class GameMenus : MonoBehaviour
     public void OpenHowToPlay()
     {
         StopGame(); Empty("遊び方");
-        Label(content, "Instructions", "A / D・← / →：移動\nSpace：ジャンプ\n左クリックを離す：クローン作成\nEsc：ポーズ／再開", 20, 140);
+        Label(content, "Instructions", "A / D・← / →：移動\nSpace：ジャンプ\nEnter：クローン作成\nEsc：ポーズ／再開", 20, 140);
         Label(content, "CloneHelp", "クローンは足場として使えます。\nコインを取ると作れる数が増えます。\n死亡時は最後に接地した地面付近へ戻ります。", 18, 110);
         MakeButton(content, "CloseHowToPlay", "閉じる", Resume);
     }
@@ -181,6 +183,7 @@ public class GameMenus : MonoBehaviour
         shade.SetActive(false);
         inputResumeAt = Time.unscaledTime + 0.15f;
         events.SetSelectedGameObject(null);
+        events.sendNavigationEvents = FindFirstObjectByType<StageManager>() == null;
     }
     public void Navigate(string scene) { Resume(); SceneManager.LoadScene(scene); }
     public void ShowClear(int stage, string next)

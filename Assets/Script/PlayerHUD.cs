@@ -38,11 +38,11 @@ public class PlayerHUD : MonoBehaviour
         image.raycastTarget = false;
         capacityText = Label(counter, "Capacity", "", new Vector2(68, -8), new Vector2(100, 48), 32);
 
-        var controls = Panel("Controls", Vector2.zero, new Vector2(16, 16), new Vector2(350, 136));
-        Label(controls, "Heading", "操作方法", new Vector2(14, -8), new Vector2(320, 26), 20);
-        Row(controls, "Move", "A / D・← / →", "移動", 38);
-        Row(controls, "Jump", "Space", "ジャンプ", 68);
-        Row(controls, "Clone", "左クリック", "クローン作成", 98);
+        var controls = Panel("Controls", Vector2.zero, new Vector2(16, 16), new Vector2(916, 56));
+        Label(controls, "Heading", "操作方法", new Vector2(14, -14), new Vector2(106, 28), 20);
+        Label(controls, "Move", "A / D・← / →：移動", new Vector2(132, -14), new Vector2(272, 28), 18);
+        Label(controls, "Jump", "Space：ジャンプ", new Vector2(420, -14), new Vector2(178, 28), 18);
+        Label(controls, "Clone", "Enter：クローン作成", new Vector2(614, -14), new Vector2(288, 28), 18);
         Refresh();
     }
 
@@ -78,12 +78,6 @@ public class PlayerHUD : MonoBehaviour
         text.alignment = TextAnchor.MiddleLeft;
         text.raycastTarget = false;
         return text;
-    }
-
-    private void Row(Transform parent, string name, string key, string description, float y)
-    {
-        Label(parent, name + "Key", key, new Vector2(14, -y), new Vector2(174, 28), 18);
-        Label(parent, name + "Description", description, new Vector2(194, -y), new Vector2(142, 28), 18);
     }
 
     private void LateUpdate() => Refresh();

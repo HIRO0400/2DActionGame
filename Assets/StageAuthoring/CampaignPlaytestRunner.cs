@@ -10,6 +10,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.SceneManagement;
 using Unity.Cinemachine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class CampaignPlaytestRunner : MonoBehaviour
 {
@@ -45,7 +47,7 @@ public class CampaignPlaytestRunner : MonoBehaviour
         InputSystem.settings.updateMode = previousUpdate;
         if (hadPreference) PlayerPrefs.SetInt("UnlockedStage",preference); else PlayerPrefs.DeleteKey("UnlockedStage");
         JsonUtility.FromJson<ProgressTestSnapshot>(SessionState.GetString("Campaign.OriginalProgress", "")).Restore();
-        report.Add(ok ? "PASS: complete Stage2-5 campaign route" : "FAIL: campaign route incomplete");
+        report.Add(ok ? "PASS: complete Stage"+SessionState.GetInt("Campaign.StartStage",1)+"-5 campaign route" : "FAIL: campaign route incomplete");
         File.WriteAllLines("StageAuthoringReports/campaign-playtest.txt",report);
         EditorApplication.Exit(ok ? 0 : 1);
     }
@@ -54,8 +56,9 @@ public class CampaignPlaytestRunner : MonoBehaviour
     {
         var keys = new List<Key>();
         if (x>0) keys.Add(Key.D); if (x<0) keys.Add(Key.A); if (jump) keys.Add(Key.Space);
+        if(clone) keys.Add(Key.Enter);
         InputSystem.QueueStateEvent(keyboard,new KeyboardState(keys.ToArray()));
-        InputSystem.QueueStateEvent(mouse,new MouseState().WithButton(MouseButton.Left,clone));
+        InputSystem.QueueStateEvent(mouse,new MouseState());
     }
     void InitializePlayer()
     {
@@ -109,6 +112,7 @@ public class CampaignPlaytestRunner : MonoBehaviour
     IEnumerator Start()
     {
         DontDestroyOnLoad(gameObject);
+        Application.targetFrameRate=60; QualitySettings.vSyncCount=0;
         hadPreference=PlayerPrefs.HasKey("UnlockedStage"); preference=PlayerPrefs.GetInt("UnlockedStage",1);
         previousBackground=InputSystem.settings.backgroundBehavior;
         previousEditor=InputSystem.settings.editorInputBehaviorInPlayMode;
@@ -119,13 +123,16 @@ public class CampaignPlaytestRunner : MonoBehaviour
         Application.runInBackground=true;
         keyboard=InputSystem.AddDevice<Keyboard>(); mouse=InputSystem.AddDevice<Mouse>();
         CinemachineCore.CameraUpdatedEvent.AddListener(WatchBackground);
-        for(stage=2;stage<=5;stage++)
+        for(stage=SessionState.GetInt("Campaign.StartStage",1);stage<=5;stage++)
         {
             yield return new WaitForSecondsRealtime(0.6f);
             Check(SceneManager.GetActiveScene().name=="Stage"+stage,"scene starts in sequence");
             InitializePlayer();
             yield return new WaitForSecondsRealtime(0.6f);
             Check(Field<bool>("isGrounded"),"spawn grounded");
+            yield return OneWayTest();
+            yield return DynamicPlatformTests();
+            if(stage==1) yield return Stage1();
             if(stage==2) yield return Stage2();
             if(stage==3) yield return Stage3();
             if(stage==4) yield return Stage4();
@@ -147,6 +154,107 @@ public class CampaignPlaytestRunner : MonoBehaviour
         Check(!player.enabled || Mathf.Abs(player.transform.position.x-target)<0.3f,"walk x="+target+" at "+player.transform.position);
         yield return new WaitForSecondsRealtime(0.2f);
     }
+    void PlacePlayer(Vector2 point)
+    {
+        Keys(); var body=player.GetComponent<Rigidbody2D>();
+        body.position=point; player.transform.position=point; body.linearVelocity=Vector2.zero; Physics2D.SyncTransforms();
+    }
+    IEnumerator Capture(string name)
+    {
+        yield return null;
+        var camera=Camera.main; var target=new RenderTexture(1280,720,24); target.Create();
+        var previous=RenderTexture.active;
+        RenderPipeline.SubmitRenderRequest(camera,new UniversalRenderPipeline.SingleCameraRequest { destination=target });
+        RenderTexture.active=target;
+        var texture=new Texture2D(1280,720,TextureFormat.RGB24,false);
+        texture.ReadPixels(new Rect(0,0,1280,720),0,0); texture.Apply();
+        Directory.CreateDirectory("StageAuthoringReports/Improvements");
+        File.WriteAllBytes("StageAuthoringReports/Improvements/"+name+".png",texture.EncodeToPNG());
+        RenderTexture.active=previous; target.Release(); Destroy(target); Destroy(texture);
+    }
+    IEnumerator OneWayTest()
+    {
+        StagePlatform platform=null;
+        foreach(var candidate in FindObjectsByType<StagePlatform>(FindObjectsSortMode.None))
+            if(candidate.GetComponent<MovingStagePlatform>()==null && candidate.GetComponent<CollapsingStagePlatform>()==null) { platform=candidate; break; }
+        if(platform==null) yield break;
+        // Nearby moving platforms can legitimately catch the same jump. Isolate
+        // this contact test; normal routes below run with every collider enabled.
+        var suspended=new List<Collider2D>();
+        foreach(var other in FindObjectsByType<StagePlatform>(FindObjectsSortMode.None))
+            if(other!=platform && other.GetComponent<Collider2D>().enabled)
+            { var collider=other.GetComponent<Collider2D>(); suspended.Add(collider); collider.enabled=false; }
+        Vector2 original=player.transform.position; Vector3 safe=Field<Vector3>("lastGroundPosition");
+        var box=platform.GetComponent<Collider2D>();
+        PlacePlayer(new Vector2(box.bounds.center.x,.5f)); yield return new WaitForSecondsRealtime(.3f);
+        bool passed=false, falseGround=false; float start=Time.time;
+        while(Time.time-start<1.8f)
+        {
+            Keys(0,Time.time-start<.9f); yield return null;
+            float foot=player.GetComponent<Collider2D>().bounds.min.y;
+            if(foot>box.bounds.max.y+.1f) passed=true;
+            if(foot>box.bounds.min.y-.2f && foot<box.bounds.max.y-.12f && Field<bool>("isGrounded")) falseGround=true;
+        }
+        Keys();
+        Check(passed && !falseGround,"one-way passes upward without false grounding");
+        Check(Field<bool>("isGrounded") && Mathf.Abs(player.GetComponent<Collider2D>().bounds.min.y-box.bounds.max.y)<.2f,"one-way supports landing from above");
+        foreach(var collider in suspended) collider.enabled=true;
+        PlacePlayer(original); typeof(Player).GetField("lastGroundPosition",Flags).SetValue(player,safe);
+        yield return new WaitForSecondsRealtime(.4f);
+    }
+    IEnumerator DynamicPlatformTests()
+    {
+        Vector2 original=player.transform.position; Vector3 originalSafe=Field<Vector3>("lastGroundPosition");
+        MovingStagePlatform moving=null;
+        foreach(var candidate in FindObjectsByType<MovingStagePlatform>(FindObjectsSortMode.None)) if(candidate.name=="Moving_SafePractice") moving=candidate;
+        if(moving!=null)
+        {
+            var box=moving.GetComponent<Collider2D>();
+            PlacePlayer(new Vector2(moving.transform.position.x,.5f)); yield return new WaitForSecondsRealtime(.3f);
+            Vector3 safe=Field<Vector3>("lastGroundPosition");
+            float start=Time.time;
+            while(Time.time-start<1.8f)
+            {
+                float delta=moving.transform.position.x-player.transform.position.x;
+                Keys(Mathf.Abs(delta)>.1f?Mathf.Sign(delta):0,Time.time-start<.9f); yield return null;
+            }
+            Keys(); yield return new WaitForSecondsRealtime(.1f);
+            Check(Field<bool>("isGrounded") && Mathf.Abs(player.GetComponent<Collider2D>().bounds.min.y-box.bounds.max.y)<.2f,"lands on safe moving platform");
+            float offset=player.transform.position.x-moving.transform.position.x;
+            yield return new WaitForSecondsRealtime(.6f);
+            Check(Mathf.Abs(player.transform.position.x-moving.transform.position.x-offset)<.2f,"moving platform carries idle player without sliding");
+            Check(Vector3.Distance(Field<Vector3>("lastGroundPosition"),safe)<.2f,"moving platform preserves last stable respawn ground");
+            yield return Capture("stage2-moving-practice");
+            Vector3 stopped=moving.transform.position; GameMenus.Instance.Pause(); yield return new WaitForSecondsRealtime(.4f);
+            Check(Vector3.Distance(stopped,moving.transform.position)<.001f,"pause freezes moving platform"); GameMenus.Instance.Resume();
+            Keys(0,true); yield return new WaitForSecondsRealtime(.25f);
+            Check(player.GetComponent<Rigidbody2D>().linearVelocity.y>1 && player.GetComponent<Collider2D>().bounds.min.y>box.bounds.max.y+.5f,"jump input leaves moving platform");
+            Keys();
+            PlacePlayer(original); typeof(Player).GetField("lastGroundPosition",Flags).SetValue(player,originalSafe); yield return new WaitForSecondsRealtime(.3f);
+        }
+        var collapsing=FindFirstObjectByType<CollapsingStagePlatform>();
+        if(collapsing!=null)
+        {
+            var box=collapsing.GetComponent<BoxCollider2D>();
+            // Establish a stable checkpoint below the optional route first.
+            PlacePlayer(new Vector2(collapsing.transform.position.x,.5f)); yield return new WaitForSecondsRealtime(.3f);
+            Vector3 safe=Field<Vector3>("lastGroundPosition");
+            PlacePlayer(new Vector2(collapsing.transform.position.x,box.bounds.max.y+.48f)); yield return new WaitForSecondsRealtime(.15f);
+            Check(collapsing.IsCountingDown,"standing starts visible collapse countdown");
+            yield return Capture("stage"+stage+"-collapse-warning");
+            Check(Vector3.Distance(Field<Vector3>("lastGroundPosition"),safe)<.2f,"collapsing platform does not become a respawn checkpoint");
+            GameMenus.Instance.Pause(); yield return new WaitForSecondsRealtime(1.1f);
+            Check(!collapsing.IsCollapsed,"pause freezes collapse countdown"); GameMenus.Instance.Resume();
+            yield return new WaitForSecondsRealtime(1.2f);
+            Check(collapsing.IsCollapsed && !box.enabled,"platform collapses after warning");
+            player.Die(); yield return new WaitForSecondsRealtime(1.5f);
+            Check(Field<bool>("isGrounded") && !Field<bool>("isGroundLocked") && Mathf.Abs(player.transform.position.x-safe.x)<.3f,
+                "death after collapse recovers to stable ground; position="+player.transform.position+", safe="+safe+", ground="+Field<bool>("isGrounded")+", lock="+Field<bool>("isGroundLocked")+", velocity="+player.GetComponent<Rigidbody2D>().linearVelocity);
+            PlacePlayer(new Vector2(collapsing.transform.position.x+3,.5f)); yield return new WaitForSecondsRealtime(3.2f);
+            Check(!collapsing.IsCollapsed && box.enabled,"collapsed platform restores for another attempt");
+            PlacePlayer(original); typeof(Player).GetField("lastGroundPosition",Flags).SetValue(player,originalSafe); yield return new WaitForSecondsRealtime(.3f);
+        }
+    }
     IEnumerator Jump(float target,float verticalDelay=0,bool required=true)
     {
         Keys(); yield return new WaitForSecondsRealtime(0.25f);
@@ -165,12 +273,13 @@ public class CampaignPlaytestRunner : MonoBehaviour
     IEnumerator Clone(float airTime=0)
     {
         int before=Field<int>("currentClones");
-        Keys(0,false,true); yield return new WaitForSecondsRealtime(0.08f);
+        Keys(); yield return new WaitForSecondsRealtime(0.08f);
         if(airTime>0)
         {
             float start=Time.time;
-            while(Time.time-start<airTime) { Keys(1,true,true); yield return null; }
+            while(Time.time-start<airTime) { Keys(1,true); yield return null; }
         }
+        Keys(0,false,true); yield return new WaitForSecondsRealtime(.08f);
         Keys(); yield return new WaitForSecondsRealtime(1.2f);
         Check(Field<int>("currentClones")==before+1,"clone generated from "+(airTime==0?"ground":"air"));
         var clones=Field<GameObject[]>("clones");
@@ -204,53 +313,118 @@ public class CampaignPlaytestRunner : MonoBehaviour
         Physics2D.SyncTransforms(); yield return new WaitForSecondsRealtime(1.8f);
         Check(Field<int>("currentClones")==before+1 && Mathf.Abs(player.transform.position.x-safe.x)<0.3f && Field<bool>("isGrounded"),"spike contact recovers once to last ground");
     }
+    IEnumerator Stage1()
+    {
+        yield return Drive(6); yield return Jump(9.5f); yield return Drive(12);
+        yield return Jump(18); yield return Drive(28);
+        yield return Clone(); yield return Jump(latestClone.transform.position.x,.2f);
+        yield return Jump(32); Check(player.transform.position.y>4.2f,"tutorial clone foothold clears wall");
+        yield return Drive(43); yield return new WaitForSecondsRealtime(.7f); yield return Drive(44.5f);
+    }
     IEnumerator Stage2()
     {
-        yield return Drive(10); yield return Jump(15); yield return Drive(17);
-        yield return Drive(22); yield return SpikeRecovery(25.5f); yield return Jump(28);
-        yield return Drive(34); yield return Jump(40.5f);
-        yield return Drive(43); yield return Jump(49);
-        yield return Drive(58); yield return Jump(64);
-        yield return Drive(76); yield return Jump(83.5f);
-        yield return Drive(86); yield return Jump(92);
-        yield return Drive(95); yield return Jump(101);
-        yield return Drive(108); yield return Jump(114);
-        yield return Drive(138); yield return Jump(143.5f);
-        yield return Drive(158.5f);
+        yield return Drive(10); yield return Jump(15); yield return Drive(22);
+        yield return SpikeRecovery(25.5f); yield return Jump(28);
+        yield return Drive(34); yield return Jump(37.5f); yield return Drive(53);
+        yield return Drive(82);
+        if(FindFirstObjectByType<MovingStagePlatform>()!=null) { yield return SpikeRecovery(87.5f); yield return RidePit(); }
+        else yield return Jump(88);
+        yield return Drive(94); yield return Jump(99);
+        yield return Jump(104.5f); yield return Drive(112.5f);
+    }
+    IEnumerator RidePit()
+    {
+        MovingStagePlatform moving=null;
+        foreach(var candidate in FindObjectsByType<MovingStagePlatform>(FindObjectsSortMode.None)) if(candidate.name=="Moving_Pit") moving=candidate;
+        Check(moving!=null,"pit has moving platform");
+        var box=moving.GetComponent<Collider2D>();
+        float deadline=Time.time+8;
+        while(moving.transform.position.x>88 || moving.Velocity.x>=0) { Keys(); yield return null; if(Time.time>deadline) { Check(false,"platform returns to takeoff bank"); yield break; } }
+        float start=Time.time;
+        while(Time.time-start<1.8f)
+        {
+            float delta=moving.transform.position.x-player.transform.position.x;
+            Keys(Mathf.Abs(delta)>.13f?Mathf.Sign(delta):0,Time.time-start<.8f); yield return null;
+        }
+        Keys();
+        Check(Field<bool>("isGrounded") && Mathf.Abs(player.GetComponent<Collider2D>().bounds.min.y-box.bounds.max.y)<.2f,"boards moving platform over pit");
+        deadline=Time.time+8;
+        while(moving.transform.position.x<89.5f) { Keys(); yield return null; if(Time.time>deadline) { Check(false,"moving platform reaches exit bank"); yield break; } }
+        yield return Jump(93.5f);
+        Check(Field<bool>("isGrounded"),"jumps off moving platform onto stable exit bank");
     }
     IEnumerator Stage3()
     {
         yield return Drive(18); yield return SpikeRecovery(21.5f); yield return Jump(24);
-        yield return OneCloneWall(30,5,true);
-        yield return Drive(51); yield return Drive(61); yield return Jump(66);
-        yield return Drive(73); yield return Jump(79);
-        yield return OneCloneWall(86,5);
-        yield return Drive(109); yield return Drive(111); yield return Jump(117);
-        yield return Drive(119); yield return Jump(125);
-        yield return OneCloneWall(138,5);
-        yield return Drive(154); yield return Jump(160);
-        yield return Drive(167.5f);
+        yield return OneCloneWall(30,5,true); yield return Drive(61); yield return Jump(66);
+        yield return Drive(73); yield return Jump(79); yield return OneCloneWall(86,5);
+        yield return Drive(107); yield return Jump(110.5f); yield return Drive(119);
+        yield return new WaitForSecondsRealtime(.5f); yield return Drive(122.5f);
     }
     IEnumerator Stage4()
     {
         yield return Drive(18); yield return SpikeRecovery(21.5f); yield return Jump(24);
-        yield return OneCloneWall(28,6,true);
-        yield return Drive(47); yield return Drive(52); yield return Jump(58);
-        yield return Drive(65); yield return Jump(71);
-        yield return OneCloneWall(80,6);
-        yield return Drive(97); yield return Jump(103);
-        yield return Drive(110); yield return Jump(116);
-        yield return Drive(130); yield return Jump(136);
-        yield return OneCloneWall(146,6);
-        yield return Drive(160); yield return Jump(165.5f);
-        yield return Drive(174.5f);
+        yield return OneCloneWall(28,6,true); yield return Drive(60); yield return Jump(65);
+        if(FindFirstObjectByType<PressurePlate>()!=null) yield return HoldDoor();
+        yield return Drive(106); yield return Jump(112); yield return Drive(121);
+        yield return Drive(134.5f);
+    }
+    IEnumerator HoldDoor()
+    {
+        var plate=FindFirstObjectByType<PressurePlate>(); var door=plate.door;
+        yield return Drive(84); yield return new WaitForSecondsRealtime(.2f);
+        Check(plate.IsPressed && door.IsOpen,"player opens linked door by standing on plate");
+        yield return Drive(87); yield return new WaitForSecondsRealtime(.2f);
+        Check(!plate.IsPressed && !door.IsOpen,"door closes when plate is released");
+        yield return Drive(84); yield return Clone();
+        yield return Drive(101);
+        Check(plate.IsPressed && door.IsOpen,"stationary clone holds switch while player crosses door");
+        yield return Capture("stage4-switch-door");
+        Vector2 original=player.transform.position;
+        PlacePlayer(new Vector2(door.transform.position.x,.5f));
+        UnityEngine.Object.Destroy(latestClone.gameObject); yield return new WaitForSecondsRealtime(.3f);
+        Check(!plate.IsPressed && door.IsOpen,"door waits for player to exit rather than crushing player");
+        PlacePlayer(original); yield return new WaitForSecondsRealtime(.3f);
+        Check(!door.IsOpen,"door closes after doorway is clear");
+    }
+    IEnumerator TwoRoles()
+    {
+        var plate=FindFirstObjectByType<PressurePlate>();
+        yield return Drive(92); yield return Clone(); var weight=latestClone;
+        yield return Drive(106.5f); yield return Clone(.34f);
+        Check(weight!=null && plate.IsPressed && plate.door.IsOpen && latestClone!=weight,"two simultaneous clones: switch weight and elevated foothold");
+        yield return Capture("stage5-two-roles");
+        yield return Jump(latestClone.transform.position.x,.58f); yield return Jump(112);
+        Check(player.transform.position.y>5.2f && plate.IsPressed,"switch clone remains while second clone clears gated wall");
+        yield return Drive(123); yield return new WaitForSecondsRealtime(.6f);
+    }
+    IEnumerator OneCloneDoorTest()
+    {
+        // Controlled negative test: temporarily restrict the inventory to one slot.
+        int capacity=Field<int>("maxClones");
+        foreach(var clone in Field<GameObject[]>("clones")) if(clone!=null) Destroy(clone);
+        typeof(Player).GetField("maxClones",Flags).SetValue(player,1);
+        typeof(Player).GetField("clones",Flags).SetValue(player,new GameObject[1]);
+        typeof(Player).GetField("currentClones",Flags).SetValue(player,0);
+        yield return Drive(92); yield return Clone();
+        yield return Drive(106.5f); yield return Clone(.34f);
+        var plate=FindFirstObjectByType<PressurePlate>();
+        Check(!plate.IsPressed && !plate.door.IsOpen,"one-slot air clone replaces switch weight and closes door");
+        yield return Jump(latestClone.transform.position.x,.58f);
+        yield return Jump(113,0,false);
+        Check(player.transform.position.x<111.3f && !plate.door.IsOpen,"one clone cannot bypass recessed door or hold it open at wall edge");
+        foreach(var clone in Field<GameObject[]>("clones")) if(clone!=null) Destroy(clone);
+        typeof(Player).GetField("maxClones",Flags).SetValue(player,capacity);
+        typeof(Player).GetField("clones",Flags).SetValue(player,new GameObject[capacity]);
+        typeof(Player).GetField("currentClones",Flags).SetValue(player,0);
+        PlacePlayer(new Vector2(90,.5f)); yield return new WaitForSecondsRealtime(.5f);
     }
     IEnumerator TwoCloneWall(int wall)
     {
         yield return Drive(wall-4);
         yield return Clone();
         var low=latestClone;
-        yield return Clone(0.46f);
+        yield return Clone(0.45f);
         var high=latestClone;
         Check(low!=null && high!=null && high.bounds.max.y-low.bounds.max.y>3,"two simultaneous low/high footholds");
         Check(player.transform.position.y<2,"returns onto low foothold before using high foothold");
@@ -273,12 +447,9 @@ public class CampaignPlaytestRunner : MonoBehaviour
         yield return TwoCloneWall(41);
         yield return Drive(64); yield return SpikeRecovery(67.5f); yield return Jump(70);
         yield return Drive(77); yield return Jump(83);
-        yield return TwoCloneWall(94);
-        yield return Drive(113); yield return Jump(119);
-        yield return Drive(124); yield return Jump(130);
-        yield return TwoCloneWall(137);
-        yield return Drive(155); yield return Jump(161);
-        yield return Drive(169.5f);
+        if(FindFirstObjectByType<PressurePlate>()!=null) { yield return OneCloneDoorTest(); yield return TwoRoles(); }
+        else yield return TwoCloneWall(94);
+        yield return Drive(124); yield return Jump(130); yield return Drive(142.5f);
     }
 }
 #endif

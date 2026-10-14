@@ -59,7 +59,7 @@ public static class StageAuthoringBootstrap
                 data.areas = new[]
                 {
                     new StageLayout.LearningArea("A まずは歩いて、ジャンプ", "A/D または ←/→ で移動。Spaceを長く押すと高く跳べます。低い段差で試してみましょう。", -2, 12),
-                    new StageLayout.LearningArea("B 足場を残して、戻ってみよう", "高い段差の少し手前で左クリック。離すと足場が残り、自分は戻ります。残した足場に乗ってジャンプ！", 12, 27),
+                    new StageLayout.LearningArea("B 足場を残して、戻ってみよう", "高い段差の少し手前で左クリックすると足場が残り、自分は戻ります。残した足場に乗ってジャンプ！", 12, 27),
                     new StageLayout.LearningArea("C コインで足場を増やそう", "コインを取ると残せる足場が1つ増えます。高い場所のコインは、取らなくても先へ進めます。", 27, 40),
                     new StageLayout.LearningArea("D 小さな穴を越えよう", "穴の底にはトゲがあります。Spaceを長押ししてジャンプ。空中にもクローンの足場を残せます。", 40, 56),
                     new StageLayout.LearningArea("E 覚えた操作で、ゴールへ", "最後の高い段差も、手前に残した足場を使って越えましょう。コインで増えた足場数も使えます。", 56, 76),

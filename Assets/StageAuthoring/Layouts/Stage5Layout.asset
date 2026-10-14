@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Stage5Layout
   m_EditorClassIdentifier: Assembly-CSharp::StageLayout
   sceneName: Stage5
-  title: "\u3075\u305F\u3064\u306E\u8DB3\u5834\u3092\u3064\u306A\u3050"
-  concept: "\u5BB9\u91CF\u3092\u5897\u3084\u3059\u5B89\u5168\u306A\u30B3\u30A4\u30F3\u306E\u5F8C\u3001\u4F4E\u3044\u30AF\u30ED\u30FC\u30F3\u3068\u9AD8\u3044\u30AF\u30ED\u30FC\u30F3\u306E2\u3064\u3092\u540C\u6642\u306B\u6B8B\u3057\u30668\u30DE\u30B9\u306E\u58C1\u3092\u653B\u7565\u3059\u308B\u3002\u6575\u8E0F\u307F\u306B\u3088\u308B\u8FC2\u56DE\u3092\u907F\u3051\u308B\u305F\u3081\u6575\u306F\u914D\u7F6E\u3057\u306A\u3044\u3002"
+  title: "\u3075\u305F\u3064\u3092\u540C\u6642\u306B"
+  concept: "\u3075\u305F\u3064\u306E\u30AF\u30ED\u30FC\u30F3\u3067\u9AD8\u3044\u58C1\u3092\u8D8A\u3048\u3001\u5F79\u5272\u3092\u5206\u62C5\u3059\u308B\u3002"
   difficulty: 5
   playerStart: {x: 2.5, y: 0.5}
-  goalPosition: {x: 169.5, y: 0.5}
+  goalPosition: {x: 142.5, y: 0.5}
   playerPrefab: {fileID: 5907979830062562168, guid: 9a41d938a409df84ba7f06ea0e055cfa, type: 3}
   goalPrefab: {fileID: 1768159151923144790, guid: 0837209cd31cf994e88cef8a99c5c983, type: 3}
   stageManagerPrefab: {fileID: 4043276702052842445, guid: 9df37ef50a7b2c74781189a7334ecd27, type: 3}
@@ -28,23 +28,17 @@ MonoBehaviour:
   spikeTile: {fileID: 11400000, guid: 7b0da1aca2cfd854da49f6d4b7875e0d, type: 2}
   groundMaterial: {fileID: 6200000, guid: 8cd217d82924974449b2f052e9495a83, type: 2}
   terrain:
-  - purpose: "A\u5730\u9762"
+  - purpose: "\u4E3B\u30EB\u30FC\u30C8\u306E\u5730\u9762"
     cells:
-      x: -8
+      x: -2
       y: -2
-      width: 74
+      width: 68
       height: 2
-  - purpose: "B\u5730\u9762"
+  - purpose: "\u4E3B\u30EB\u30FC\u30C8\u306E\u5730\u9762"
     cells:
       x: 69
       y: -2
-      width: 46
-      height: 2
-  - purpose: "C\u5730\u9762"
-    cells:
-      x: 118
-      y: -2
-      width: 58
+      width: 78
       height: 2
   - purpose: "\u5FC5\u9808\u306E\u30AF\u30ED\u30FC\u30F3\u6BB5\u5DEE"
     cells:
@@ -52,109 +46,100 @@ MonoBehaviour:
       y: 0
       width: 6
       height: 8
-  - purpose: "\u5B89\u5168\u306A\u4E0B\u308A\u4E0A\u6BB5"
+  - purpose: "\u964D\u308A\u308B\u6BB5\u5DEE"
     cells:
       x: 47
       y: 0
       width: 3
-      height: 5
-  - purpose: "\u5B89\u5168\u306A\u4E0B\u308A\u4E0B\u6BB5"
-    cells:
-      x: 50
-      y: 0
-      width: 3
       height: 2
+  - purpose: "\u5929\u4E95"
+    cells:
+      x: 73
+      y: 5
+      width: 5
+      height: 1
   - purpose: "\u5FC5\u9808\u306E\u30AF\u30ED\u30FC\u30F3\u6BB5\u5DEE"
     cells:
-      x: 94
+      x: 110
       y: 0
       width: 6
-      height: 8
-  - purpose: "\u5B89\u5168\u306A\u4E0B\u308A\u4E0A\u6BB5"
-    cells:
-      x: 100
-      y: 0
-      width: 3
       height: 5
-  - purpose: "\u5B89\u5168\u306A\u4E0B\u308A\u4E0B\u6BB5"
+  - purpose: "\u964D\u308A\u308B\u6BB5\u5DEE"
     cells:
-      x: 103
-      y: 0
-      width: 3
-      height: 2
-  - purpose: "\u5FC5\u9808\u306E\u30AF\u30ED\u30FC\u30F3\u6BB5\u5DEE"
-    cells:
-      x: 137
-      y: 0
-      width: 6
-      height: 8
-  - purpose: "\u5B89\u5168\u306A\u4E0B\u308A\u4E0A\u6BB5"
-    cells:
-      x: 143
-      y: 0
-      width: 3
-      height: 5
-  - purpose: "\u5B89\u5168\u306A\u4E0B\u308A\u4E0B\u6BB5"
-    cells:
-      x: 146
+      x: 116
       y: 0
       width: 3
       height: 2
   hazards:
-  - purpose: "\u7A741"
+  - purpose: "\u7A74\u306E\u30C8\u30B2"
     cells:
       x: 66
       y: -3
       width: 3
       height: 1
-  - purpose: "\u30C8\u30B21"
+  - purpose: "\u77ED\u3044\u30C8\u30B2"
     cells:
       x: 79
       y: 0
       width: 2
       height: 1
-  - purpose: "\u7A742"
-    cells:
-      x: 115
-      y: -3
-      width: 3
-      height: 1
-  - purpose: "\u30C8\u30B22"
+  - purpose: "\u6700\u5F8C\u306E\u30C8\u30B2"
     cells:
       x: 126
       y: 0
       width: 2
       height: 1
-  - purpose: "\u6700\u5F8C\u306E\u30C8\u30B2"
-    cells:
-      x: 157
-      y: 0
-      width: 2
-      height: 1
   placements:
-  - label: Coin_RequiredSecondSlot
+  - label: Coin
     prefab: {fileID: 715680254216700685, guid: 3703606d66b3771449c64dccd11daac6, type: 3}
-    position: {x: 6, y: 0.9}
+    position: {x: 6, y: 1.2}
+  - label: Coin
+    prefab: {fileID: 715680254216700685, guid: 3703606d66b3771449c64dccd11daac6, type: 3}
+    position: {x: 135, y: 1.2}
   areas:
-  - title: "A \u8DB3\u5834\u30922\u3064\u6B8B\u305B\u308B\u6E96\u5099"
-    instruction: "\u6700\u521D\u306E\u5B89\u5168\u306A\u30B3\u30A4\u30F3\u3092\u53D6\u308A\u307E\u3057\u3087\u3046\u3002\u6B8B\u305B\u308B\u8DB3\u5834\u304C2\u3064\u306B\u306A\u308A\u307E\u3059\u3002\u307E\u305A\u5730\u9762\u30671\u3064\u6B8B\u3059\u64CD\u4F5C\u3092\u5FA9\u7FD2\u3002"
-    fromX: -8
-    toX: 29
-  - title: "B \u4F4E\u3044\u8DB3\u5834\u3068\u9AD8\u3044\u8DB3\u5834"
-    instruction: "\u58C1\u306E\u5C11\u3057\u624B\u524D\u306B\u4F4E\u3044\u8DB3\u5834\u3002\u305D\u3053\u304B\u3089\u30B8\u30E3\u30F3\u30D7\u3057\u3001\u5C11\u3057\u524D\u306E\u9AD8\u3044\u4F4D\u7F6E\u306B2\u3064\u76EE\u3092\u6B8B\u3057\u307E\u3059\u3002\u623B\u3063\u305F\u3089\u3001\u4F4E\u3044\u8DB3\u5834
-      \u2192 \u9AD8\u3044\u8DB3\u5834 \u2192 \u58C1\u306E\u9806\u3078\u3002"
-    fromX: 29
-    toX: 66
-  - title: "C 2\u3064\u3092\u6B8B\u3057\u305F\u307E\u307E\u9032\u3080"
-    instruction: "\u7A74\u3092\u8D8A\u3048\u3066\u304B\u3089\u3001\u5B89\u5168\u306A\u5E8A\u30672\u3064\u306E\u8DB3\u5834\u3092\u4F5C\u308A\u76F4\u3057\u307E\u3059\u3002\u9AD8\u3044\u8DB3\u5834\u3078\u306F\u771F\u4E0A\u306B\u8DF3\u3073\u4E0A\u304C\u3063\u3066\u304B\u3089\u6A2A\u3078\u79FB\u52D5\u3059\u308B\u3068\u5B89\u5168\u3067\u3059\u3002"
-    fromX: 66
-    toX: 115
-  - title: "D \u5371\u967A\u3092\u8D8A\u3048\u3001\u8DB3\u5834\u3092\u6E96\u5099"
-    instruction: "\u30C8\u30B2\u3092\u5148\u306B\u8D8A\u3048\u3001\u5B89\u5168\u306A\u5E8A\u3067\u4F4E\u3044\u8DB3\u5834\u3068\u9AD8\u3044\u8DB3\u5834\u3092\u4F5C\u308A\u307E\u3057\u3087\u3046\u3002"
-    fromX: 115
-    toX: 133
-  - title: "E \u6700\u5F8C\u306E2\u6BB5\u968E\u30B8\u30E3\u30F3\u30D7"
-    instruction: "2\u3064\u306E\u8DB3\u5834\u3092\u540C\u6642\u306B\u6B8B\u3057\u3001\u4F4E\u3044\u8DB3\u5834
-      \u2192 \u9AD8\u3044\u8DB3\u5834 \u2192 \u6700\u5F8C\u306E\u58C1\u3078\u3002\u4E0B\u308A\u306E\u5F8C\u306B\u3082\u898B\u3048\u308B\u30C8\u30B2\u304C\u3042\u308A\u307E\u3059\u3002"
-    fromX: 133
-    toX: 177
+  - title: "A \u3075\u305F\u3064\u306E\u8DB3\u5834"
+    instruction: "\u6700\u521D\u306E\u30B3\u30A4\u30F3\u3067\u30AF\u30ED\u30FC\u30F3\u30922\u3064\u306B\u3002\u4F4E\u3044\u30AF\u30ED\u30FC\u30F3\u304B\u3089\u8DF3\u3073\u30012\u3064\u76EE\u3092\u9AD8\u3044\u5834\u6240\u306B\u6B8B\u3057\u3066\u9AD8\u30558\u306E\u58C1\u3092\u8D8A\u3048\u307E\u3059\u3002"
+    fromX: -2
+    toX: 56
+  - title: "B \u52D5\u304D\u3068\u30BF\u30A4\u30DF\u30F3\u30B0"
+    instruction: "\u4E0A\u306E\u9053\u306F\u7DD1\u306E\u79FB\u52D5\u8DB3\u5834\u304B\u3089\u30AA\u30EC\u30F3\u30B8\u306E\u8DB3\u5834\u3078\u3002\u5D29\u308C\u308B\u524D\u306B\u9032\u307F\u307E\u3057\u3087\u3046\u3002\u4E0B\u306E\u9053\u306F\u901A\u5E38\u306E\u30B8\u30E3\u30F3\u30D7\u3067\u9032\u3081\u307E\u3059\u3002"
+    fromX: 56
+    toX: 89
+  - title: "C \u3075\u305F\u3064\u306E\u5F79\u5272"
+    instruction: "1\u3064\u3092\u9EC4\u8272\u3044\u30B9\u30A4\u30C3\u30C1\u306B\u6B8B\u3057\u3066\u6249\u3092\u958B\u304D\u307E\u3059\u3002\u3082\u30461\u3064\u3092\u6249\u306E\u624B\u524D\u306E\u7A7A\u4E2D\u306B\u6B8B\u3057\u3001\u9752\u3044\u6249\u3068\u9AD8\u30555\u306E\u58C1\u3092\u8D8A\u3048\u307E\u3057\u3087\u3046\u3002"
+    fromX: 89
+    toX: 124
+  - title: "D \u30B4\u30FC\u30EB\u3078"
+    instruction: "\u30B9\u30A4\u30C3\u30C1\u306E\u30AF\u30ED\u30FC\u30F3\u3092\u6D88\u3059\u3068\u6249\u304C\u9589\u3058\u307E\u3059\u3002\u8D8A\u3048\u305F\u3042\u3068\u306F\u6700\u5F8C\u306E\u30C8\u30B2\u3092\u8DF3\u3073\u8D8A\u3048\u307E\u3057\u3087\u3046\u3002"
+    fromX: 124
+    toX: 147
+  platforms:
+  - label: OneWay_Branch
+    kind: 0
+    position: {x: 59, y: 2.25}
+    size: {x: 4, y: 0.5}
+    travel: {x: 0, y: 0}
+    period: 5
+    collapseDelay: 0.85
+    restoreDelay: 3
+  - label: Moving_Branch
+    kind: 1
+    position: {x: 58, y: 3.25}
+    size: {x: 2, y: 0.5}
+    travel: {x: 4, y: 0}
+    period: 5
+    collapseDelay: 0.85
+    restoreDelay: 3
+  - label: Collapse_Branch
+    kind: 2
+    position: {x: 64, y: 2.25}
+    size: {x: 2, y: 0.5}
+    travel: {x: 0, y: 0}
+    period: 5
+    collapseDelay: 0.85
+    restoreDelay: 3
+  switchDoors:
+  - label: TwoRoles
+    switchPosition: {x: 92, y: 0.06}
+    doorPosition: {x: 112, y: 9}
+    doorSize: {x: 1, y: 18}

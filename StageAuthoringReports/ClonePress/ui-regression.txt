@@ -1,0 +1,74 @@
+PASS: Actual keyboard jump starts before pause
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Actual pointer click pauses time and audio
+PASS: Player stationary during pause
+PASS: Jump-key release during pause is retained
+PASS: Button exists: Resume
+PASS: Pointer raycast reaches Resume
+PASS: Actual pointer click resumes
+PASS: Resume click does not create an unintended clone
+PASS: Controls displayed horizontally
+PASS: Mouse down creates clone while button remains held
+PASS: Holding mouse does not repeat clone creation
+PASS: Mouse release does not create another clone
+PASS: Escape opens pause through new Input System
+PASS: Escape resumes
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Button exists: Restart
+PASS: Pointer raycast reaches Restart
+PASS: Pointer restart resets scene and time
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Button exists: Select
+PASS: Pointer raycast reaches Select
+PASS: Pointer opens selection
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Button exists: Title
+PASS: Pointer raycast reaches Title
+PASS: Pointer opens title
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Actual pointer controls independent volume sliders
+PASS: Button exists: Mute
+PASS: Pointer raycast reaches Mute
+PASS: Pointer toggles mute
+PASS: Button exists: Mute
+PASS: Pointer raycast reaches Mute
+PASS: Zero volume is silent without invalid logarithm
+PASS: Button exists: CloseSettings
+PASS: Pointer raycast reaches CloseSettings
+PASS: Close saves volume and restores time
+PASS: Japanese font bundled with runtime resources
+PASS: Bundled font contains all Japanese HUD and menu glyphs
+PASS: TextMeshPro contains or creates Japanese glyphs from bundled font
+PASS: Menu text uses bundled font
+PASS: Menu text uses bundled font
+PASS: Invalid negative progress repaired
+PASS: Unlocks limited to existing stages
+PASS: Existing unlocks migrate to clear records
+PASS: Goal progress explicitly saved
+PASS: Button exists: ResetProgress
+PASS: Pointer raycast reaches ResetProgress
+PASS: Button exists: CancelReset
+PASS: Pointer raycast reaches CancelReset
+PASS: Pointer cancel preserves progress
+PASS: Button exists: ResetProgress
+PASS: Pointer raycast reaches ResetProgress
+PASS: Button exists: ConfirmReset
+PASS: Pointer raycast reaches ConfirmReset
+PASS: Pointer confirm resets only progress
+PASS: Actual goal waits on clear screen
+PASS: Clear freezes player and saves next unlock
+PASS: Button exists: NextStage
+PASS: Pointer raycast reaches NextStage
+PASS: Actual pointer next-stage button works
+PASS: Stage selection respects unlocks
+PASS: Clear status shown; unbuilt Stage6 hidden
+PASS: Actual pointer stage-selection button works
+PASS: Final-stage completion screen and record work
+PASS: Button exists: ClearSelect
+PASS: Pointer raycast reaches ClearSelect
+PASS: Actual pointer final-stage return works

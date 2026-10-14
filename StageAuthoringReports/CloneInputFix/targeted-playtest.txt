@@ -1,0 +1,20 @@
+INITIAL count=0 locked=False respawning=False grounded=True jumpHeld=False physicalSpace=False vy=0
+JUMP AFTER 40MS count=0 locked=False respawning=False grounded=False jumpHeld=True physicalSpace=True vy=6.089529
+RIGHT CLICK WITH SPACE HELD count=1 locked=True respawning=True grounded=False jumpHeld=True physicalSpace=True vy=-0.6866997
+PASS: Right click 40ms after jumping with Space held
+NEW JUMP AND CLICK DURING LOCK count=1 locked=True respawning=True grounded=False jumpHeld=True physicalSpace=True vy=-2.648699
+PASS: Recovery rejects immediate repeated creation
+PASS: Physical Space and internal held state agree during recovery
+LANDED WITH SPACE STILL HELD count=1 locked=False respawning=False grounded=False jumpHeld=True physicalSpace=True vy=-8.853427
+RIGHT CLICK AFTER LANDING WITH SPACE HELD count=2 locked=True respawning=True grounded=False jumpHeld=True physicalSpace=True vy=-1.1772
+PASS: Jump requested during recovery executes and permits right-click clone
+PASS: Expired recovery click does not cause repeated creation
+PASS: Test player is physically standing on clone
+PASS: Standing on clone still rejects generation
+PASS: Right press works while left remains held, with simultaneous jump
+PASS: Holding both buttons and Space does not repeat creation
+PASS: Test player is physically standing on clone
+PASS: Jump and clone are accepted on recovery-unlock frame (injected lock state)
+PASS: Test player is physically standing on clone
+PASS: Buffered click does not generate while recovery is active
+PASS: Click within 150ms of unlock executes after jump (injected recovery state)

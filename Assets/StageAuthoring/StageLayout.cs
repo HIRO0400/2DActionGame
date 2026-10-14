@@ -24,6 +24,29 @@ public class StageLayout : ScriptableObject
     public GroundRegion[] hazards = Array.Empty<GroundRegion>();
     public PrefabPlacement[] placements = Array.Empty<PrefabPlacement>();
     public LearningArea[] areas = Array.Empty<LearningArea>();
+    public PlatformPlacement[] platforms = Array.Empty<PlatformPlacement>();
+    public SwitchDoorPlacement[] switchDoors = Array.Empty<SwitchDoorPlacement>();
+
+    public enum PlatformKind { OneWay, Moving, Collapsing }
+    [Serializable] public struct PlatformPlacement
+    {
+        public string label;
+        public PlatformKind kind;
+        public Vector2 position, size, travel;
+        public float period, collapseDelay, restoreDelay;
+        public PlatformPlacement(string label, PlatformKind kind, Vector2 position, Vector2 size, Vector2 travel = default)
+        {
+            this.label=label; this.kind=kind; this.position=position; this.size=size; this.travel=travel;
+            period=5f; collapseDelay=.85f; restoreDelay=3f;
+        }
+    }
+    [Serializable] public struct SwitchDoorPlacement
+    {
+        public string label;
+        public Vector2 switchPosition, doorPosition, doorSize;
+        public SwitchDoorPlacement(string label, Vector2 plate, Vector2 door, Vector2 size)
+        { this.label=label; switchPosition=plate; doorPosition=door; doorSize=size; }
+    }
 
     [Serializable] public struct GroundRegion
     {

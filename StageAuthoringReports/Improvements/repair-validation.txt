@@ -1,0 +1,75 @@
+PASS: Stage1 has a stage manager
+PASS: Stage1 stage number
+PASS: Stage1 transition
+PASS: Stage2 has a stage manager
+PASS: Stage2 stage number
+PASS: Stage2 transition
+PASS: Assets/Scenes/Terrain.unity prefab Player
+PASS: Assets/Scenes/Terrain.unity prefab GroundCheck
+PASS: Assets/Scenes/Terrain.unity prefab Main Camera
+PASS: Assets/Scenes/Terrain.unity prefab CinemachineCamera
+PASS: Assets/Scenes/Terrain.unity prefab Grid
+PASS: Assets/Scenes/Terrain.unity prefab Tilemap
+PASS: Assets/Scenes/Terrain.unity prefab Tilemap toge
+PASS: Assets/Scenes/Terrain.unity prefab Goal
+PASS: Assets/Scenes/Terrain.unity prefab StageManager
+PASS: Assets/Scenes/Terrain.unity prefab enemy_zako1
+PASS: Assets/Scenes/Terrain.unity clone reference
+PASS: Assets/Scenes/SampleU.unity prefab Global Light 2D
+PASS: Assets/Scenes/SampleU.unity prefab Player
+PASS: Assets/Scenes/SampleU.unity prefab FootCheck
+PASS: Assets/Scenes/SampleU.unity prefab Main Camera
+PASS: Assets/Scenes/SampleU.unity prefab Grid
+PASS: Assets/Scenes/SampleU.unity prefab OriginTile
+PASS: Assets/Scenes/SampleU.unity prefab Ground
+PASS: Assets/Scenes/SampleU.unity prefab Spike
+PASS: Assets/Scenes/SampleU.unity clone reference
+PASS: flat ground detected
+PASS: ground movement speed preserved
+PASS: walking updates respawn location
+PASS: jump initial speed preserved
+PASS: jump consumes coyote time
+PASS: ascending player cannot reset jump grace
+PASS: air control preserved
+PASS: clone supports player landing
+PASS: clone standing restriction preserved
+PASS: trigger cannot act as solid ground
+PASS: isRespawning protects player independently
+PASS: isGroundLocked protects player independently
+PASS: isBlinkInvincible protects player independently
+PASS: invincibility ends when all protections end
+PASS: enemy bounce preserved
+PASS: clone capacity growth preserved
+PASS: collected coin ignores both player colliders
+PASS: respawn starts
+PASS: respawn position and height preserved
+PASS: respawn clears velocity
+PASS: respawn cannot cancel landing protection
+PASS: death blink protects player
+PASS: death blink completes and releases protection
+PASS: Assets/Scenes/Stage/Stage1.unity three backgrounds
+PASS: rendering camera reference
+PASS: parallax factor preserved
+PASS: no initial background displacement
+PASS: loop offset survives parallax update
+PASS: rendering camera reference
+PASS: parallax factor preserved
+PASS: no initial background displacement
+PASS: loop offset survives parallax update
+PASS: rendering camera reference
+PASS: parallax factor preserved
+PASS: no initial background displacement
+PASS: loop offset survives parallax update
+PASS: Assets/Scenes/Stage/撮影用.unity three backgrounds
+PASS: rendering camera reference
+PASS: parallax factor preserved
+PASS: no initial background displacement
+PASS: loop offset survives parallax update
+PASS: rendering camera reference
+PASS: parallax factor preserved
+PASS: no initial background displacement
+PASS: loop offset survives parallax update
+PASS: rendering camera reference
+PASS: parallax factor preserved
+PASS: no initial background displacement
+PASS: loop offset survives parallax update

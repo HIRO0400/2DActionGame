@@ -1,0 +1,65 @@
+PASS: Stage5 scene starts in sequence
+PASS: Stage5 player exists
+PASS: Stage5 spawn grounded
+PASS: Stage5 one-way passes upward without false grounding
+PASS: Stage5 one-way supports landing from above
+PASS: Stage5 standing starts visible collapse countdown
+PASS: Stage5 collapsing platform does not become a respawn checkpoint
+PASS: Stage5 pause freezes collapse countdown
+PASS: Stage5 platform collapses after warning
+PASS: Stage5 death after collapse recovers to stable ground; position=(64.00, 1.44, 0.00), safe=(64.00, 0.02, 0.00), ground=True, lock=False, velocity=(0.00, 0.00)
+PASS: Stage5 collapsed platform restores for another attempt
+PASS: Stage5 walk x=6 at (5.91, 0.46, 0.00)
+PASS: Stage5 safe coin enables two slots
+PASS: Stage5 walk x=37 at (36.89, 0.46, 0.00)
+PASS: Stage5 clone generated from air
+PASS: Stage5 clone return releases landing lock; clone top=3.021873
+PASS: Stage5 jump x=38.32692 lands at (38.28, 3.48, 0.00)
+PASS: Stage5 one reachable air clone cannot clear eight-unit wall
+PASS: Stage5 player exists
+PASS: Stage5 walk x=6 at (5.89, 0.46, 0.00)
+PASS: Stage5 restart restores exactly two slots after coin
+PASS: Stage5 walk x=37 at (36.89, 0.46, 0.00)
+PASS: Stage5 clone generated from ground
+PASS: Stage5 clone return releases landing lock; clone top=0.9838668
+PASS: Stage5 clone generated from air
+PASS: Stage5 clone return releases landing lock; clone top=4.515534
+PASS: Stage5 two simultaneous low/high footholds
+PASS: Stage5 returns onto low foothold before using high foothold
+PASS: Stage5 jump x=38.71122 lands at (38.79, 4.97, 0.00)
+PASS: Stage5 lands on second clone
+PASS: Stage5 jump x=43 lands at (43.07, 8.46, 0.00)
+PASS: Stage5 two clones clear eight-unit wall
+PASS: Stage5 walk x=54 at (53.86, 0.46, 0.00)
+PASS: Stage5 walk x=64 at (63.94, 0.46, 0.00)
+PASS: Stage5 spike contact recovers once to last ground
+PASS: Stage5 jump x=70 lands at (70.07, 0.46, 0.00)
+PASS: Stage5 walk x=77 at (76.94, 0.46, 0.00)
+PASS: Stage5 jump x=83 lands at (82.89, 0.46, 0.00)
+PASS: Stage5 walk x=92 at (91.90, 0.46, 0.00)
+PASS: Stage5 clone generated from ground
+PASS: Stage5 clone return releases landing lock; clone top=0.9805632
+PASS: Stage5 walk x=106.5 at (106.43, 0.46, 0.00)
+PASS: Stage5 clone generated from air
+PASS: Stage5 clone return releases landing lock; clone top=3.021152
+PASS: Stage5 one-slot air clone replaces switch weight and closes door
+PASS: Stage5 jump x=107.8552 lands at (107.87, 3.48, 0.00)
+PASS: Stage5 one clone cannot bypass recessed door or hold it open at wall edge
+PASS: Stage5 walk x=92 at (91.93, 0.46, 0.00)
+PASS: Stage5 clone generated from ground
+PASS: Stage5 clone return releases landing lock; clone top=0.9838026
+PASS: Stage5 walk x=106.5 at (106.36, 0.46, 0.00)
+PASS: Stage5 clone generated from air
+PASS: Stage5 clone return releases landing lock; clone top=3.02949
+PASS: Stage5 two simultaneous clones: switch weight and elevated foothold
+PASS: Stage5 jump x=107.7795 lands at (107.78, 3.48, 0.00)
+PASS: Stage5 jump x=112 lands at (112.01, 5.46, 0.00)
+PASS: Stage5 switch clone remains while second clone clears gated wall
+PASS: Stage5 walk x=123 at (122.88, 0.46, 0.00)
+PASS: Stage5 walk x=124 at (123.86, 0.46, 0.00)
+PASS: Stage5 jump x=130 lands at (130.08, 0.46, 0.00)
+PASS: Stage5 walk x=142.5 at (141.60, 0.46, 0.00)
+PASS: Stage5 background and viewport stable for 3427 camera updates
+PASS: Stage5 goal displays clear screen
+PASS: Stage5 goal transition
+PASS: complete Stage5-5 campaign route

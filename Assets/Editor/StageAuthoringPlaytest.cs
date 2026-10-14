@@ -20,9 +20,7 @@ public static class StageAuthoringPlaytest
     }
     public static void Run()
     {
-        SessionState.SetString("Stage1.OriginalProgress", JsonUtility.ToJson(new ProgressTestSnapshot()));
-        EditorSceneManager.OpenScene(StageAuthoringBootstrap.ScenePath);
-        SessionState.SetBool("StageAuthoringTest", true);
-        EditorApplication.EnterPlaymode();
+        // The former Stage1-only route used the old 70-unit layout.
+        CampaignPlaytest.Run();
     }
 }

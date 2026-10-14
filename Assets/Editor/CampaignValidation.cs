@@ -15,7 +15,7 @@ public static class CampaignValidation
         try
         {
             const BindingFlags flags=BindingFlags.Instance|BindingFlags.NonPublic;
-            for(int n=2;n<=5;n++)
+            for(int n=1;n<=5;n++)
             {
                 var scene=EditorSceneManager.OpenScene("Assets/Scenes/Stage/Stage"+n+".unity");
                 var layout=AssetDatabase.LoadAssetAtPath<StageLayout>("Assets/StageAuthoring/Layouts/Stage"+n+"Layout.asset");
@@ -38,11 +38,23 @@ public static class CampaignValidation
                     foreach(var r in layout.terrain) if(r.purpose=="必須のクローン段差")
                     {
                         gates++;
-                        if(r.cells.height!=(n==3?5:n==4?6:8)) throw new Exception("Gate height");
+                        if(n==3 && r.cells.height!=5 || n==4 && r.cells.height!=6 || n==5 && r.cells.height!=8 && r.cells.height!=5) throw new Exception("Gate height");
                         foreach(var placement in layout.placements)
                             if(placement.prefab.GetComponent<Enemy>()!=null && Mathf.Abs(placement.position.x-r.cells.xMin)<16) throw new Exception("Enemy can bypass required clone gate");
                     }
-                    if(gates!=3) throw new Exception("Gate count");
+                    if(gates!=(n==4?1:2)) throw new Exception("Gate count");
+                }
+                foreach(var surface in UnityEngine.Object.FindObjectsByType<StagePlatform>(FindObjectsSortMode.None))
+                {
+                    if(surface.GetComponent<PlatformEffector2D>()==null || !surface.GetComponent<Collider2D>().usedByEffector) throw new Exception("One-way setup");
+                    if((surface.GetComponent<MovingStagePlatform>()!=null || surface.GetComponent<CollapsingStagePlatform>()!=null) && surface.stableRespawnSurface) throw new Exception("Unsafe dynamic checkpoint");
+                }
+                foreach(var plate in UnityEngine.Object.FindObjectsByType<PressurePlate>(FindObjectsSortMode.None))
+                    if(plate.door==null) throw new Exception("Missing switch-door link");
+                if(n==5 && layout.switchDoors.Length>0)
+                {
+                    var gate=layout.switchDoors[0];
+                    if(gate.doorPosition.x-gate.doorSize.x*.5f<111 || gate.doorSize.y<16) throw new Exception("Single-clone door bypass possible");
                 }
                 // Verify regeneration preserves manual objects; do not save this test scene.
                 var decoration=new GameObject("ManualDecorationValidation");
@@ -50,7 +62,7 @@ public static class CampaignValidation
                 if(decoration==null || UnityEngine.Object.FindObjectsByType<GeneratedStage>(FindObjectsSortMode.None).Length!=1) throw new Exception("Unsafe regeneration");
                 report.Add("PASS: Stage"+n+" references, transitions, static composite terrain, spike triggers, world sky, required gates, regeneration preserves manual decorations.");
             }
-            report.Add("PASS: Stage3/4 mandatory heights 5/6 exceed normal jump; Stage5 height 8 exceeds normal jump plus one reachable clone (about 7.36). No enemy at mandatory gates.");
+            report.Add("PASS: Stage3/4 mandatory heights 5/6 exceed normal jump; Stage5 uses an eight-unit wall and a switch plus five-unit gated wall. No enemy at mandatory gates.");
             File.WriteAllLines("StageAuthoringReports/campaign-validation.txt",report);
             RepairValidation.Run();
         }

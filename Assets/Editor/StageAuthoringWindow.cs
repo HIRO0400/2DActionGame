@@ -82,6 +82,15 @@ public class StageAuthoringWindow : EditorWindow
             Handles.Label(new Vector3(area.fromX, 7f), area.title + "\n" + area.instruction);
         foreach (var obj in layout.placements)
             Handles.Label(obj.position, obj.label);
+        foreach(var p in layout.platforms ?? Array.Empty<StageLayout.PlatformPlacement>())
+        {
+            Handles.color=p.kind==StageLayout.PlatformKind.Collapsing ? new Color(1,.5f,.1f) : Color.cyan;
+            Handles.DrawWireCube(p.position,p.size);
+            Handles.Label(p.position,p.label+" / "+p.kind);
+            if(p.kind==StageLayout.PlatformKind.Moving) { Handles.DrawDottedLine(p.position,p.position+p.travel,4); Handles.DrawWireCube(p.position+p.travel,p.size); }
+        }
+        foreach(var p in layout.switchDoors ?? Array.Empty<StageLayout.SwitchDoorPlacement>())
+        { Handles.color=Color.yellow; Handles.DrawWireCube(p.doorPosition,p.doorSize); Handles.DrawDottedLine(p.switchPosition,p.doorPosition,4); Handles.Label(p.switchPosition,p.label); }
         Handles.color = Color.cyan;
         Vector3 origin = new Vector3(layout.playerStart.x, 0f);
         // Approximation only: full hold, speed 3.6, initial vertical velocity 6.
@@ -127,6 +136,14 @@ public static class StageBuilder
             if (placement.prefab == null) errors.Add(placement.label + "のPrefab参照がありません。");
         foreach (var region in data.terrain)
             if (region.cells.width <= 0 || region.cells.height <= 0) errors.Add("地形範囲の幅・高さは正数にしてください。");
+        foreach(var p in data.platforms ?? Array.Empty<StageLayout.PlatformPlacement>())
+        {
+            if(p.size.x<=0 || p.size.y<=0) errors.Add(p.label+"の足場サイズを正数にしてください。");
+            if(p.kind==StageLayout.PlatformKind.Moving && (p.period<1 || p.travel.sqrMagnitude<.01f)) errors.Add(p.label+"の移動距離と周期を設定してください。");
+            if(p.kind==StageLayout.PlatformKind.Collapsing && (p.collapseDelay<.3f || p.restoreDelay<1)) errors.Add(p.label+"の崩壊・復帰時間が短すぎます。");
+        }
+        foreach(var p in data.switchDoors ?? Array.Empty<StageLayout.SwitchDoorPlacement>())
+            if(p.doorSize.x<=0 || p.doorSize.y<=0) errors.Add(p.label+"の扉サイズを正数にしてください。");
         return errors;
     }
     private static bool HasGroundBelow(StageLayout data, Vector2 p)
@@ -196,9 +213,7 @@ public static class StageBuilder
         marker.externalRoots = new[] { audio };
         if (data.bgmPrefab != null) Place(data.bgmPrefab, "BGM", Vector2.zero, root.transform, scene);
         foreach (var obj in data.placements) Place(obj.prefab, obj.label, obj.position, root.transform, scene);
-        var guide = root.AddComponent<StageGuide>();
-        guide.layout = data;
-        guide.player = playerObject.transform;
+        StageGimmickBuilder.Build(data, root.transform);
         var camera = playerObject.GetComponentInChildren<Camera>();
         if (camera != null) camera.backgroundColor = new Color(0.12f, 0.19f, 0.27f);
         if (data.backgroundPrefab != null && camera != null)
