@@ -326,7 +326,7 @@ public class Player : MonoBehaviour
             if (candidate.collider == null || candidate.collider.isTrigger ||
                 candidate.normal.y < 0.5f || candidate.distance <= 0f) continue;
             var platform = candidate.collider.GetComponent<StagePlatform>();
-            if (platform != null && !platform.CanStand(footCheck.position.y)) continue;
+            if (platform != null && !platform.CanStand(footCheck.position.y, candidate.point.y)) continue;
             if (candidate.distance < nearest)
             {
                 nearest = candidate.distance;

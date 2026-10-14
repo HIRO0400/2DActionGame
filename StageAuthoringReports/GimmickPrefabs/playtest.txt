@@ -1,0 +1,23 @@
+PASS: PressureSwitchDoor asset exists
+PASS: Switch and door reference survives prefab instantiation
+PASS: MovingPlatform asset exists
+PASS: CollapsingPlatform asset exists
+PASS: OneWayPlatform asset exists
+PASS: OneWayTilemap asset exists
+PASS: Tile palette has recognised palette settings
+PASS: Player opens door by standing on prefab switch
+PASS: Door closes after player leaves switch
+PASS: Static clone holds prefab switch open
+PASS: Door does not close inside player
+PASS: Door closes when doorway becomes clear
+PASS: Player boards moved prefab platform
+PASS: Moving prefab carries player
+PASS: Pause freezes moving prefab
+PASS: Player jumps off moving prefab
+PASS: Standing starts prefab collapse warning
+PASS: Collapse prefab removes collision
+PASS: Collapse prefab restores collision
+PASS: Same tilemap supports local height 2
+PASS: Same tilemap supports local height 5
+PASS: Painted tilemap allows jumping through from below without false grounding
+PASS: Player lands on painted lower row despite higher row in same tilemap
