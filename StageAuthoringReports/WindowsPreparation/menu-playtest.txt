@@ -1,0 +1,145 @@
+PASS: title-1280: HowToPlayButton inside screen (x:192.98, y:148.78, width:120.09, height:32.33) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: title-1280: StartButton inside screen (x:192.98, y:192.66, width:254.03, height:36.95) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: MenuOpen inside screen (x:517.60, y:443.05, width:113.16, height:27.71) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: ContinueButton inside screen (x:192.98, y:238.85, width:254.03, height:36.95) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: ResetProgress inside screen (x:9.24, y:9.24, width:150.11, height:27.71) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: CreditsButton inside screen (x:192.98, y:109.52, width:254.03, height:27.71) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: QuitButton inside screen (x:326.93, y:148.78, width:120.09, height:32.33) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: buttons do not overlap
+PASS: title-1280: buttons do not overlap
+PASS: HowToPlayButton available
+PASS: How-to-play opens
+PASS: how-to-play: CloseHowToPlay inside screen (x:195.29, y:127.42, width:249.42, height:27.71) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: CloseHowToPlay available
+PASS: How-to-play closes
+PASS: MenuOpen available
+PASS: CloseSettings available
+PASS: Title settings work
+PASS: ContinueButton available
+PASS: Continue loads highest unlocked stage
+PASS: StartButton available
+PASS: Title opens selection
+PASS: Locked stage disabled and absent stage hidden
+PASS: selection-1280: Stage4 inside screen (x:150.26, y:152.82, width:161.66, height:73.90) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: selection-1280: Back inside screen (x:464.49, y:46.19, width:161.66, height:32.33) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: Stage2 inside screen (x:239.17, y:240.58, width:161.66, height:73.90) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: Stage3 inside screen (x:416.99, y:240.58, width:161.66, height:73.90) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: MenuOpen inside screen (x:517.60, y:443.05, width:113.16, height:27.71) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: ResetProgress inside screen (x:9.24, y:9.24, width:150.11, height:27.71) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: Stage1 inside screen (x:61.35, y:240.58, width:161.66, height:73.90) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: Stage5 inside screen (x:328.08, y:152.82, width:161.66, height:73.90) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-1280: buttons do not overlap
+PASS: selection-800: Stage4 inside screen (x:150.26, y:152.82, width:161.66, height:73.90) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: selection-800: Back inside screen (x:464.49, y:46.19, width:161.66, height:32.33) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: Stage2 inside screen (x:239.17, y:240.58, width:161.66, height:73.90) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: Stage3 inside screen (x:416.99, y:240.58, width:161.66, height:73.90) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: MenuOpen inside screen (x:517.60, y:443.05, width:113.16, height:27.71) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: ResetProgress inside screen (x:9.24, y:9.24, width:150.11, height:27.71) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: Stage1 inside screen (x:61.35, y:240.58, width:161.66, height:73.90) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: Stage5 inside screen (x:328.08, y:152.82, width:161.66, height:73.90) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: selection-800: buttons do not overlap
+PASS: Stage2 available
+PASS: Stage card loads stage
+PASS: Back available
+PASS: Back returns to title
+PASS: title-800: CreditsButton inside screen (x:192.98, y:109.52, width:254.03, height:27.71) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: title-800: StartButton inside screen (x:192.98, y:192.66, width:254.03, height:36.95) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: title-800: buttons do not overlap
+PASS: title-800: HowToPlayButton inside screen (x:192.98, y:148.78, width:120.09, height:32.33) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: title-800: buttons do not overlap
+PASS: title-800: buttons do not overlap
+PASS: title-800: QuitButton inside screen (x:326.93, y:148.78, width:120.09, height:32.33) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: title-800: buttons do not overlap
+PASS: title-800: buttons do not overlap
+PASS: title-800: buttons do not overlap
+PASS: title-800: ContinueButton inside screen (x:192.98, y:238.85, width:254.03, height:36.95) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: title-800: buttons do not overlap
+PASS: title-800: buttons do not overlap
+PASS: title-800: buttons do not overlap
+PASS: title-800: buttons do not overlap
+PASS: title-800: MenuOpen inside screen (x:517.60, y:443.05, width:113.16, height:27.71) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: title-800: buttons do not overlap
+PASS: title-800: buttons do not overlap
+PASS: title-800: buttons do not overlap
+PASS: title-800: buttons do not overlap
+PASS: title-800: buttons do not overlap
+PASS: title-800: ResetProgress inside screen (x:9.24, y:9.24, width:150.11, height:27.71) / (x:0.00, y:0.00, width:640.00, height:480.00)
+PASS: title-800: buttons do not overlap
+PASS: title-800: buttons do not overlap
+PASS: title-800: buttons do not overlap
+PASS: title-800: buttons do not overlap
+PASS: title-800: buttons do not overlap
+PASS: title-800: buttons do not overlap

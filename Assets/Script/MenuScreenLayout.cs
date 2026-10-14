@@ -63,12 +63,13 @@ public static class MenuScreenLayout
     {
         var canvas = Setup();
         var logo = canvas.transform.Find("Rogo"); if (logo != null) logo.gameObject.SetActive(false);
-        Text(canvas.transform, "TitleHeading", "2D ACTION GAME", new Vector2(0, 205), new Vector2(800, 80), 48);
+        Text(canvas.transform, "TitleHeading", "Clone Advanture", new Vector2(0, 205), new Vector2(800, 80), 48);
         Text(canvas.transform, "TitleSubtitle", "クローンを足場に、次のステージへ", new Vector2(0, 143), new Vector2(800, 44), 23);
         Button(canvas.transform, "ContinueButton", "続きから", new Vector2(0, 30), new Vector2(440, 64));
         Button(canvas.transform, "StartButton", "ステージを選ぶ", new Vector2(0, -50), new Vector2(440, 64));
         Button(canvas.transform, "HowToPlayButton", "遊び方", new Vector2(-116, -130), new Vector2(208, 56));
         Button(canvas.transform, "QuitButton", "終了", new Vector2(116, -130), new Vector2(208, 56));
+        Button(canvas.transform, "CreditsButton", "クレジット", new Vector2(0, -202), new Vector2(440, 48));
     }
     public static void Selection(Button[] buttons, string[] scenes)
     {

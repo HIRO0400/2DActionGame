@@ -1,0 +1,6 @@
+PASS: Release options use Windows64 without Development Build
+PASS: Options prepared without building
+PASS: Title is Clone Advanture
+PASS: Company is HIROTO KANO
+PASS: Windows icon has 8 assigned sizes
+Output: Builds/Windows/Clone Advanture.exe

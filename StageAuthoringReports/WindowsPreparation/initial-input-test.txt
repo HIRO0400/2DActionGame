@@ -1,0 +1,96 @@
+PASS: Actual keyboard jump starts before pause
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Actual pointer click pauses time and audio
+PASS: Player stationary during pause
+PASS: Jump-key release during pause is retained
+PASS: Button exists: Resume
+PASS: Pointer raycast reaches Resume
+PASS: Actual pointer click resumes
+PASS: Resume click does not create an unintended clone
+PASS: Controls displayed horizontally
+PASS: Mouse buttons no longer create clones
+PASS: Left Alt plus Enter does not create clone
+PASS: Releasing Alt while Enter remains held does not create clone
+PASS: Right Alt plus Enter does not create clone
+PASS: Enter press creates clone without submitting selected pause button
+PASS: Held Enter does not repeat clone creation
+PASS: Enter release does not create clone
+PASS: Standing on clone still prevents generation without jumping
+PASS: Simultaneous Space and Enter creates clone on takeoff
+PASS: Enter immediately after jumping creates clone
+PASS: Space remains held before Enter
+PASS: Enter creates clone while Space remains held
+PASS: Held Space and Enter do not repeat creation
+PASS: Losing gameplay focus opens pause
+PASS: Regaining focus requires explicit resume
+PASS: Escape opens pause
+PASS: Enter submits Resume without creating clone
+PASS: Held menu-submit Enter does not leak into gameplay
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Button exists: Restart
+PASS: Pointer raycast reaches Restart
+PASS: Pointer restart resets scene and time
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Button exists: Select
+PASS: Pointer raycast reaches Select
+PASS: Pointer opens selection
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Button exists: Title
+PASS: Pointer raycast reaches Title
+PASS: Pointer opens title
+PASS: Title credit button exists
+PASS: Actual title click opens audio credits
+PASS: Credit includes bundled font
+PASS: Credit includes all three confirmed image assets and publishers
+PASS: Credit scroll layout has valid bounds
+PASS: Full asset credits scroll to the bottom
+PASS: Button exists: CloseCredits
+PASS: Pointer raycast reaches CloseCredits
+PASS: Credit close restores title and time
+PASS: Button exists: MenuOpen
+PASS: Pointer raycast reaches MenuOpen
+PASS: Actual pointer controls independent volume sliders
+PASS: Button exists: Mute
+PASS: Pointer raycast reaches Mute
+PASS: Pointer toggles mute
+PASS: Button exists: Mute
+PASS: Pointer raycast reaches Mute
+PASS: Zero volume is silent without invalid logarithm
+PASS: Button exists: CloseSettings
+PASS: Pointer raycast reaches CloseSettings
+PASS: Close saves volume and restores time
+PASS: Japanese font bundled with runtime resources
+PASS: Bundled font contains all Japanese HUD and menu glyphs
+PASS: TextMeshPro contains or creates Japanese glyphs from bundled font
+PASS: Menu text uses bundled font
+PASS: Menu text uses bundled font
+PASS: Invalid negative progress repaired
+PASS: Unlocks limited to existing stages
+PASS: Existing unlocks migrate to clear records
+PASS: Goal progress explicitly saved
+PASS: Button exists: ResetProgress
+PASS: Pointer raycast reaches ResetProgress
+PASS: Button exists: CancelReset
+PASS: Pointer raycast reaches CancelReset
+PASS: Pointer cancel preserves progress
+PASS: Button exists: ResetProgress
+PASS: Pointer raycast reaches ResetProgress
+PASS: Button exists: ConfirmReset
+PASS: Pointer raycast reaches ConfirmReset
+PASS: Pointer confirm resets only progress
+PASS: Actual goal waits on clear screen
+PASS: Clear freezes player and saves next unlock
+PASS: Button exists: NextStage
+PASS: Pointer raycast reaches NextStage
+PASS: Actual pointer next-stage button works
+PASS: Stage selection respects unlocks
+PASS: Clear status shown; unbuilt Stage6 hidden
+PASS: Actual pointer stage-selection button works
+PASS: Final-stage completion screen and record work
+PASS: Button exists: ClearSelect
+PASS: Pointer raycast reaches ClearSelect
+PASS: Actual pointer final-stage return works

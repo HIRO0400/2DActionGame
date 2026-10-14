@@ -188,6 +188,19 @@ public class ReleaseUITestRunner : MonoBehaviour
         InputSystem.QueueStateEvent(mouse,new MouseState {position=new Vector2(Screen.width*.5f,Screen.height*.5f)}.WithButton(MouseButton.Left,true).WithButton(MouseButton.Right,true));
         yield return new WaitForSecondsRealtime(.1f);
         Check((int)cloneCount.GetValue(player)==0,"Mouse buttons no longer create clones");
+        InputSystem.QueueStateEvent(keyboard,new KeyboardState(Key.LeftAlt,Key.Enter));
+        yield return new WaitForSecondsRealtime(.1f);
+        Check((int)cloneCount.GetValue(player)==0,"Left Alt plus Enter does not create clone");
+        InputSystem.QueueStateEvent(keyboard,new KeyboardState(Key.Enter));
+        yield return new WaitForSecondsRealtime(.1f);
+        Check((int)cloneCount.GetValue(player)==0,"Releasing Alt while Enter remains held does not create clone");
+        InputSystem.QueueStateEvent(keyboard,new KeyboardState());
+        yield return new WaitForSecondsRealtime(.1f);
+        InputSystem.QueueStateEvent(keyboard,new KeyboardState(Key.RightAlt,Key.Enter));
+        yield return new WaitForSecondsRealtime(.1f);
+        Check((int)cloneCount.GetValue(player)==0,"Right Alt plus Enter does not create clone");
+        InputSystem.QueueStateEvent(keyboard,new KeyboardState());
+        yield return new WaitForSecondsRealtime(.1f);
         InputSystem.QueueStateEvent(mouse,new MouseState());
         EventSystem.current.SetSelectedGameObject(GameObject.Find("MenuCanvas/MenuOpen"));
         InputSystem.QueueStateEvent(keyboard,new KeyboardState(Key.Enter));
@@ -224,6 +237,11 @@ public class ReleaseUITestRunner : MonoBehaviour
         Check((int)cloneCount.GetValue(player)==4,"Enter creates clone while Space remains held");
         yield return new WaitForSecondsRealtime(1.8f);
         Check((int)cloneCount.GetValue(player)==4,"Held Space and Enter do not repeat creation");
+        GameMenus.Instance.SendMessage("OnApplicationFocus",false);
+        Check(GameMenus.IsPaused && Time.timeScale==0,"Losing gameplay focus opens pause");
+        GameMenus.Instance.SendMessage("OnApplicationFocus",true);
+        Check(GameMenus.IsPaused,"Regaining focus requires explicit resume");
+        GameMenus.Instance.Resume();
         InputSystem.QueueStateEvent(keyboard,new KeyboardState());
         yield return new WaitForSecondsRealtime(.1f);
         yield return Escape(); Check(GameMenus.IsPaused,"Escape opens pause");
@@ -243,6 +261,28 @@ public class ReleaseUITestRunner : MonoBehaviour
         GameMenus.Instance.Navigate("Stage1"); yield return new WaitForSecondsRealtime(0.5f);
         yield return Click("MenuOpen"); yield return Click("Title");
         Check(SceneManager.GetActiveScene().name == "TitleScene" && Time.timeScale == 1, "Pointer opens title");
+        var creditsButton = GameObject.Find("CreditsButton");
+        Check(creditsButton != null, "Title credit button exists");
+        var creditsPoint = RectTransformUtility.WorldToScreenPoint(null, creditsButton.transform.position);
+        InputSystem.QueueStateEvent(mouse, new MouseState { position = creditsPoint }.WithButton(MouseButton.Left, true));
+        yield return new WaitForSecondsRealtime(.1f);
+        InputSystem.QueueStateEvent(mouse, new MouseState { position = creditsPoint });
+        yield return new WaitForSecondsRealtime(.2f);
+        var creditsText = GameObject.Find("CreditsText").GetComponent<UnityEngine.UI.Text>();
+        Check(GameMenus.IsPaused && creditsText.text.Contains("FC音工場") && creditsText.text.Contains("タダノオト"), "Actual title click opens audio credits");
+        Check(creditsText.text.Contains("Noto Sans CJK JP"), "Credit includes bundled font");
+        Check(creditsText.text.Contains("Simple 2D Platformer Assets Pack") && creditsText.text.Contains("Goldmetal") &&
+            creditsText.text.Contains("Sunny Land") && creditsText.text.Contains("Ansimuz") &&
+            creditsText.text.Contains("Pixel Adventure 1") && creditsText.text.Contains("Pixel Frog"), "Credit includes all three confirmed image assets and publishers");
+        var creditsScroll = GameObject.Find("CreditsScroll").GetComponent<UnityEngine.UI.ScrollRect>();
+        Check(creditsScroll.content.rect.height > 0 && creditsScroll.viewport.rect.height > 0, "Credit scroll layout has valid bounds");
+        creditsScroll.verticalNormalizedPosition = 0;
+        yield return null;
+        Check(creditsScroll.content.rect.height > creditsScroll.viewport.rect.height &&
+            creditsScroll.verticalNormalizedPosition < .01f, "Full asset credits scroll to the bottom");
+        yield return Capture("credits");
+        yield return Click("CloseCredits");
+        Check(!GameMenus.IsPaused && Time.timeScale == 1, "Credit close restores title and time");
         if (phase >= 2)
         {
             yield return Click("MenuOpen");

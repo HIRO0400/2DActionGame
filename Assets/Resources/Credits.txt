@@ -1,0 +1,34 @@
+Clone Advanture
+制作：HIROTO KANO
+
+BGM提供
+FC音工場
+https://fc.sitefactory.info/
+
+効果音
+タダノオト
+https://tadanote.tokyo/
+
+画像素材（Unity Asset Store）
+
+Simple 2D Platformer Assets Pack
+Goldmetal
+https://assetstore.unity.com/packages/2d/characters/simple-2d-platformer-assets-pack-188518
+
+Sunny Land
+Ansimuz
+https://assetstore.unity.com/packages/2d/characters/sunny-land-103349
+
+Pixel Adventure 1
+Pixel Frog
+https://assetstore.unity.com/packages/2d/characters/pixel-adventure-1-155360
+
+フォント
+Noto Sans CJK JP
+Copyright © 2014-2021 Adobe
+SIL Open Font License 1.1
+
+フォントのライセンス全文は、配布データ内の
+StreamingAssets/Licensesに同梱しています。
+
+素材をご提供くださった皆さまに感謝いたします。

@@ -1,0 +1,14 @@
+PASS: Clone Advanture.exe
+PASS: UnityPlayer.dll
+PASS: Clone Advanture_Data
+PASS: MonoBleedingEdge
+PASS: README.txt
+PASS: CREDITS.txt
+PASS: Clone Advanture_Data/StreamingAssets/Licenses/NotoSansCJK-LICENSE.txt
+PASS: Clone Advanture_Data/StreamingAssets/Licenses/NotoSansCJK-NOTICE.txt
+PASS: Windows x64 executable
+PASS: app.info contains correct company and product
+PASS: Development/editor test runners excluded
+PASS: DoNotShip debug folder excluded
+PASS: SHA256 matches for 204 output files
+Game was not launched. No upload or publication performed.

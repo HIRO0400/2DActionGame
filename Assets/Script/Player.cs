@@ -215,8 +215,11 @@ public class Player : MonoBehaviour
         if (pendingJump && Time.time - jumpInputTime > inputBufferTime) pendingJump = false;
         jumpPressed = pendingJump;
 
-        if (GameMenus.BlocksGameplay) pendingClone = false;
-        if (cloneAction.enabled && !GameMenus.BlocksGameplay && cloneAction.WasPressedThisFrame())
+        var cloneKeyboard = cloneAction.activeControl?.device as Keyboard;
+        bool fullscreenShortcut = cloneKeyboard != null &&
+            (cloneKeyboard.leftAltKey.isPressed || cloneKeyboard.rightAltKey.isPressed);
+        if (GameMenus.BlocksGameplay || fullscreenShortcut) pendingClone = false;
+        if (cloneAction.enabled && !GameMenus.BlocksGameplay && !fullscreenShortcut && cloneAction.WasPressedThisFrame())
         {
             pendingClone = true;
             cloneInputTime = Time.time;

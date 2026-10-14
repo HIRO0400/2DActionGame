@@ -100,6 +100,12 @@ public class GameMenus : MonoBehaviour
     }
     void Start() { AudioSettings.Reload(); ProgressStore.Initialize(); }
     void OnApplicationQuit() => AudioSettings.Save();
+    void OnApplicationFocus(bool focused)
+    {
+        // Keep the pause screen on focus regain; the player chooses when to resume.
+        if (!focused && !paused && !IsClearVisible && FindFirstObjectByType<StageManager>() != null)
+            Pause();
+    }
     void Update()
     {
         if (!IsClearVisible && Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
@@ -146,6 +152,36 @@ public class GameMenus : MonoBehaviour
         Label(content, "Instructions", "A / D・← / →：移動\nSpace：ジャンプ\nEnter：クローン作成\nEsc：ポーズ／再開", 20, 140);
         Label(content, "CloneHelp", "クローンは足場として使えます。\nコインを取ると作れる数が増えます。\n死亡時は最後に接地した地面付近へ戻ります。", 18, 110);
         MakeButton(content, "CloseHowToPlay", "閉じる", Resume);
+    }
+    public void OpenCredits()
+    {
+        StopGame(); Empty("クレジット");
+        var asset = Resources.Load<TextAsset>("Credits");
+        var scrollObject = new GameObject("CreditsScroll", typeof(RectTransform), typeof(Image), typeof(ScrollRect), typeof(LayoutElement));
+        scrollObject.transform.SetParent(content, false);
+        scrollObject.GetComponent<Image>().color = new Color(0, 0, 0, .15f);
+        scrollObject.GetComponent<LayoutElement>().preferredHeight = 320;
+        var viewport = new GameObject("Viewport", typeof(RectTransform), typeof(RectMask2D));
+        viewport.transform.SetParent(scrollObject.transform, false);
+        var viewportRect = viewport.GetComponent<RectTransform>(); Stretch(viewportRect);
+        viewportRect.offsetMin = new Vector2(12, 8); viewportRect.offsetMax = new Vector2(-12, -8);
+        var bodyObject = new GameObject("CreditsText", typeof(RectTransform), typeof(Text), typeof(ContentSizeFitter));
+        bodyObject.transform.SetParent(viewport.transform, false);
+        var rect = bodyObject.GetComponent<RectTransform>();
+        rect.anchorMin = new Vector2(0, 1); rect.anchorMax = Vector2.one; rect.pivot = new Vector2(.5f, 1);
+        rect.sizeDelta = Vector2.zero;
+        var text = bodyObject.GetComponent<Text>();
+        text.font = font; text.fontSize = 20; text.color = Color.white;
+        text.alignment = TextAnchor.UpperLeft; text.raycastTarget = false;
+        text.horizontalOverflow = HorizontalWrapMode.Wrap; text.verticalOverflow = VerticalWrapMode.Overflow;
+        text.text = asset != null ? asset.text : "BGM提供：FC音工場\n効果音：タダノオト";
+        bodyObject.GetComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+        var scroll = scrollObject.GetComponent<ScrollRect>();
+        scroll.viewport = viewportRect; scroll.content = rect;
+        scroll.horizontal = false; scroll.vertical = true; scroll.movementType = ScrollRect.MovementType.Clamped;
+        Label(content, "CreditsScrollHint", "スクロール／ドラッグで続きを読む", 16, 24);
+        MakeButton(content, "CloseCredits", "閉じる", Resume);
+        Canvas.ForceUpdateCanvases(); scroll.verticalNormalizedPosition = 1;
     }
     public void ConfirmReset()
     {

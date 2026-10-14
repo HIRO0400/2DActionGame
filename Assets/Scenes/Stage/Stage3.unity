@@ -328,6 +328,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3401914155077773342, guid: 9a41d938a409df84ba7f06ea0e055cfa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.4871294
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914155077773342, guid: 9a41d938a409df84ba7f06ea0e055cfa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.61115444
+      objectReference: {fileID: 0}
+    - target: {fileID: 5277698601278615570, guid: 9a41d938a409df84ba7f06ea0e055cfa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5277698601278615570, guid: 9a41d938a409df84ba7f06ea0e055cfa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5907979830062562168, guid: 9a41d938a409df84ba7f06ea0e055cfa, type: 3}
       propertyPath: m_Name
       value: Player
@@ -5496,6 +5512,10 @@ PrefabInstance:
     - target: {fileID: 2319908281580917720, guid: b05ae39bab5dfc945a623565e0406c5b, type: 3}
       propertyPath: m_Name
       value: BGM
+      objectReference: {fileID: 0}
+    - target: {fileID: 2319908281580917720, guid: b05ae39bab5dfc945a623565e0406c5b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8301198261355736599, guid: b05ae39bab5dfc945a623565e0406c5b, type: 3}
       propertyPath: m_LocalPosition.x
